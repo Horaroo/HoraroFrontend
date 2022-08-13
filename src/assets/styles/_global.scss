@@ -16,10 +16,33 @@ body {
   body{
     background-color: #F2F2F2;
   }
-
+  .link{
+    font-family: 'Lato', sans-serif;
+    color: $color-text;
+    &:hover{
+      color: $color-light-blue;
+    }
+    &--not-hover{
+      &:hover{
+        color: $color-text;
+      }
+    }
+    &--light{
+      color: $color-blue;
+      &:hover{
+        color: $color-text;
+      }
+    }
+  }
+ .input-icon{
+  color: $grey-text;
+ }
   .mb-20{
     margin-bottom: 20px;
   }
   .mb-10{
     margin-bottom: 10px;
+  }
+  .mb-35{
+    margin-bottom: 35px;
   }

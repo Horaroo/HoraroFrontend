@@ -2,9 +2,11 @@ import { Box, TextField, Button, InputAdornment } from '@material-ui/core'
 import LockIcon from '@material-ui/icons/Lock'
 import PersonIcon from '@material-ui/icons/Person'
 import EmailIcon from '@material-ui/icons/Email'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { useState } from 'react'
+import useAuth from 'hooks/useAuth'
+import { Api } from 'api/Api'
 
 const GROUP_TEST = [
     { id: 1, name: 'У851' },
@@ -12,7 +14,37 @@ const GROUP_TEST = [
     { id: 3, name: 'У736' },
 ]
 const SignUp = () => {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
+    const [loading, setLoading] = useState(false)
     const [selectedGroup, setSelectedGroup] = useState(null)
+
+    const { setToken, setUser } = useAuth()
+    const navigate = useNavigate()
+
+    const onSubmit = async () => {
+        try {
+            setLoading(true)
+            const { data } = await Api.register(
+                username,
+                password,
+                selectedGroup?.name,
+                email
+            )
+            // setToken(data.auth_token)
+            setUser({
+                id: data.id,
+                username: data.username,
+                group: data.group,
+            })
+            navigate('/login')
+
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+        }
+    }
     return (
         <div className="auth__form-layout">
             <Box component="form" className="auth__form" spacing={2}>
@@ -22,6 +54,8 @@ const SignUp = () => {
                     type="text"
                     placeholder="Username"
                     className="auth__form-input"
+                    value={username}
+                    onChange={({ target }) => setUsername(target.value)}
                     size="small"
                     InputProps={{
                         endAdornment: (
@@ -40,6 +74,8 @@ const SignUp = () => {
                     type="email"
                     placeholder="Email"
                     className="auth__form-input"
+                    value={email}
+                    onChange={({ target }) => setEmail(target.value)}
                     size="small"
                     InputProps={{
                         endAdornment: (
@@ -58,6 +94,8 @@ const SignUp = () => {
                     type="password"
                     placeholder="Password"
                     className="auth__form-input"
+                    value={password}
+                    onChange={({ target }) => setPassword(target.value)}
                     size="small"
                     InputProps={{
                         endAdornment: (
@@ -91,6 +129,7 @@ const SignUp = () => {
                 />
 
                 <Button
+                    onClick={onSubmit}
                     color="primary"
                     variant="contained"
                     size="large"

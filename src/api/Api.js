@@ -23,4 +23,16 @@ export const Api = {
     logout() {
         return instance.get(`/auth/token/logout/`)
     },
+    resetPassword(email) {
+        return instance.post(`/auth/detail/users/reset_password/`, {
+            email,
+        })
+    },
+    setNewPassword(uid, token, newPassword) {
+        return instance.post(`/auth/detail/users/reset_password_confirm/`, {
+            uid,
+            token,
+            new_password: newPassword,
+        })
+    },
 }

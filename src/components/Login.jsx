@@ -32,35 +32,15 @@ const Login = () => {
     return (
         <div className="auth__form-layout">
             <Box component="form" className="auth__form" spacing={2}>
-                <h2 className="auth__form-title">Log in</h2>
+                <h2 className="auth__form-title">Вход</h2>
                 <TextField
                     variant="outlined"
                     value={username}
                     onChange={({ target }) => setUsername(target.value)}
                     type="text"
-                    placeholder="Username"
+                    placeholder="Логин"
                     className="auth__form-input"
                     size="small"
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment
-                                position="start"
-                                className="input-icon"
-                            >
-                                <LockIcon />
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-
-                <TextField
-                    variant="outlined"
-                    type="password"
-                    placeholder="Password"
-                    className="auth__form-input"
-                    size="small"
-                    value={password}
-                    onChange={({ target }) => setPassword(target.value)}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment
@@ -72,21 +52,44 @@ const Login = () => {
                         ),
                     }}
                 />
+
+                <TextField
+                    variant="outlined"
+                    type="password"
+                    placeholder="Пароль"
+                    className="auth__form-input"
+                    size="small"
+                    value={password}
+                    onChange={({ target }) => setPassword(target.value)}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment
+                                position="start"
+                                className="input-icon"
+                            >
+                                <LockIcon />
+                            </InputAdornment>
+                        ),
+                    }}
+                />
                 <Button
                     onClick={onSubmit}
                     color="primary"
                     variant="contained"
                     size="large"
-                    style={{ marginBottom: 10 }}
+                    style={{ marginBottom: 40 }}
                 >
-                    Log in
+                    Войти
                 </Button>
                 <NavLink className="link link--light mb-10" to="/login">
-                    Forgot Password?
+                    Забыли пароль?
                 </NavLink>
                 <NavLink className="link link--not-hover" to="/signup">
-                    Not registered yet?
-                    <span className="link--light"> Sign Up here!</span>
+                    Ещё не зарегистрированы?
+                    <span className="link--light">
+                        {' '}
+                        Зарегистрируйтесь здесь!
+                    </span>
                 </NavLink>
             </Box>
         </div>

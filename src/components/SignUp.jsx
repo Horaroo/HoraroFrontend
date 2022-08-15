@@ -48,11 +48,11 @@ const SignUp = () => {
     return (
         <div className="auth__form-layout">
             <Box component="form" className="auth__form" spacing={2}>
-                <h2 className="auth__form-title">Sign up</h2>
+                <h2 className="auth__form-title">Регистрация</h2>
                 <TextField
                     variant="outlined"
                     type="text"
-                    placeholder="Username"
+                    placeholder="Логин"
                     className="auth__form-input"
                     value={username}
                     onChange={({ target }) => setUsername(target.value)}
@@ -63,7 +63,7 @@ const SignUp = () => {
                                 position="start"
                                 className="input-icon"
                             >
-                                <LockIcon />
+                                <PersonIcon />
                             </InputAdornment>
                         ),
                     }}
@@ -72,7 +72,7 @@ const SignUp = () => {
                 <TextField
                     variant="outlined"
                     type="email"
-                    placeholder="Email"
+                    placeholder="Почта"
                     className="auth__form-input"
                     value={email}
                     onChange={({ target }) => setEmail(target.value)}
@@ -92,7 +92,7 @@ const SignUp = () => {
                 <TextField
                     variant="outlined"
                     type="password"
-                    placeholder="Password"
+                    placeholder="Пароль"
                     className="auth__form-input"
                     value={password}
                     onChange={({ target }) => setPassword(target.value)}
@@ -103,7 +103,7 @@ const SignUp = () => {
                                 position="start"
                                 className="input-icon"
                             >
-                                <PersonIcon />
+                                <LockIcon />
                             </InputAdornment>
                         ),
                     }}
@@ -115,7 +115,7 @@ const SignUp = () => {
                     renderInput={(params) => (
                         <TextField
                             {...params}
-                            label="Group"
+                            label="Группа"
                             variant="outlined"
                             size="small"
                         />
@@ -133,13 +133,13 @@ const SignUp = () => {
                     color="primary"
                     variant="contained"
                     size="large"
-                    style={{ marginBottom: 10 }}
+                    style={{ marginBottom: 40 }}
                 >
-                    Sign up
+                    Зарегистрироваться
                 </Button>
-                <NavLink className="link  mb-10" to="/login">
-                    Have an account?
-                    <span className="link--light"> Sign in.</span>
+                <NavLink className="link link--not-hover mb-10" to="/login">
+                    Уже имеете учетную запись?
+                    <span className="link--light"> Войдите</span>
                 </NavLink>
             </Box>
         </div>

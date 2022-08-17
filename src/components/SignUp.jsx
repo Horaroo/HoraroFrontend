@@ -8,20 +8,24 @@ import { useState } from 'react'
 import useAuth from 'hooks/useAuth'
 import { Api } from 'api/Api'
 
-const GROUP_TEST = [
-    { id: 1, name: 'У851' },
-    { id: 2, name: 'У836' },
-    { id: 3, name: 'У736' },
-]
 const SignUp = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
     const [loading, setLoading] = useState(false)
     const [selectedGroup, setSelectedGroup] = useState(null)
-
+    const [groups, setGroups] = useState([])
     const { setToken, setUser } = useAuth()
     const navigate = useNavigate()
+
+    const onSearchGroup = async (e) => {
+        try {
+            const { data } = await Api.searchGroup(e.target.value)
+            setGroups(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const onSubmit = async () => {
         try {
@@ -111,13 +115,14 @@ const SignUp = () => {
                 <Autocomplete
                     className="mb-35"
                     id="nba teams"
-                    options={GROUP_TEST}
+                    options={groups}
                     renderInput={(params) => (
                         <TextField
                             {...params}
                             label="Группа"
                             variant="outlined"
                             size="small"
+                            onChange={onSearchGroup}
                         />
                     )}
                     getOptionLabel={(option) => option.name}
@@ -130,9 +135,9 @@ const SignUp = () => {
 
                 <Button
                     onClick={onSubmit}
-                    color="primary"
                     variant="contained"
                     size="large"
+                    color="primary"
                     style={{ marginBottom: 40 }}
                 >
                     Зарегистрироваться

@@ -1,7 +1,9 @@
-@import "./variables";
-@import "./base/mixins";
-@import "./base/normalize";
-@import "./global";
+@import './variables';
+@import './base/mixins';
+@import './base/normalize';
+@import './global';
 
 // components
-@import "./components/auth__form";
+@import './components/auth__form';
+@import './components/header';
+@import './components/footer';

@@ -1,6 +1,6 @@
 import Home from 'views/Home'
-import Login from 'components/Login'
-import SignUp from 'components/SignUp'
+import Login from 'components/Login/Login'
+import SignUp from 'components/SignUp/SignUp'
 import NotFound from 'views/NotFound'
 import { Route, Routes } from 'react-router-dom'
 import Layout from 'components/Layout'

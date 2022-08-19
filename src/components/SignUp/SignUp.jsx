@@ -1,4 +1,10 @@
-import { Box, TextField, Button, InputAdornment } from '@material-ui/core'
+import {
+    Box,
+    TextField,
+    Button,
+    InputAdornment,
+    Typography,
+} from '@material-ui/core'
 import LockIcon from '@material-ui/icons/Lock'
 import PersonIcon from '@material-ui/icons/Person'
 import EmailIcon from '@material-ui/icons/Email'
@@ -7,16 +13,62 @@ import Autocomplete from '@material-ui/lab/Autocomplete'
 import { useState } from 'react'
 import useAuth from 'hooks/useAuth'
 import { Api } from 'api/Api'
+import { useFormik } from 'formik'
+import { validationSchema } from './validateShema'
 
 const SignUp = () => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [email, setEmail] = useState('')
     const [loading, setLoading] = useState(false)
     const [selectedGroup, setSelectedGroup] = useState(null)
     const [groups, setGroups] = useState([])
     const { setToken, setUser } = useAuth()
+    const [textError, setTextError] = useState(null)
     const navigate = useNavigate()
+    const { handleSubmit, values, touched, errors, handleChange, setErrors } =
+        useFormik({
+            initialValues: {
+                username: '',
+                password: '',
+                email: '',
+                group: '',
+            },
+            onSubmit: async (values) => {
+                try {
+                    setLoading(true)
+                    const { data } = await Api.register(
+                        values.username,
+                        values.password,
+                        selectedGroup?.id,
+                        values.email
+                    )
+                    // setToken(data.auth_token)
+                    setUser({
+                        id: data.id,
+                        username: data.username,
+                        group: data.group,
+                    })
+                    navigate('/login')
+
+                    setLoading(false)
+                } catch (error) {
+                    setLoading(false)
+                    console.log(error.message)
+                    if (error.response.data) {
+                        setErrors({
+                            username:
+                                Boolean(error.response.data.username) &&
+                                error.response.data.username[0],
+                            email:
+                                Boolean(error.response.data.email) &&
+                                error.response.data.email[0],
+                            group:
+                                Boolean(error.response.data.group) &&
+                                error.response.data.group[0],
+                        })
+                    }
+                }
+            },
+            validationSchema: validationSchema,
+        })
 
     const onSearchGroup = async (e) => {
         try {
@@ -26,40 +78,22 @@ const SignUp = () => {
             console.log(error)
         }
     }
-
-    const onSubmit = async () => {
-        try {
-            setLoading(true)
-            const { data } = await Api.register(
-                username,
-                password,
-                selectedGroup?.name,
-                email
-            )
-            // setToken(data.auth_token)
-            setUser({
-                id: data.id,
-                username: data.username,
-                group: data.group,
-            })
-            navigate('/login')
-
-            setLoading(false)
-        } catch (error) {
-            setLoading(false)
-        }
-    }
+    console.log(errors)
     return (
         <div className="auth__form-layout">
-            <Box component="form" className="auth__form" spacing={2}>
+            <form onSubmit={handleSubmit} className="auth__form">
                 <h2 className="auth__form-title">Регистрация</h2>
                 <TextField
                     variant="outlined"
+                    id="username"
+                    name="username"
                     type="text"
-                    placeholder="Логин"
+                    label="Логин"
                     className="auth__form-input"
-                    value={username}
-                    onChange={({ target }) => setUsername(target.value)}
+                    value={values.username}
+                    onChange={handleChange}
+                    error={touched.username && Boolean(errors.username)}
+                    helperText={touched.username && errors.username}
                     size="small"
                     InputProps={{
                         endAdornment: (
@@ -76,10 +110,14 @@ const SignUp = () => {
                 <TextField
                     variant="outlined"
                     type="email"
-                    placeholder="Почта"
+                    name="email"
+                    id="email"
+                    label="Почта"
                     className="auth__form-input"
-                    value={email}
-                    onChange={({ target }) => setEmail(target.value)}
+                    value={values.email}
+                    onChange={handleChange}
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
                     size="small"
                     InputProps={{
                         endAdornment: (
@@ -96,10 +134,14 @@ const SignUp = () => {
                 <TextField
                     variant="outlined"
                     type="password"
-                    placeholder="Пароль"
+                    name="password"
+                    id="password"
+                    label="Пароль"
                     className="auth__form-input"
-                    value={password}
-                    onChange={({ target }) => setPassword(target.value)}
+                    value={values.password}
+                    onChange={handleChange}
+                    error={touched.password && Boolean(errors.password)}
+                    helperText={touched.password && errors.password}
                     size="small"
                     InputProps={{
                         endAdornment: (
@@ -123,6 +165,9 @@ const SignUp = () => {
                             variant="outlined"
                             size="small"
                             onChange={onSearchGroup}
+                            name="group"
+                            error={Boolean(errors.group)}
+                            helperText={errors?.group}
                         />
                     )}
                     getOptionLabel={(option) => option.name}
@@ -130,15 +175,22 @@ const SignUp = () => {
                     value={selectedGroup}
                     onChange={(_event, group) => {
                         setSelectedGroup(group)
+                        setErrors({ group: null })
                     }}
                 />
+                {textError !== null && (
+                    <Typography color="error" className="text--error">
+                        {textError}
+                    </Typography>
+                )}
 
                 <Button
-                    onClick={onSubmit}
+                    type="submit"
                     variant="contained"
                     size="large"
                     color="primary"
                     style={{ marginBottom: 40 }}
+                    disabled={loading}
                 >
                     Зарегистрироваться
                 </Button>
@@ -146,7 +198,7 @@ const SignUp = () => {
                     Уже имеете учетную запись?
                     <span className="link--light"> Войдите</span>
                 </NavLink>
-            </Box>
+            </form>
         </div>
     )
 }

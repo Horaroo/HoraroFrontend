@@ -13,9 +13,9 @@ import {
 } from '@material-ui/core'
 
 const pages = [
-    { id: 1, name: 'Home', url: '/' },
-    { id: 2, name: 'Shedules', url: '/shedules' },
-    { id: 3, name: 'About', url: '/about' },
+    { id: 1, name: 'Главная', url: '/' },
+    { id: 2, name: 'Расписания', url: '/shedules' },
+    { id: 3, name: 'О нас', url: '/about' },
 ]
 import logoIcon from 'assets/images/logo.png'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -99,7 +99,7 @@ const Header = () => {
                             onClose={handleCloseUserMenu}
                         >
                             <MenuItem onClick={onLogoutUser}>
-                                <Typography>Logout</Typography>
+                                <Typography>Выйти</Typography>
                             </MenuItem>
                         </Menu>
                     </Box>

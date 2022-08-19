@@ -1,46 +1,63 @@
-import { Box, TextField, Button, InputAdornment } from '@material-ui/core'
+import { TextField, Button, InputAdornment } from '@material-ui/core'
 import LockIcon from '@material-ui/icons/Lock'
 import PersonIcon from '@material-ui/icons/Person'
 import { Api } from 'api/Api'
 import useAuth from 'hooks/useAuth'
-import { useCallback, useState } from 'react'
-import { Navigate, NavLink, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
+import { validationSchema } from './validateShema'
+
 const Login = () => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const { setToken, setUser } = useAuth()
     const navigate = useNavigate()
-    const onSubmit = async () => {
-        try {
-            setLoading(true)
-            const { data, status } = await Api.login(username, password)
-            if (status === 200) {
-                setToken(data.auth_token)
-                setUser({
-                    id: data.id,
-                    username: data.username,
-                    group: data.group,
-                })
-                navigate('/')
+    const [textError, setTextError] = useState()
+    const { handleSubmit, values, touched, errors, handleChange } = useFormik({
+        initialValues: {
+            username: '',
+            password: '',
+        },
+        onSubmit: async (values) => {
+            try {
+                setLoading(true)
+                const { data, status } = await Api.login(
+                    values.username,
+                    values.password
+                )
+                if (status === 200) {
+                    setToken(data.auth_token)
+                    setUser({
+                        id: data.id,
+                        username: data.username,
+                        group: data.group,
+                    })
+                    navigate('/')
+                }
+                setLoading(false)
+            } catch (error) {
+                setLoading(false)
+                setTextError(error.message)
             }
-            setLoading(false)
-        } catch (error) {
-            setLoading(false)
-        }
-    }
+        },
+        validationSchema: validationSchema,
+    })
+
     return (
         <div className="auth__form-layout">
-            <Box component="form" className="auth__form" spacing={2}>
+            <form onSubmit={handleSubmit} className="auth__form">
                 <h2 className="auth__form-title">Вход</h2>
                 <TextField
+                    fullWidth
+                    id="username"
+                    name="username"
+                    label="Логин"
                     variant="outlined"
-                    value={username}
-                    onChange={({ target }) => setUsername(target.value)}
-                    type="text"
-                    placeholder="Логин"
+                    value={values.username}
+                    onChange={handleChange}
                     className="auth__form-input"
-                    size="small"
+                    error={touched.username && Boolean(errors.username)}
+                    helperText={touched.username && errors.username}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment
@@ -52,15 +69,18 @@ const Login = () => {
                         ),
                     }}
                 />
-
                 <TextField
-                    variant="outlined"
+                    fullWidth
+                    id="password"
+                    name="password"
+                    label="Пароль"
                     type="password"
-                    placeholder="Пароль"
+                    variant="outlined"
+                    value={values.password}
+                    onChange={handleChange}
                     className="auth__form-input"
-                    size="small"
-                    value={password}
-                    onChange={({ target }) => setPassword(target.value)}
+                    error={touched.password && Boolean(errors.password)}
+                    helperText={touched.password && errors.password}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment
@@ -73,11 +93,12 @@ const Login = () => {
                     }}
                 />
                 <Button
-                    onClick={onSubmit}
+                    type="submit"
                     color="primary"
                     variant="contained"
                     size="large"
                     style={{ marginBottom: 40 }}
+                    disabled={loading}
                 >
                     Войти
                 </Button>
@@ -91,7 +112,7 @@ const Login = () => {
                         Зарегистрируйтесь здесь!
                     </span>
                 </NavLink>
-            </Box>
+            </form>
         </div>
     )
 }

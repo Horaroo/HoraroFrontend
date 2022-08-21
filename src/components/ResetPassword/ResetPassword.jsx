@@ -3,7 +3,7 @@ import LockIcon from '@material-ui/icons/Lock'
 import EmailIcon from '@material-ui/icons/Email'
 import { Api } from 'api/Api'
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { setNewPassSchema, resetPassSchema } from './validateShema'
 import { useFormik } from 'formik'
@@ -14,28 +14,36 @@ const ResetPassword = ({ isSetNewPass }) => {
     const [isSend, setIsSend] = useState(false)
     const navigate = useNavigate()
 
-    const { handleSubmit, values, touched, errors, handleChange } = useFormik({
-        initialValues: isSetNewPass
-            ? { password: '', confirmPassword: '' }
-            : { email: '' },
-        validationSchema: isSetNewPass ? setNewPassSchema : resetPassSchema,
-        onSubmit: async (values) => {
-            try {
-                console.log('click')
-                setLoading(true)
-                if (isSetNewPass) {
-                    await Api.setpassword(uid, token, values.password)
-                    navigate('/login')
-                } else {
-                    const res = await Api.resetPassword(values.email)
-                    if (res.status === 201) setIsSend(true)
+    const { handleSubmit, values, touched, errors, handleChange, setErrors } =
+        useFormik({
+            initialValues: isSetNewPass
+                ? { password: '', confirmPassword: '' }
+                : { email: '' },
+            validationSchema: isSetNewPass ? setNewPassSchema : resetPassSchema,
+            onSubmit: async (values) => {
+                try {
+                    console.log('click')
+                    setLoading(true)
+                    if (isSetNewPass) {
+                        await Api.setpassword(uid, token, values.password)
+                        navigate('/login')
+                    } else {
+                        const res = await Api.resetPassword(values.email)
+                        if (res.status === 204) setIsSend(true)
+                    }
+                    setLoading(false)
+                } catch (error) {
+                    setLoading(false)
+                    if (error.response.data) {
+                        setErrors({
+                            email:
+                                Boolean(error.response.data.email) &&
+                                error.response.data.email[0],
+                        })
+                    }
                 }
-                setLoading(false)
-            } catch (error) {
-                setLoading(false)
-            }
-        },
-    })
+            },
+        })
 
     return (
         <div className="auth__form-layout">
@@ -133,11 +141,18 @@ const ResetPassword = ({ isSetNewPass }) => {
                     color="primary"
                     variant="contained"
                     size="large"
-                    style={{ marginBottom: 10 }}
+                    style={{ marginBottom: 20 }}
                     disabled={isSend || loading}
                 >
                     {isSetNewPass ? 'Отправить' : 'Сбросить'}
                 </Button>
+                <NavLink className="link link--not-hover" to="/signup">
+                    Ещё не зарегистрированы?
+                    <span className="link--light">
+                        {' '}
+                        Зарегистрируйтесь здесь!
+                    </span>
+                </NavLink>
             </form>
         </div>
     )

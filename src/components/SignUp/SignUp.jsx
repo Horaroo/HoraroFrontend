@@ -10,7 +10,7 @@ import PersonIcon from '@material-ui/icons/Person'
 import EmailIcon from '@material-ui/icons/Email'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import useAuth from 'hooks/useAuth'
 import { Api } from 'api/Api'
 import { useFormik } from 'formik'
@@ -69,6 +69,27 @@ const SignUp = () => {
             },
             validationSchema: validationSchema,
         })
+
+    const getGroups = useCallback(async () => {
+        try {
+            const { data } = await Api.searchGroup('')
+            setGroups(data)
+        } catch (error) {
+            console.log(error.message)
+        }
+    }, [setGroups])
+
+    useEffect(() => {
+        const getGroups = async () => {
+            try {
+                const { data } = await Api.searchGroup('')
+                setGroups(data)
+            } catch (error) {
+                console.log(error.message)
+            }
+        }
+        getGroups()
+    }, [])
 
     const onSearchGroup = async (e) => {
         try {
@@ -157,6 +178,7 @@ const SignUp = () => {
                     className="mb-35"
                     id="nba teams"
                     options={groups}
+                    noOptionsText="Группа не найдена"
                     renderInput={(params) => (
                         <TextField
                             {...params}

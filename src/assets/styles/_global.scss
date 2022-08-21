@@ -14,7 +14,9 @@ code {
 html,
 body {
     background-color: #f2f2f2;
-    min-height: 100%;
+    overflow: hidden;
+    padding-top: 73px;
+    padding-bottom: 55px;
 }
 .link {
     font-size: 14px;
@@ -43,12 +45,6 @@ body {
     margin: 0 auto;
 }
 .layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 100vh;
-    height: 100%;
     overflow: hidden;
 }
 .input-icon {
@@ -79,4 +75,7 @@ body {
 }
 .text--error{
     margin: 10px 0;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 15px;
 }

@@ -13,9 +13,8 @@ import {
 } from '@material-ui/core'
 
 const pages = [
-    { id: 1, name: 'Главная', url: '/' },
-    { id: 2, name: 'Расписания', url: '/shedules' },
-    { id: 3, name: 'О нас', url: '/about' },
+    { id: 1, name: 'Расписания', url: '/' },
+    { id: 2, name: 'О нас', url: '/' },
 ]
 import logoIcon from 'assets/images/logo.png'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -45,23 +44,31 @@ const Header = () => {
     }
 
     return (
-        <AppBar position="static">
-            <div className="container">
+        <AppBar position="static" className="header">
+            <div className="container header__container">
                 <Toolbar
                     disableGutters
-                    style={{ display: 'flex', justifyContent: 'space-between' }}
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                    }}
                 >
                     <img className="logo" src={logoIcon} alt="logo" />
                     <Box
                         sx={{
                             flexGrow: 0,
+                            height: 75,
+                            display: 'flex',
+                            alignItems: 'center',
                         }}
                     >
                         {pages.map((page) => (
-                            <NavLink to={page.url} key={page.id}>
-                                <Button style={{ color: 'white' }}>
-                                    {page.name}
-                                </Button>
+                            <NavLink
+                                to={page.url}
+                                key={page.id}
+                                className="header__nav-link"
+                            >
+                                {page.name}
                             </NavLink>
                         ))}
                     </Box>

@@ -1,4 +1,9 @@
-import { TextField, Button, InputAdornment } from '@material-ui/core'
+import {
+    TextField,
+    Button,
+    InputAdornment,
+    Typography,
+} from '@material-ui/core'
 import LockIcon from '@material-ui/icons/Lock'
 import PersonIcon from '@material-ui/icons/Person'
 import { Api } from 'api/Api'
@@ -37,7 +42,13 @@ const Login = () => {
                 setLoading(false)
             } catch (error) {
                 setLoading(false)
-                setTextError(error.message)
+                if (error.response.data) {
+                    setTextError({
+                        non_field_errors:
+                            Boolean(error.response.data.non_field_errors) &&
+                            error.response.data.non_field_errors[0],
+                    })
+                }
             }
         },
         validationSchema: validationSchema,
@@ -92,6 +103,11 @@ const Login = () => {
                         ),
                     }}
                 />
+                {textError !== null && (
+                    <Typography color="error" className="text--error">
+                        {textError}
+                    </Typography>
+                )}
                 <Button
                     type="submit"
                     color="primary"

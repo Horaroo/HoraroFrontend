@@ -5,7 +5,7 @@ import NotFound from 'views/NotFound'
 import { Route, Routes } from 'react-router-dom'
 import Layout from 'components/Layout'
 import PrivateRoute from 'routes/PrivateRoute'
-import ResetPassword from 'components/ResetPassword'
+import ResetPassword from 'components/ResetPassword/ResetPassword'
 function App() {
     return (
         <Routes>

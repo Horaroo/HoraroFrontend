@@ -102,7 +102,10 @@ const Login = () => {
                 >
                     Войти
                 </Button>
-                <NavLink className="link link--light mb-10" to="/login">
+                <NavLink
+                    className="link link--light mb-10"
+                    to="/reset_password"
+                >
                     Забыли пароль?
                 </NavLink>
                 <NavLink className="link link--not-hover" to="/signup">

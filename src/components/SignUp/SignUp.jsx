@@ -78,7 +78,6 @@ const SignUp = () => {
             console.log(error)
         }
     }
-    console.log(errors)
     return (
         <div className="auth__form-layout">
             <form onSubmit={handleSubmit} className="auth__form">

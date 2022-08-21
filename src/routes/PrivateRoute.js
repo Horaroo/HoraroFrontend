@@ -8,7 +8,6 @@ function PrivateRoute({ children }) {
     const url = new URLSearchParams()
 
     url.set('redirect', location.pathname)
-    console.log(auth)
     return auth.token ? (
         children
     ) : (

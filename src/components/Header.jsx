@@ -21,11 +21,9 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { Api } from 'api/Api'
 import useAuth from 'hooks/useAuth'
 const Header = () => {
-    const [anchorElNav, setAnchorElNav] = useState(null)
-    const [anchorElUser, setAnchorElUser] = useState(null)
     const navigate = useNavigate()
     const { logOut, user } = useAuth()
-
+    const [openDropdown, setOpenDropdown] = useState(false)
     const onLogoutUser = async () => {
         try {
             navigate('/login')
@@ -35,12 +33,8 @@ const Header = () => {
             console.log(error)
         }
     }
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget)
-    }
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null)
+    const handleOpenUserMenu = () => {
+        setOpenDropdown(!openDropdown)
     }
 
     return (
@@ -51,6 +45,7 @@ const Header = () => {
                     style={{
                         display: 'flex',
                         justifyContent: 'space-between',
+                        height: 73,
                     }}
                 >
                     <img className="logo" src={logoIcon} alt="logo" />
@@ -73,42 +68,36 @@ const Header = () => {
                         ))}
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton
-                                onClick={handleOpenUserMenu}
-                                sx={{ p: 0, color: 'white' }}
+                        <div className="header__profile">
+                            <Typography
+                                style={{ color: 'white', marginRight: 7 }}
                             >
-                                <Typography
-                                    style={{ color: 'white', marginRight: 7 }}
+                                {user?.username}
+                            </Typography>
+                            <Avatar
+                                onClick={handleOpenUserMenu}
+                                className="header__avatar"
+                                alt={user?.username.toUpperCase()}
+                                src="/static/images/avatar/2.jpg"
+                            />
+                        </div>
+
+                        <div className={`dropdown ${!openDropdown && 'none'}`}>
+                            <ul className="dropdown__list">
+                                <li
+                                    onClick={() => navigate('/profile')}
+                                    className="dropdown__item"
                                 >
-                                    {user?.username}
-                                </Typography>
-                                <Avatar
-                                    alt={user?.username.toUpperCase()}
-                                    src="/static/images/avatar/2.jpg"
-                                />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            <MenuItem onClick={onLogoutUser}>
-                                <Typography>Выйти</Typography>
-                            </MenuItem>
-                        </Menu>
+                                    Профиль
+                                </li>
+                                <li
+                                    onClick={onLogoutUser}
+                                    className="dropdown__item"
+                                >
+                                    Выйти
+                                </li>
+                            </ul>
+                        </div>
                     </Box>
                 </Toolbar>
             </div>

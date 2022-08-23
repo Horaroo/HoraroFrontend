@@ -32,4 +32,12 @@
     &__nav-link {
         color: $white;
     }
+    &__profile{
+        display: flex;
+        align-items: center;
+    }
+    &__avatar{
+        cursor: pointer;
+    }
+    
 }

@@ -1,8 +1,9 @@
 .header {
     position: absolute !important;
     top: 0 !important;
-
+   
     &__container {
+        padding: 0px 10px;
         @media (max-width: 480px) {
             padding: 0 5px;
         }

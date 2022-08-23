@@ -13,10 +13,11 @@ code {
 }
 html,
 body {
+    height: 100%;
     background-color: #f2f2f2;
-    overflow: hidden;
-    padding-top: 73px;
-    padding-bottom: 55px;
+}
+.root{
+    height: 100%;
 }
 .link {
     font-size: 14px;
@@ -45,7 +46,10 @@ body {
     margin: 0 auto;
 }
 .layout {
+    min-height: 100% ;
     overflow: hidden;
+    padding-top: 83px;
+    position: relative;
 }
 .input-icon {
     color: $grey-text;

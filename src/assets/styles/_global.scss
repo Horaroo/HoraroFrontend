@@ -16,7 +16,7 @@ body {
     height: 100%;
     background-color: #f2f2f2;
 }
-#root{
+#root {
     height: 100% !important;
 }
 .link {
@@ -44,12 +44,22 @@ body {
     width: 100%;
     padding: 0 20px;
     margin: 0 auto;
+
+    @include _480 {
+        padding: 0 10px;
+    }
 }
 .layout {
-    min-height: 100% ;
+    height: 100%;
     overflow: hidden;
     padding-top: 83px;
     position: relative;
+
+    @include _480 {
+        width: 100%;
+        position: fixed;
+        height: calc(100vh - 82px);
+    }
 }
 .input-icon {
     color: $grey-text;
@@ -67,7 +77,10 @@ body {
     width: 100%;
 }
 .logo {
-    width: 35px;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
     border-radius: 50%;
 }
 .btn {
@@ -77,12 +90,15 @@ body {
     background: -moz-linear-gradient(65deg, #392a2a 0%, #215dbb 80%);
     color: $white !important;
 }
-.text--error{
+.text--error {
     margin: 10px 0;
     text-align: center;
     font-size: 14px;
     margin-bottom: 15px;
 }
-.none{
+.none {
     display: none;
+}
+.opacity-0 {
+    opacity: 0 !important;
 }

@@ -38,70 +38,56 @@ const Header = () => {
     }
 
     return (
-        <AppBar position="static" className="header">
+        <header className="header">
             <div className="container header__container">
-                <Toolbar
-                    disableGutters
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        height: 73,
-                    }}
-                >
+                <div className="header__logo">
                     <img className="logo" src={logoIcon} alt="logo" />
-                    <Box
-                        sx={{
-                            flexGrow: 0,
-                            height: 75,
-                            display: 'flex',
-                            alignItems: 'center',
-                        }}
-                    >
-                        {pages.map((page) => (
-                            <NavLink
-                                to={page.url}
-                                key={page.id}
-                                className="header__nav-link"
-                            >
-                                {page.name}
-                            </NavLink>
-                        ))}
-                    </Box>
-                    <Box sx={{ flexGrow: 0 }}>
-                        <div className="header__profile">
-                            <Typography
-                                style={{ color: 'white', marginRight: 7 }}
-                            >
-                                {user?.username}
-                            </Typography>
-                            <Avatar
-                                onClick={handleOpenUserMenu}
-                                className="header__avatar"
-                                alt={user?.username.toUpperCase()}
-                                src="/static/images/avatar/2.jpg"
-                            />
-                        </div>
+                </div>
+                <nav className="header__menu">
+                    <ul className="header__menu-list">
+                        {pages?.map((item) => {
+                            return (
+                                <NavLink
+                                    className="header__nav-link"
+                                    key={item.id}
+                                    to={item.url}
+                                >
+                                    {item.name}
+                                </NavLink>
+                            )
+                        })}
+                    </ul>
+                </nav>
 
-                        <div className={`dropdown ${!openDropdown && 'none'}`}>
-                            <ul className="dropdown__list">
-                                <li
-                                    onClick={() => navigate('/profile')}
-                                    className="dropdown__item"
-                                >
-                                    Профиль
-                                </li>
-                                <li
-                                    onClick={onLogoutUser}
-                                    className="dropdown__item"
-                                >
-                                    Выйти
-                                </li>
-                            </ul>
-                        </div>
-                    </Box>
-                </Toolbar>
+                <div className="header__profile">
+                    <Typography
+                        className="header__profile-name"
+                        style={{ color: 'white', marginRight: 7 }}
+                    >
+                        {user?.username}
+                    </Typography>
+                    <Avatar
+                        onClick={handleOpenUserMenu}
+                        className="header__avatar"
+                        alt={user?.username.toUpperCase()}
+                        src="/static/images/avatar/2.jpg"
+                    />
+                </div>
+                <div className={`dropdown ${!openDropdown && 'opacity-0'} `}>
+                    <ul className="dropdown__list">
+                        <li
+                            onClick={() => navigate('/profile')}
+                            className="dropdown__item"
+                        >
+                            Профиль
+                        </li>
+                        <li onClick={onLogoutUser} className="dropdown__item">
+                            Выйти
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </AppBar>
+        </header>
     )
 }
 

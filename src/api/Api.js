@@ -3,14 +3,18 @@ import Cookies from 'js-cookie'
 
 const defaultOptions = {
     baseURL: process.env.REACT_APP_API_URL,
+    headers: {
+        Authorization: getToken(),
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
 }
 
 let instance = axios.create(defaultOptions)
 const getToken = () => {
     const token = Cookies.get('auth-token')
-    const result = `Token ${token}}`
-    return result
+    return `Token ${String(token)}`
 }
+
 export const Api = {
     register(username, password, group, email) {
         return instance.post(`/auth/detail/users/`, {
@@ -44,6 +48,21 @@ export const Api = {
     searchGroup(searchValue) {
         return instance.get(`/group/`, {
             params: { q: searchValue },
+        })
+    },
+    changePassword(current_password, new_password) {
+        console.log(getToken())
+        return instance.post(`/auth/detail/users/set_password/`, {
+            data: {
+                current_password,
+                new_password,
+            },
+        })
+    },
+    deleteAccount(current_password) {
+        return instance.delete(`/auth/detail/users/me/`, {
+            current_password,
+            headers: getToken(),
         })
     },
 }

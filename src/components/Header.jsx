@@ -1,29 +1,23 @@
 import { useState } from 'react'
-import {
-    Toolbar,
-    Typography,
-    Box,
-    IconButton,
-    Tooltip,
-    Avatar,
-    Menu,
-    MenuItem,
-    AppBar,
-    Button,
-} from '@material-ui/core'
+import { Typography, Avatar } from '@material-ui/core'
+import logoIcon from 'assets/images/logo.png'
+import { NavLink, useNavigate } from 'react-router-dom'
+import useAuth from 'hooks/useAuth'
+import Modal from './Modal/Modal'
+import { Api } from 'api/Api'
 
 const pages = [
     { id: 1, name: 'Расписания', url: '/' },
     { id: 2, name: 'О нас', url: '/' },
 ]
-import logoIcon from 'assets/images/logo.png'
-import { NavLink, useNavigate } from 'react-router-dom'
-import { Api } from 'api/Api'
-import useAuth from 'hooks/useAuth'
+
 const Header = () => {
     const navigate = useNavigate()
     const { logOut, user } = useAuth()
     const [openDropdown, setOpenDropdown] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
+    const [activeType, setActiveType] = useState(null)
+    const types = ['change', 'delete']
     const onLogoutUser = async () => {
         try {
             navigate('/login')
@@ -36,7 +30,9 @@ const Header = () => {
     const handleOpenUserMenu = () => {
         setOpenDropdown(!openDropdown)
     }
-
+    const handleClose = () => {
+        setOpenModal(false)
+    }
     return (
         <header className="header">
             <div className="container header__container">
@@ -75,18 +71,36 @@ const Header = () => {
                 </div>
                 <div className={`dropdown ${!openDropdown && 'opacity-0'} `}>
                     <ul className="dropdown__list">
-                        <li
-                            onClick={() => navigate('/profile')}
-                            className="dropdown__item"
-                        >
-                            Профиль
-                        </li>
                         <li onClick={onLogoutUser} className="dropdown__item">
                             Выйти
+                        </li>
+                        <li
+                            onClick={() => {
+                                setOpenModal(true)
+                                setActiveType('change')
+                            }}
+                            className="dropdown__item"
+                        >
+                            Сменить пароль
+                        </li>
+                        <li
+                            onClick={() => {
+                                setOpenModal(true)
+                                setActiveType('delete')
+                            }}
+                            className="dropdown__item"
+                            style={{ color: 'red' }}
+                        >
+                            Удалить аккаунт
                         </li>
                     </ul>
                 </div>
             </div>
+            <Modal
+                open={openModal}
+                handleClose={handleClose}
+                activeType={activeType}
+            />
         </header>
     )
 }

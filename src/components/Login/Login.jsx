@@ -18,41 +18,42 @@ const Login = () => {
     const { setToken, setUser } = useAuth()
     const navigate = useNavigate()
     const [textError, setTextError] = useState()
-    const { handleSubmit, values, touched, errors, handleChange } = useFormik({
-        initialValues: {
-            username: '',
-            password: '',
-        },
-        onSubmit: async (values) => {
-            try {
-                setLoading(true)
-                const { data, status } = await Api.login(
-                    values.username,
-                    values.password
-                )
-                if (status === 200) {
-                    setToken(data.auth_token)
-                    setUser({
-                        id: data.id,
-                        username: data.username,
-                        group: data.group,
-                    })
-                    navigate('/')
-                }
-                setLoading(false)
-            } catch (error) {
-                setLoading(false)
-                if (error.response.data) {
-                    setTextError({
-                        non_field_errors:
+    const { handleSubmit, values, touched, errors, handleChange, setErrors } =
+        useFormik({
+            initialValues: {
+                username: '',
+                password: '',
+            },
+            onSubmit: async (values) => {
+                try {
+                    setLoading(true)
+                    const { data, status } = await Api.login(
+                        values.username,
+                        values.password
+                    )
+                    console.log(data, status)
+                    if (status === 200) {
+                        setToken(data.auth_token)
+                        setUser({
+                            id: data.id,
+                            username: data.username,
+                            group: data.group,
+                        })
+                        navigate('/')
+                    }
+                    setLoading(false)
+                } catch (error) {
+                    setLoading(false)
+                    if (error.response.data) {
+                        setTextError(
                             Boolean(error.response.data.non_field_errors) &&
-                            error.response.data.non_field_errors[0],
-                    })
+                                error.response.data.non_field_errors[0]
+                        )
+                    }
                 }
-            }
-        },
-        validationSchema: validationSchema,
-    })
+            },
+            validationSchema: validationSchema,
+        })
 
     return (
         <div className="auth__form-layout">

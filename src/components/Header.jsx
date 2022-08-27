@@ -100,6 +100,7 @@ const Header = () => {
                 open={openModal}
                 handleClose={handleClose}
                 activeType={activeType}
+                isChangePass={activeType === 'change'}
             />
         </header>
     )

@@ -1,50 +1,65 @@
-import { Dialog, Button, TextField } from '@material-ui/core'
-import React, { useState } from 'react'
+import { Dialog, Button, TextField, Typography } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Api } from 'api/Api'
+import { Api, clearToken } from 'api/Api'
 import { useFormik } from 'formik'
 import { changePasswordShema, deleteAccount } from './validateShema'
-const Modal = ({ open, handleClose, activeType }) => {
+import { useNavigate } from 'react-router-dom'
+import useAuth from 'hooks/useAuth'
+const Modal = ({ open, handleClose, isChangePass }) => {
+    const { logOut } = useAuth()
     const [loading, setLoading] = useState(false)
-    const isChangePass = activeType === 'change'
-    const title =
-        (activeType === 'change' && 'Смена пароля') ||
-        (activeType === 'delete' && 'Удаление аккаунта')
-
-    const { handleSubmit, values, touched, errors, handleChange, setErrors } =
-        useFormik({
-            initialValues: isChangePass
-                ? { password: '', newPassword: '' }
-                : { password: '' },
-            validationSchema: isChangePass
-                ? changePasswordShema
-                : deleteAccount,
-            onSubmit: async (values) => {
-                try {
-                    console.log('click')
-                    setLoading(true)
-                    let result
-                    if (changePasswordShema) {
-                        result = await Api.changePassword(
-                            values.password,
-                            values.newPassword
-                        )
-                    } else {
-                        result = Api.deleteAccount(values.password)
-                    }
-                    setLoading(false)
-                } catch (error) {
-                    setLoading(false)
-                    if (error.response.data) {
-                        setErrors({
-                            password:
-                                Boolean(error.response.data.current_password) &&
-                                error.response.data.current_password[0],
-                        })
+    const navigate = useNavigate()
+    useEffect(() => {
+        setValues({ password: '' })
+    }, [isChangePass])
+    const title = isChangePass ? 'Смена пароля' : 'Удаление аккаунта'
+    const {
+        handleSubmit,
+        values,
+        touched,
+        errors,
+        handleChange,
+        setErrors,
+        setValues,
+    } = useFormik({
+        initialValues: isChangePass
+            ? { password: '', newPassword: '' }
+            : { password: '' },
+        validationSchema: isChangePass ? changePasswordShema : deleteAccount,
+        onSubmit: async (values) => {
+            try {
+                setLoading(true)
+                let result
+                console.log(isChangePass)
+                if (isChangePass) {
+                    result = await Api.changePassword(
+                        values.password,
+                        values.newPassword
+                    )
+                } else {
+                    result = await Api.deleteAccount(values.password)
+                    console.log(result)
+                    if (result.status === 204) {
+                        navigate('/login')
+                        logOut()
+                        await clearToken()
                     }
                 }
-            },
-        })
+                handleClose()
+                setLoading(false)
+            } catch (error) {
+                setLoading(false)
+                if (error.response.data) {
+                    setErrors({
+                        password:
+                            Boolean(error.response.data.current_password) &&
+                            error.response.data.current_password[0],
+                    })
+                }
+            }
+        },
+    })
     return (
         <Dialog
             maxWidth="lg"
@@ -84,7 +99,8 @@ const Modal = ({ open, handleClose, activeType }) => {
                         size="small"
                     />
                 )}
-                <div className="flex flex-space-between flex-middle">
+
+                <div className="flex flex-space-between flex-middle modal__btns">
                     <Button
                         onClick={handleSubmit}
                         disabled={loading}
@@ -94,10 +110,12 @@ const Modal = ({ open, handleClose, activeType }) => {
                                 ? {
                                       background: 'rgb(244 67 54)',
                                       color: 'white',
+                                      marginRight: '17px',
                                   }
                                 : {
                                       background: '#3F51B5',
                                       color: 'white',
+                                      marginRight: '17px',
                                   }
                         }
                         type="submit"
@@ -114,6 +132,6 @@ export default Modal
 
 Modal.propTypes = {
     open: PropTypes.bool.isRequired,
+    isChangePass: PropTypes.bool,
     handleClose: PropTypes.func.isRequired,
-    activeType: PropTypes.oneOf(['change', 'delete']),
 }

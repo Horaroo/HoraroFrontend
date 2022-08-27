@@ -3,18 +3,14 @@ import Cookies from 'js-cookie'
 
 const defaultOptions = {
     baseURL: process.env.REACT_APP_API_URL,
-    headers: {
-        Authorization: getToken(),
-        'Content-Type': 'application/x-www-form-urlencoded',
-    },
 }
-
+const token = Cookies.get('auth-token')
 let instance = axios.create(defaultOptions)
-const getToken = () => {
-    const token = Cookies.get('auth-token')
-    return `Token ${String(token)}`
-}
-
+instance.defaults.headers.common['Authorization'] = token
+    ? `Token ${token}`
+    : null
+export const clearToken = async () =>
+    (instance.defaults.headers.common['Authorization'] = null)
 export const Api = {
     register(username, password, group, email) {
         return instance.post(`/auth/detail/users/`, {
@@ -25,13 +21,27 @@ export const Api = {
         })
     },
     login(username, password) {
-        return instance.post(`auth/token/login/`, {
-            username,
-            password,
-        })
+        return instance
+            .post(`auth/token/login/`, {
+                username,
+                password,
+            })
+            .then((res) => {
+                if (res.status === 200) {
+                    instance.defaults.headers.common[
+                        'Authorization'
+                    ] = `Token ${res.data.auth_token}`
+                }
+
+                return res
+            })
     },
     logout() {
-        return instance.post(`/auth/token/logout/`)
+        return instance.post(`/auth/token/logout/`).then((res) => {
+            if (res.status === 204) {
+                instance.defaults.headers.common['Authorization'] = null
+            }
+        })
     },
     resetPassword(email) {
         return instance.post(`/auth/detail/users/reset_password/`, {
@@ -51,18 +61,17 @@ export const Api = {
         })
     },
     changePassword(current_password, new_password) {
-        console.log(getToken())
         return instance.post(`/auth/detail/users/set_password/`, {
-            data: {
-                current_password,
-                new_password,
-            },
+            current_password,
+            new_password,
         })
     },
-    deleteAccount(current_password) {
+    deleteAccount(password) {
+        console.log(password)
         return instance.delete(`/auth/detail/users/me/`, {
-            current_password,
-            headers: getToken(),
+            data: {
+                current_password: password,
+            },
         })
     },
 }

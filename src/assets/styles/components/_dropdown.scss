@@ -9,7 +9,7 @@
     &__list {
         padding: 8px 5px;
         margin: 0;
-        background-color: $color-primary;
+        background-color: $accent;
         text-align: start;
         border-radius: 0px 0px 8px 8px;
         overflow: hidden;
@@ -28,7 +28,7 @@
         transition: background ease-in-out 0.2s;
         border-radius: 6px;
         &:hover {
-            background-color: lighten($color-primary, 10%);
+            background-color: lighten($accent, 10%);
         }
     }
 }

@@ -1,0 +1,96 @@
+.shedule {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-weight: 500;
+    line-height: 1.4;
+    position: relative;
+    color: $accent;
+    max-width: 850px;
+    &__sitebar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    &__nav {
+        display: inline-flex;
+        margin-bottom: $gap;
+        padding-bottom: $small-gap;
+        border-bottom: 1px solid $accent;
+        &-btn {
+            color: inherit;
+            font-size: $size-base;
+            margin-right: $small-gap;
+            border-radius: 4px;
+            padding: 4px $small-gap;
+            border: 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s ease-in-out;
+            &:hover {
+                color: $white;
+                background-color: lighten($accent, 5%);
+            }
+            &.active {
+                color: $white;
+                background-color: $accent;
+            }
+        }
+    }
+    &__dayes {
+        padding: 0;
+        border: 2px solid $accent-light;
+        border-radius: $border-base;
+        overflow: hidden;
+        &-list {
+            border-radius: $border-base;
+            width: 100%;
+            padding-right: $gap;
+        }
+        &-item {
+            color: $black-secondary;
+            padding: 15px $gap;
+            font-size: $size-middle;
+            transition: all 0.3s ease-in-out;
+            &.active {
+                background-color: $accent-light;
+                color: $white;
+            }
+        }
+    }
+    &__content {
+        max-width: 850px;
+        min-width: 300px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    &-item {
+        width: 100%;
+
+        &__top {
+            width: max-content;
+            display: inline-flex;
+            align-items: center;
+            margin: 0 auto;
+
+            svg {
+                fill: $accent;
+            }
+        }
+        &__title {
+            font-size: $size-big;
+            margin: 0 10px 10px;
+        }
+        &__form {
+            width: 100%;
+            padding: $gap 30px;
+            border: 2px solid $accent-light;
+            border-radius: $border-base;
+        }
+    }
+}

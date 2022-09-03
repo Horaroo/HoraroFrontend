@@ -16,6 +16,15 @@ body {
     height: 100%;
     background-color: #f2f2f2;
 }
+li,
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+}
 #root {
     height: 100% !important;
 }
@@ -89,7 +98,9 @@ body {
     background: -webkit-linear-gradient(65deg, #392a2a 0%, #215dbb 80%);
     background: -moz-linear-gradient(65deg, #392a2a 0%, #215dbb 80%);
     color: $white !important;
+    border: 0;
 }
+
 .text--error {
     margin: 10px 0;
     text-align: center;

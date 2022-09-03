@@ -1,0 +1,17 @@
+.pair {
+    &__field {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        &-label {
+            font-size: $size-middle;
+            padding-bottom: $small-gap;
+        }
+
+        &-select {
+            width: max-content;
+            margin-right: auto;
+        }
+    }
+}

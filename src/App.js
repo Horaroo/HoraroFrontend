@@ -9,14 +9,7 @@ import ResetPassword from 'components/ResetPassword/ResetPassword'
 function App() {
     return (
         <Routes>
-            <Route
-                path="/"
-                element={
-                    <PrivateRoute>
-                        <Layout />
-                    </PrivateRoute>
-                }
-            >
+            <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
             </Route>
             <Route path="/login" element={<Login />} />

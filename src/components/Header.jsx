@@ -69,7 +69,7 @@ const Header = () => {
                         src="/static/images/avatar/2.jpg"
                     />
                 </div>
-                <div className={`dropdown ${!openDropdown && 'opacity-0'} `}>
+                <div className={`dropdown ${!openDropdown && 'none'} `}>
                     <ul className="dropdown__list">
                         <li onClick={onLogoutUser} className="dropdown__item">
                             Выйти

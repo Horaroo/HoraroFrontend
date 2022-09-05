@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
-
+import PropTypes from 'prop-types'
 const defaultOptions = {
     baseURL: process.env.REACT_APP_API_URL,
 }
@@ -74,4 +74,26 @@ export const Api = {
             },
         })
     },
+    postShedule({number_pair, subject, teacher, audience, week, group, type_pair, day}) {
+        return instance.post(`/schedule/`, {
+            number_pair,
+            subject,
+            teacher,
+            audience,
+            week,
+            group,
+            type_pair,
+            day
+        })
+    }
 }
+
+// Api.postShedule.propTypes = {
+//     number_pair: PropTypes.number.isRequired,
+//     subject: PropTypes.string.isRequired,
+//     teacher: PropTypes.string.isRequired, audience: PropTypes.string.isRequired,
+//     week: PropTypes.number.isRequired,
+//     group: PropTypes.number.isRequired,
+//     type_pair: PropTypes.number.isRequired,
+//     day: PropTypes.number.isRequired
+// }

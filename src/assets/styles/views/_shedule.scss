@@ -1,23 +1,32 @@
 .shedule {
+    position: relative;
+    margin-top: $gap;
     width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
     font-weight: 500;
     line-height: 1.4;
     position: relative;
     color: $accent;
-    max-width: 850px;
+    padding-top: 70px;
+    @include _768 {
+        padding-top: 90px;
+    }
     &__sitebar {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
     }
     &__nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0 5px;
         display: inline-flex;
         margin-bottom: $gap;
         padding-bottom: $small-gap;
         border-bottom: 1px solid $accent;
+
         &-btn {
             color: inherit;
             font-size: $size-base;
@@ -32,21 +41,41 @@
                 color: $white;
                 background-color: lighten($accent, 5%);
             }
+            &:last-child {
+                margin-right: 0;
+            }
+            @include _850 {
+                margin-right: 4px;
+            }
             &.active {
                 color: $white;
                 background-color: $accent;
             }
         }
     }
+    &__select {
+        position: absolute !important;
+        top: 0;
+        &-item {
+            border-bottom: none;
+        }
+        &-dayes {
+            right: 0;
+        }
+        &-nav {
+            left: 0;
+        }
+    }
+
     &__dayes {
-        padding: 0;
+        margin-right: $gap;
         border: 2px solid $accent-light;
         border-radius: $border-base;
         overflow: hidden;
+
         &-list {
             border-radius: $border-base;
             width: 100%;
-            padding-right: $gap;
         }
         &-item {
             color: $black-secondary;
@@ -60,8 +89,8 @@
         }
     }
     &__content {
-        max-width: 850px;
-        min-width: 300px;
+        position: relative;
+        max-width: 750px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -71,26 +100,43 @@
 
     &-item {
         width: 100%;
-
         &__top {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
             width: max-content;
             display: inline-flex;
             align-items: center;
             margin: 0 auto;
-
+            font-size: $size-big;
+            @include _768 {
+                font-size: 28px;
+                top: -46px;
+            }
             svg {
                 fill: $accent;
             }
         }
         &__title {
-            font-size: $size-big;
+            font-size: inherit;
             margin: 0 10px 10px;
         }
         &__form {
-            width: 100%;
+            position: relative;
             padding: $gap 30px;
             border: 2px solid $accent-light;
             border-radius: $border-base;
+            @include _768 {
+                padding: $gap;
+            }
+        }
+    }
+
+    &__nav,
+    &__dayes {
+        @include _768 {
+            display: none;
         }
     }
 }

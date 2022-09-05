@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useFormik } from 'formik'
 import { validationSchema } from './validateShema'
-import { IconButton, TextField } from '@material-ui/core'
+import { IconButton } from '@material-ui/core'
 import Pair from 'components/Pair/Pair'
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import ArrowBack from '@material-ui/icons/ArrowBack'
-const SheduleItem = ({ numberPair, setNumberPair }) => {
+import { Api } from 'api/Api'
+import useAuth from 'hooks/useAuth'
+const SheduleItem = ({ numberPair, activeWeek, setNumberPair, activeDay }) => {
+    const { user } = useAuth()
     const [loading, setLoading] = useState()
     const { handleSubmit, values, touched, errors, handleChange, setErrors } =
         useFormik({
@@ -19,6 +22,8 @@ const SheduleItem = ({ numberPair, setNumberPair }) => {
             onSubmit: async (values) => {
                 try {
                     setLoading(true)
+                    const res = await Api.postShedule({number_pair: numberPair,subject: values.title, teacher: values.teacher, type_pair:values.type,audience:values.audit, week:activeWeek, day:activeDay, group: user.group })
+                    console.log(res)
                     setLoading(false)
                 } catch (error) {
                     setLoading(false)
@@ -59,6 +64,8 @@ const SheduleItem = ({ numberPair, setNumberPair }) => {
 SheduleItem.propTypes = {
     pair: PropTypes.object,
     numberPair: PropTypes.number.isRequired,
+    activeWeek: PropTypes.number.isRequired,
+    activeDay: PropTypes.number.isRequired,
     handleSubmit: PropTypes.func,
     setNumberPair: PropTypes.func,
 }

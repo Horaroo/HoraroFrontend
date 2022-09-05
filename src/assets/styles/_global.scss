@@ -53,7 +53,7 @@ a {
     width: 100%;
     padding: 0 20px;
     margin: 0 auto;
-
+    overflow: hidden;
     @include _480 {
         padding: 0 10px;
     }
@@ -61,13 +61,19 @@ a {
 .layout {
     height: 100%;
     overflow: hidden;
-    padding-top: 83px;
+    padding-top: 77px;
     position: relative;
 
     @include _480 {
         width: 100%;
         position: fixed;
         height: calc(100vh - 82px);
+    }
+
+    &__container {
+        max-width: 1200px;
+        padding: 0 20px;
+        margin: 0 auto;
     }
 }
 .input-icon {

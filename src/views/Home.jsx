@@ -1,3 +1,4 @@
+import { MenuItem, Select } from '@material-ui/core'
 import SheduleItem from 'components/SheduleItem/SheduleItem'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
@@ -19,9 +20,10 @@ const tabs = [
 const handleSubmit = () => {}
 const Home = ({ user }) => {
     const [activeDay, setActiveDay] = useState(1)
-    const [activeTab, setActiveTab] = useState(1)
+    const [activeWeek, setActiveWeek] = useState(1)
     const [numberPair, setNumberPair] = useState(1)
     const [pair, setPair] = useState(null)
+    console.log(user)
     useEffect(() => {
         const getData = async () => {
             console.log('day change: ' + numberPair)
@@ -29,7 +31,11 @@ const Home = ({ user }) => {
             // setPair(res)
         }
         getData()
-    }, [activeDay, activeTab, numberPair])
+    }, [activeDay, activeWeek, numberPair])
+
+    const handleChange = (event) => {
+        setActiveDay(event.target.value)
+    }
 
     return (
         <div className="shedule">
@@ -38,15 +44,44 @@ const Home = ({ user }) => {
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
-                            onClick={() => setActiveTab(tab.value)}
+                            onClick={() => setActiveWeek(tab.value)}
                             className={`shedule__nav-btn ${
-                                tab.value === activeTab && 'active'
+                                tab.value === activeWeek && 'active'
                             }`}
                         >
                             {tab.label}
                         </button>
                     ))}
                 </nav>
+                <Select
+                    className="shedule__select shedule__select-nav"
+                    value={activeWeek}
+                    onChange={(e) => setActiveWeek(e.target.value)}
+                >
+                    {tabs.map((tab) => (
+                        <MenuItem key={tab.id} value={tab.id}>
+                            {tab.label}
+                        </MenuItem>
+                    ))}
+                </Select>
+
+                <Select
+                    className="shedule__select shedule__select-dayes"
+                    value={activeDay}
+                    label="Age"
+                    onChange={handleChange}
+                    style={{ border: '1px solid red' }}
+                >
+                    {dayes.map((day) => (
+                        <MenuItem
+                            className="shedule__select-item"
+                            key={day.id}
+                            value={day.id}
+                        >
+                            {day.label}
+                        </MenuItem>
+                    ))}
+                </Select>
                 <div className="shedule__dayes">
                     <ul className="shedule__dayes-list">
                         {dayes.map((day) => (
@@ -68,6 +103,8 @@ const Home = ({ user }) => {
                 <SheduleItem
                     pair={pair}
                     numberPair={numberPair}
+                    activeWeek={activeWeek}
+                    activeDay={activeDay}
                     setNumberPair={setNumberPair}
                     handleSubmit={handleSubmit}
                 />

@@ -1,17 +1,15 @@
-import {
-    Button,
-    MenuItem,
-    NativeSelect,
-    Select,
-    TextField,
-} from '@material-ui/core'
+import { Button, MenuItem, Select, TextField } from '@material-ui/core'
 import React from 'react'
 import PropTypes from 'prop-types'
-const TYPE_PAIR = [
-    { id: 1, label: 'Лекция' },
-    { id: 2, label: 'Практика' },
-]
-const Pair = ({ values, handleChange, errors, touched }) => {
+
+const Pair = ({
+    values,
+    handleChange,
+    errors,
+    touched,
+    pairTypes,
+    loading,
+}) => {
     return (
         <div className="pair">
             <div className="pair__field">
@@ -33,8 +31,8 @@ const Pair = ({ values, handleChange, errors, touched }) => {
                 <div className="pair__field-label">Преподаватель</div>
                 <TextField
                     variant="outlined"
-                    id="title"
-                    name="title"
+                    id="teacher"
+                    name="teacher"
                     type="text"
                     className="auth__form-input"
                     value={values.teacher}
@@ -44,35 +42,57 @@ const Pair = ({ values, handleChange, errors, touched }) => {
                     size="small"
                 />
             </div>
-            <div className="pair__field">
-                <div className="pair__field-label">Тип</div>
-                <Select
-                    style={{ marginRight: 'auto' }}
-                    className="pair__field-select auth__form-input"
-                    defaultValue={1}
-                >
-                    <MenuItem value="1">Лекция</MenuItem>
-                    <MenuItem value="2">Практика</MenuItem>
-                    <MenuItem value="3">Лабораторная</MenuItem>
-                </Select>
+            <div className="flex">
+                <div className="pair__field">
+                    <div className="pair__field-label">Тип</div>
+                    <Select
+                        style={{ marginRight: 'auto' }}
+                        name="type"
+                        className="pair__field-select auth__form-input"
+                        onChange={handleChange}
+                        value={values.type}
+                        error={touched.type && Boolean(errors.type)}
+                    >
+                        {pairTypes.map((item) => (
+                            <MenuItem key={item.id} value={item.id}>
+                                {item.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+
+                    {touched.type && Boolean(errors.type) && (
+                        <div
+                            className="text--error "
+                            style={{ position: 'relative', top: '-30px' }}
+                        >
+                            Обязательно
+                        </div>
+                    )}
+                </div>
+
+                <div className="pair__field">
+                    <div className="pair__field-label">Аудитория</div>
+                    <TextField
+                        variant="outlined"
+                        id="audit"
+                        name="audit"
+                        type="text"
+                        className="auth__form-input"
+                        value={values.audit}
+                        onChange={handleChange}
+                        error={touched.audit && Boolean(errors.audit)}
+                        helperText={touched.audit && errors.audit}
+                        size="small"
+                    />
+                </div>
             </div>
 
-            <div className="pair__field">
-                <div className="pair__field-label">Аудитория</div>
-                <TextField
-                    variant="outlined"
-                    id="title"
-                    name="title"
-                    type="text"
-                    className="auth__form-input"
-                    value={values.audit}
-                    onChange={handleChange}
-                    error={touched.audit && Boolean(errors.audit)}
-                    helperText={touched.audit && errors.audit}
-                    size="small"
-                />
-            </div>
-            <Button color="primary" type="submit" variant="contained">
+            <Button
+                disabled={loading}
+                color="primary"
+                type="submit"
+                variant="contained"
+            >
                 Сохранить
             </Button>
         </div>
@@ -81,7 +101,9 @@ const Pair = ({ values, handleChange, errors, touched }) => {
 Pair.propTypes = {
     values: PropTypes.object.isRequired,
     handleChange: PropTypes.func,
+    loading: PropTypes.bool,
     errors: PropTypes.object.isRequired,
     touched: PropTypes.object.isRequired,
+    pairTypes: PropTypes.array.isRequired,
 }
 export default Pair

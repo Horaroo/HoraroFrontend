@@ -1,8 +1,10 @@
 import { MenuItem, Select } from '@material-ui/core'
+import { Api } from 'api/Api'
 import SheduleItem from 'components/SheduleItem/SheduleItem'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 const dayes = [
     { id: 1, label: 'Понедельник', value: 1 },
     { id: 2, label: 'Вторник', value: 2 },
@@ -22,16 +24,19 @@ const Home = ({ user }) => {
     const [activeDay, setActiveDay] = useState(1)
     const [activeWeek, setActiveWeek] = useState(1)
     const [numberPair, setNumberPair] = useState(1)
+    const [pairTypes, setPairTypes] = useState([])
     const [pair, setPair] = useState(null)
-    console.log(user)
     useEffect(() => {
         const getData = async () => {
-            console.log('day change: ' + numberPair)
-            // const res = get /1/monday/1
-            // setPair(res)
+            try {
+                const res = await Api.getPairTypes()
+                if (res.status === 200) setPairTypes(res.data)
+            } catch (error) {
+                console.log(error)
+            }
         }
         getData()
-    }, [activeDay, activeWeek, numberPair])
+    }, [])
 
     const handleChange = (event) => {
         setActiveDay(event.target.value)
@@ -70,7 +75,6 @@ const Home = ({ user }) => {
                     value={activeDay}
                     label="Age"
                     onChange={handleChange}
-                    style={{ border: '1px solid red' }}
                 >
                     {dayes.map((day) => (
                         <MenuItem
@@ -104,11 +108,13 @@ const Home = ({ user }) => {
                     pair={pair}
                     numberPair={numberPair}
                     activeWeek={activeWeek}
+                    pairTypes={pairTypes}
                     activeDay={activeDay}
                     setNumberPair={setNumberPair}
                     handleSubmit={handleSubmit}
                 />
             </main>
+            <ToastContainer position="bottom-center" autoClose={3000} />
         </div>
     )
 }

@@ -8,29 +8,87 @@ import ArrowForward from '@material-ui/icons/ArrowForward'
 import ArrowBack from '@material-ui/icons/ArrowBack'
 import { Api } from 'api/Api'
 import useAuth from 'hooks/useAuth'
-const SheduleItem = ({ numberPair, activeWeek, setNumberPair, activeDay }) => {
+import { useEffect } from 'react'
+import { toast } from 'react-toastify'
+const SheduleItem = ({
+    numberPair,
+    activeWeek,
+    setNumberPair,
+    activeDay,
+    pairTypes,
+}) => {
     const { user } = useAuth()
     const [loading, setLoading] = useState()
-    const { handleSubmit, values, touched, errors, handleChange, setErrors } =
-        useFormik({
-            initialValues: {
-                title: '',
-                type: '',
-                teacher: '',
-                audit: '',
-            },
-            onSubmit: async (values) => {
-                try {
-                    setLoading(true)
-                    const res = await Api.postShedule({number_pair: numberPair,subject: values.title, teacher: values.teacher, type_pair:values.type,audience:values.audit, week:activeWeek, day:activeDay, group: user.group })
-                    console.log(res)
-                    setLoading(false)
-                } catch (error) {
-                    setLoading(false)
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const res = await Api.getPair(
+                    activeWeek,
+                    activeDay,
+                    numberPair,
+                    user.group
+                )
+                if (res.status === 200) {
+                    const { audience, subject, teacher, type_pair } = res.data
+                    if (JSON.stringify(res.data) !== '{}') {
+                        setValues({
+                            title: subject,
+                            audit: audience,
+                            teacher,
+                            type: type_pair,
+                        })
+                    } else {
+                        setValues(initialValues)
+                    }
                 }
-            },
-            validationSchema: validationSchema,
-        })
+
+                console.log(res)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getData()
+    }, [numberPair, activeDay, activeWeek, user])
+
+    const {
+        handleSubmit,
+        values,
+        touched,
+        errors,
+        handleChange,
+        setErrors,
+        setValues,
+        initialValues,
+    } = useFormik({
+        initialValues: {
+            title: '',
+            type: '',
+            teacher: '',
+            audit: '',
+        },
+        onSubmit: async (values) => {
+            try {
+                setLoading(true)
+                const res = await Api.postShedule({
+                    subject: values.title,
+                    teacher: values.teacher,
+                    type_pair: values.type,
+                    audience: values.audit,
+                    day: activeDay,
+                    week: activeWeek,
+                    number_pair: numberPair,
+                    group: user.id,
+                })
+                toast.success('Данные сохранены!')
+                setLoading(false)
+            } catch (error) {
+                setLoading(false)
+                toast.success('Данные не сохранены!')
+            }
+        },
+        validationSchema: validationSchema,
+    })
 
     const increment = () => {
         numberPair !== 4 && setNumberPair(numberPair + 1)
@@ -50,8 +108,10 @@ const SheduleItem = ({ numberPair, activeWeek, setNumberPair, activeDay }) => {
                 </IconButton>
             </div>
 
-            <form className="shedule-item__form">
+            <form onSubmit={handleSubmit} className="shedule-item__form">
                 <Pair
+                    loading={loading}
+                    pairTypes={pairTypes}
                     values={values}
                     handleChange={handleChange}
                     errors={errors}
@@ -63,6 +123,7 @@ const SheduleItem = ({ numberPair, activeWeek, setNumberPair, activeDay }) => {
 }
 SheduleItem.propTypes = {
     pair: PropTypes.object,
+    pairTypes: PropTypes.array,
     numberPair: PropTypes.number.isRequired,
     activeWeek: PropTypes.number.isRequired,
     activeDay: PropTypes.number.isRequired,

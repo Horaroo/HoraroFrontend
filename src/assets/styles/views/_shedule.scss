@@ -56,6 +56,10 @@
     &__select {
         position: absolute !important;
         top: 0;
+        display: none !important;
+        @include _768 {
+            display: block !important   ;
+        }
         &-item {
             border-bottom: none;
         }

@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import Layout from 'components/Layout'
 import PrivateRoute from 'routes/PrivateRoute'
 import ResetPassword from 'components/ResetPassword/ResetPassword'
+import 'react-toastify/dist/ReactToastify.css'
 function App() {
     return (
         <Routes>

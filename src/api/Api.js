@@ -67,25 +67,24 @@ export const Api = {
         })
     },
     deleteAccount(password) {
-        console.log(password)
         return instance.delete(`/auth/detail/users/me/`, {
             data: {
                 current_password: password,
             },
         })
     },
-    postShedule({number_pair, subject, teacher, audience, week, group, type_pair, day}) {
-        return instance.post(`/schedule/`, {
-            number_pair,
-            subject,
-            teacher,
-            audience,
-            week,
-            group,
-            type_pair,
-            day
-        })
-    }
+    getPairTypes() {
+        return instance.get(`/type-pair/`)
+    },
+    postShedule(data) {
+        console.log(data)
+        return instance.post(`/schedule/`, data)
+    },
+    getPair(week, day, number, group) {
+        return instance.get(
+            `/get-pair/${week}/${day}/${number}/?group=${group}`
+        )
+    },
 }
 
 // Api.postShedule.propTypes = {

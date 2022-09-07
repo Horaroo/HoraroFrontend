@@ -10,6 +10,7 @@ export const validationSchema = yup.object({
         .min(6, 'Пароль должен иметь не меньше 6 символов')
         .max(15, 'Пароль должен иметь не больше 15 символов')
         .required('Обязательно'),
+    group: yup.string('Введите вашу Группу').required('Обязательно'),
     email: yup
         .string()
         .email('Введен не корректный адрес электроной почты')

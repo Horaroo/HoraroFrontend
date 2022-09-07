@@ -1,16 +1,9 @@
-import {
-    Box,
-    TextField,
-    Button,
-    InputAdornment,
-    Typography,
-} from '@material-ui/core'
+import { TextField, Button, InputAdornment } from '@material-ui/core'
 import LockIcon from '@material-ui/icons/Lock'
 import PersonIcon from '@material-ui/icons/Person'
 import EmailIcon from '@material-ui/icons/Email'
 import { NavLink, useNavigate } from 'react-router-dom'
-import Autocomplete from '@material-ui/lab/Autocomplete'
-import { useCallback, useEffect, useState } from 'react'
+import { useState } from 'react'
 import useAuth from 'hooks/useAuth'
 import { Api } from 'api/Api'
 import { useFormik } from 'formik'
@@ -18,11 +11,9 @@ import { validationSchema } from './validateShema'
 
 const SignUp = () => {
     const [loading, setLoading] = useState(false)
-    const [selectedGroup, setSelectedGroup] = useState(null)
-    const [groups, setGroups] = useState([])
-    const { setToken, setUser } = useAuth()
-    const [textError, setTextError] = useState(null)
+    const { setUser } = useAuth()
     const navigate = useNavigate()
+
     const { handleSubmit, values, touched, errors, handleChange, setErrors } =
         useFormik({
             initialValues: {
@@ -37,17 +28,15 @@ const SignUp = () => {
                     const { data } = await Api.register(
                         values.username,
                         values.password,
-                        selectedGroup?.id,
+                        values.group,
                         values.email
                     )
-                    // setToken(data.auth_token)
                     setUser({
                         id: data.id,
                         username: data.username,
                         group: data.group,
                     })
                     navigate('/login')
-
                     setLoading(false)
                 } catch (error) {
                     setLoading(false)
@@ -70,35 +59,6 @@ const SignUp = () => {
             validationSchema: validationSchema,
         })
 
-    const getGroups = useCallback(async () => {
-        try {
-            const { data } = await Api.searchGroup('')
-            setGroups(data)
-        } catch (error) {
-            console.log(error.message)
-        }
-    }, [setGroups])
-
-    useEffect(() => {
-        const getGroups = async () => {
-            try {
-                const { data } = await Api.searchGroup('')
-                setGroups(data)
-            } catch (error) {
-                console.log(error.message)
-            }
-        }
-        getGroups()
-    }, [])
-
-    const onSearchGroup = async (e) => {
-        try {
-            const { data } = await Api.searchGroup(e.target.value)
-            setGroups(data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
     return (
         <div className="auth__form-layout">
             <form onSubmit={handleSubmit} className="auth__form">
@@ -174,36 +134,20 @@ const SignUp = () => {
                         ),
                     }}
                 />
-                <Autocomplete
-                    className="mb-35"
-                    id="nba teams"
-                    options={groups}
-                    noOptionsText="Группа не найдена"
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label="Группа"
-                            variant="outlined"
-                            size="small"
-                            onChange={onSearchGroup}
-                            name="group"
-                            error={Boolean(errors.group)}
-                            helperText={errors?.group}
-                        />
-                    )}
-                    getOptionLabel={(option) => option.name}
-                    style={{ width: '100%' }}
-                    value={selectedGroup}
-                    onChange={(_event, group) => {
-                        setSelectedGroup(group)
-                        setErrors({ group: null })
-                    }}
+
+                <TextField
+                    variant="outlined"
+                    id="group"
+                    name="group"
+                    type="text"
+                    label="Группа"
+                    className="auth__form-input"
+                    value={values.group}
+                    onChange={handleChange}
+                    error={touched.group && Boolean(errors.group)}
+                    helperText={touched.group && errors.group}
+                    size="small"
                 />
-                {textError !== null && (
-                    <Typography color="error" className="text--error">
-                        {textError}
-                    </Typography>
-                )}
 
                 <Button
                     type="submit"

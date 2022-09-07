@@ -19,7 +19,7 @@ const SheduleItem = ({
 }) => {
     const { user } = useAuth()
     const [loading, setLoading] = useState()
-
+    console.log(user)
     useEffect(() => {
         const getData = async () => {
             try {
@@ -27,7 +27,7 @@ const SheduleItem = ({
                     activeWeek,
                     activeDay,
                     numberPair,
-                    user.group
+                    user.username
                 )
                 if (res.status === 200) {
                     const { audience, subject, teacher, type_pair } = res.data
@@ -91,7 +91,7 @@ const SheduleItem = ({
     })
 
     const increment = () => {
-        numberPair !== 4 && setNumberPair(numberPair + 1)
+        numberPair !== 6 && setNumberPair(numberPair + 1)
     }
     const decrement = () => {
         numberPair !== 1 && setNumberPair(numberPair - 1)

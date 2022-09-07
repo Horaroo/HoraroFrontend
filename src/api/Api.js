@@ -80,9 +80,9 @@ export const Api = {
         console.log(data)
         return instance.post(`/schedule/`, data)
     },
-    getPair(week, day, number, group) {
+    getPair(week, day, number, userName) {
         return instance.get(
-            `/get-pair/${week}/${day}/${number}/?group=${group}`
+            `/get-pair/${week}/${day}/${number}/?token=${userName}`
         )
     },
 }

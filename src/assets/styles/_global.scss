@@ -13,8 +13,8 @@ code {
 }
 html,
 body {
-    height: 100%;
     background-color: #f2f2f2;
+    height: 100vh;
 }
 li,
 ul {
@@ -59,15 +59,10 @@ a {
     }
 }
 .layout {
-    height: 100%;
-    overflow: hidden;
-    padding-top: 77px;
     position: relative;
-
+    height: 100vh;
+    overflow: hidden;
     @include _480 {
-        width: 100%;
-        position: fixed;
-        height: calc(100vh - 82px);
     }
 
     &__container {

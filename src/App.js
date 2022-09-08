@@ -11,7 +11,14 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
+                <Route
+                    index
+                    element={
+                        <PrivateRoute>
+                            <Home />
+                        </PrivateRoute>
+                    }
+                />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/reset_password" element={<ResetPassword />} />

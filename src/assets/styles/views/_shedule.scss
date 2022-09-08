@@ -8,6 +8,7 @@
     line-height: 1.4;
     color: $accent;
     padding-top: 50px;
+
     @include _768 {
         margin-top: 85px;
         padding-top: 90px;

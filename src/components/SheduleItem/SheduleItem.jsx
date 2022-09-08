@@ -19,7 +19,6 @@ const SheduleItem = ({
 }) => {
     const { user } = useAuth()
     const [loading, setLoading] = useState()
-    console.log(user)
     useEffect(() => {
         const getData = async () => {
             try {
@@ -27,7 +26,7 @@ const SheduleItem = ({
                     activeWeek,
                     activeDay,
                     numberPair,
-                    user.username
+                    user?.username
                 )
                 if (res.status === 200) {
                     const { audience, subject, teacher, type_pair } = res.data
@@ -39,17 +38,20 @@ const SheduleItem = ({
                             type: type_pair,
                         })
                     } else {
-                        setValues(initialValues)
+                        resetData()
                     }
                 }
-
-                console.log(res)
             } catch (error) {
                 console.log(error)
             }
         }
         getData()
     }, [numberPair, activeDay, activeWeek, user])
+
+    const resetData = () => {
+        setValues(initialValues)
+        setTouched({ title: false, type: false, teacher: false, audit: false })
+    }
 
     const {
         handleSubmit,
@@ -59,6 +61,7 @@ const SheduleItem = ({
         handleChange,
         setErrors,
         setValues,
+        setTouched,
         initialValues,
     } = useFormik({
         initialValues: {

@@ -8,7 +8,7 @@ import useAuth from 'hooks/useAuth'
 import { Api } from 'api/Api'
 import { useFormik } from 'formik'
 import { validationSchema } from './validateShema'
-
+import Tooltip from '@material-ui/core/Tooltip'
 const SignUp = () => {
     const [loading, setLoading] = useState(false)
     const { setUser } = useAuth()
@@ -58,34 +58,42 @@ const SignUp = () => {
             },
             validationSchema: validationSchema,
         })
-
+    const [openTooltip, setOpenTooltip] = useState()
     return (
         <div className="auth__form-layout">
             <form onSubmit={handleSubmit} className="auth__form">
                 <h2 className="auth__form-title">Регистрация</h2>
-                <TextField
-                    variant="outlined"
-                    id="username"
-                    name="username"
-                    type="text"
-                    label="Логин"
-                    className="auth__form-input"
-                    value={values.username}
-                    onChange={handleChange}
-                    error={touched.username && Boolean(errors.username)}
-                    helperText={touched.username && errors.username}
-                    size="small"
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment
-                                position="start"
-                                className="input-icon"
-                            >
-                                <PersonIcon />
-                            </InputAdornment>
-                        ),
-                    }}
-                />
+                <Tooltip
+                    interactive
+                    title="Логин используется в качестве токена"
+                    open={openTooltip}
+                    placement="bottom"
+                >
+                    <TextField
+                        onFocus={() => setOpenTooltip(true)}
+                        variant="outlined"
+                        id="username"
+                        name="username"
+                        type="text"
+                        label="Логин"
+                        className="auth__form-input"
+                        value={values.username}
+                        onChange={handleChange}
+                        error={touched.username && Boolean(errors.username)}
+                        helperText={touched.username && errors.username}
+                        size="small"
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment
+                                    position="start"
+                                    className="input-icon"
+                                >
+                                    <PersonIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                </Tooltip>
 
                 <TextField
                     variant="outlined"

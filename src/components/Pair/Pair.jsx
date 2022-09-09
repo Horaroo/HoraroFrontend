@@ -25,6 +25,7 @@ const Pair = ({
                     error={touched.title && Boolean(errors.title)}
                     helperText={touched.title && errors.title}
                     size="small"
+                    placeholder={loading && 'Загрузка...'}
                 />
             </div>
             <div className="pair__field">
@@ -40,6 +41,7 @@ const Pair = ({
                     error={touched.teacher && Boolean(errors.teacher)}
                     helperText={touched.teacher && errors.teacher}
                     size="small"
+                    placeholder={loading && 'Загрузка...'}
                 />
             </div>
             <div className="flex">
@@ -83,6 +85,7 @@ const Pair = ({
                         error={touched.audit && Boolean(errors.audit)}
                         helperText={touched.audit && errors.audit}
                         size="small"
+                        placeholder={loading && 'Загрузка...'}
                     />
                 </div>
             </div>

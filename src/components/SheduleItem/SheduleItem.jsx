@@ -18,10 +18,11 @@ const SheduleItem = ({
     pairTypes,
 }) => {
     const { user } = useAuth()
-    const [loading, setLoading] = useState()
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         const getData = async () => {
             try {
+                setLoading(true)
                 const res = await Api.getPair(
                     activeWeek,
                     activeDay,
@@ -40,8 +41,10 @@ const SheduleItem = ({
                     } else {
                         resetData()
                     }
+                    setLoading(false)
                 }
             } catch (error) {
+                setLoading(false)
                 console.log(error)
             }
         }

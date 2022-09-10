@@ -43,7 +43,7 @@ const Home = ({ user }) => {
     }
 
     return (
-        <div className="shedule">
+        <div className="page shedule">
             <div className="shedule__sitebar">
                 <nav className="shedule__nav">
                     {tabs.map((tab) => (

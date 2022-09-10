@@ -31,7 +31,6 @@ const Login = () => {
                         values.username,
                         values.password
                     )
-                    console.log(data, status)
                     if (status === 200) {
                         setToken(data.auth_token)
                         setUser({

@@ -8,7 +8,7 @@ import { Api } from 'api/Api'
 
 const pages = [
     { id: 1, name: 'Расписания', url: '/' },
-    { id: 2, name: 'О нас', url: '/' },
+    { id: 2, name: 'О нас', url: '/about' },
 ]
 
 const Header = () => {

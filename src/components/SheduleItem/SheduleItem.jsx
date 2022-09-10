@@ -45,7 +45,6 @@ const SheduleItem = ({
                 }
             } catch (error) {
                 setLoading(false)
-                console.log(error)
             }
         }
         getData()

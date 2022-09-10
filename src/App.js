@@ -7,18 +7,20 @@ import Layout from 'components/Layout'
 import PrivateRoute from 'routes/PrivateRoute'
 import ResetPassword from 'components/ResetPassword/ResetPassword'
 import 'react-toastify/dist/ReactToastify.css'
+import About from 'views/About'
 function App() {
     return (
         <Routes>
-            <Route path="/" element={<Layout />}>
-                <Route
-                    index
-                    element={
-                        <PrivateRoute>
-                            <Home />
-                        </PrivateRoute>
-                    }
-                />
+            <Route
+                path="/"
+                element={
+                    <PrivateRoute>
+                        <Layout />
+                    </PrivateRoute>
+                }
+            >
+                <Route index element={<Home />} />
+                <Route path="/about" element={<About />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/reset_password" element={<ResetPassword />} />

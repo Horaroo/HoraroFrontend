@@ -1,0 +1,17 @@
+.notfound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__content {
+        width: 80%;
+        img {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 320px;
+            max-width: 920px;
+            width: 100%;
+        }
+    }
+}

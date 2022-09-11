@@ -85,6 +85,12 @@ export const Api = {
             `/get-pair/${week}/${day}/${number}/?token=${userName}`
         )
     },
+    activation(uid, token) {
+        return instance.post(`auth/detail/users/activation/`, {
+            uid,
+            token,
+        })
+    },
 }
 
 // Api.postShedule.propTypes = {

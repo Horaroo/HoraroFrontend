@@ -9,56 +9,66 @@ import { Api } from 'api/Api'
 import { useFormik } from 'formik'
 import { validationSchema } from './validateShema'
 import Tooltip from '@material-ui/core/Tooltip'
+import { toast } from 'react-toastify'
 const SignUp = () => {
     const [loading, setLoading] = useState(false)
     const { setUser } = useAuth()
     const navigate = useNavigate()
 
-    const { handleSubmit, values, touched, errors, handleChange, setErrors } =
-        useFormik({
-            initialValues: {
-                username: '',
-                password: '',
-                email: '',
-                group: '',
-            },
-            onSubmit: async (values) => {
-                try {
-                    setLoading(true)
-                    const { data } = await Api.register(
-                        values.username,
-                        values.password,
-                        values.group,
-                        values.email
-                    )
-                    setUser({
-                        id: data.id,
-                        username: data.username,
-                        group: data.group,
+    const {
+        handleSubmit,
+        values,
+        touched,
+        errors,
+        handleChange,
+        setErrors,
+        resetForm,
+    } = useFormik({
+        initialValues: {
+            username: '',
+            password: '',
+            email: '',
+            group: '',
+        },
+        onSubmit: async (values) => {
+            try {
+                setLoading(true)
+                const { data } = await Api.register(
+                    values.username,
+                    values.password,
+                    values.group,
+                    values.email
+                )
+                setUser({
+                    id: data.id,
+                    username: data.username,
+                    group: data.group,
+                })
+                toast.success(
+                    `На почту ${values.email} отправлено письмо для активации аккаунта.`
+                )
+                setLoading(false)
+                resetForm()
+            } catch (error) {
+                setLoading(false)
+                console.log(error.message)
+                if (error.response.data) {
+                    setErrors({
+                        username:
+                            Boolean(error.response.data.username) &&
+                            error.response.data.username[0],
+                        email:
+                            Boolean(error.response.data.email) &&
+                            error.response.data.email[0],
+                        group:
+                            Boolean(error.response.data.group) &&
+                            error.response.data.group[0],
                     })
-                    navigate('/login')
-                    setLoading(false)
-                } catch (error) {
-                    setLoading(false)
-                    console.log(error.message)
-                    if (error.response.data) {
-                        setErrors({
-                            username:
-                                Boolean(error.response.data.username) &&
-                                error.response.data.username[0],
-                            email:
-                                Boolean(error.response.data.email) &&
-                                error.response.data.email[0],
-                            group:
-                                Boolean(error.response.data.group) &&
-                                error.response.data.group[0],
-                        })
-                    }
                 }
-            },
-            validationSchema: validationSchema,
-        })
-    const [openTooltip, setOpenTooltip] = useState()
+            }
+        },
+        validationSchema: validationSchema,
+    })
     return (
         <div className="auth__form-layout">
             <form onSubmit={handleSubmit} className="auth__form">
@@ -66,11 +76,9 @@ const SignUp = () => {
                 <Tooltip
                     interactive
                     title="Логин используется в качестве токена"
-                    open={openTooltip}
                     placement="bottom"
                 >
                     <TextField
-                        onFocus={() => setOpenTooltip(true)}
                         variant="outlined"
                         id="username"
                         name="username"

@@ -4,7 +4,6 @@ import SheduleItem from 'components/SheduleItem/SheduleItem'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
 const dayes = [
     { id: 1, label: 'Понедельник', value: 1 },
     { id: 2, label: 'Вторник', value: 2 },
@@ -114,7 +113,6 @@ const Home = ({ user }) => {
                     handleSubmit={handleSubmit}
                 />
             </main>
-            <ToastContainer position="bottom-center" autoClose={3000} />
         </div>
     )
 }

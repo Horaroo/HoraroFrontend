@@ -1,12 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import DoneIcon from 'assets/images/done.png'
 import WarningIcon from 'assets/images/warning.png'
-import { CircularProgress } from '@material-ui/core'
+import { CircularProgress, Typography } from '@material-ui/core'
 import PropTypes from 'prop-types'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Api } from 'api/Api'
 const Activate = () => {
+    const { token, uid } = useParams()
+    const navigate = useNavigate()
+
     const [loading, setLoading] = useState(true)
     const [success, setSuccess] = useState(null)
+    const [error, setError] = useState(null)
 
+    useEffect(() => {
+        const postActivation = async () => {
+            try {
+                const res = await Api.activation(uid, token)
+                if (res.status === 204) {
+                    setLoading(false)
+                    setSuccess(true)
+                    setTimeout(() => {
+                        navigate('/login')
+                    }, 3000)
+                }
+                console.log(res)
+            } catch (error) {
+                setLoading(false)
+                setSuccess(false)
+                setTimeout(() => {
+                    navigate('/signup')
+                }, 3000)
+                setError(error?.response.data.uid)
+                console.log(error)
+            }
+        }
+        postActivation()
+    }, [token, uid, navigate])
     const ActivateContent = ({ icon, Component, text, isIcon }) => {
         return (
             <div className="activate__content">
@@ -53,12 +83,16 @@ const Activate = () => {
                         ) : (
                             <ActivateContent
                                 icon={WarningIcon}
-                                text="Аккаунт не активирован! Что то пошло не
-                            так:("
+                                text="Аккаунт не активирован!"
                                 isIcon={true}
                             />
                         )}
                     </div>
+                )}
+                {error !== null && (
+                    <Typography color="error" className="text--error">
+                        {error}
+                    </Typography>
                 )}
             </div>
         </div>

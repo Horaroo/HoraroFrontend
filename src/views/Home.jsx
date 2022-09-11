@@ -1,122 +1,103 @@
-import { MenuItem, Select } from '@material-ui/core'
-import { Api } from 'api/Api'
-import SheduleItem from 'components/SheduleItem/SheduleItem'
+import React from 'react'
+import Slider from 'react-slick'
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
-const dayes = [
-    { id: 1, label: 'Понедельник', value: 1 },
-    { id: 2, label: 'Вторник', value: 2 },
-    { id: 3, label: 'Среда', value: 3 },
-    { id: 4, label: 'Четверг', value: 4 },
-    { id: 5, label: 'Пятница', value: 5 },
-    { id: 6, label: 'Суббота', value: 6 },
+import ImageAbout from 'assets/images/home/1.png'
+const data = [
+    {
+        id: 1,
+        title: 'Фронтенд',
+        desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sit, reprehenderit, facilis laborum amet quod libero et cupiditate ut corrupti ab vitae repellat quas quis quaerat voluptatem ex nostrum porro`,
+        features: [
+            {
+                id: 1,
+                title: 'Добавили возможность подтверждение почты',
+                image: null,
+            },
+            {
+                id: 2,
+                title: 'Добавлена страница  <О нас>',
+                image: ImageAbout,
+            },
+            {
+                id: 3,
+                title: 'Добавлена страница <Главная>',
+                image: null,
+            },
+        ],
+    },
+    {
+        id: 2,
+        title: 'Бэкенд',
+        desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sit, reprehenderit, facilis laborum amet quod libero et cupiditate ut corrupti ab vitae repellat quas quis quaerat voluptatem ex nostrum porro`,
+        features: [
+            {
+                id: 1,
+                title: 'Добавили возможность подтверждение почты',
+                image: null,
+            },
+            {
+                id: 2,
+                title: 'Добавлена страница <О нас>',
+                image: null,
+            },
+            {
+                id: 3,
+                title: 'Добавлена страница <Главная>',
+                image: null,
+            },
+        ],
+    },
 ]
-const tabs = [
-    { id: 1, label: '1нед.', value: 1 },
-    { id: 2, label: '2нед.', value: 2 },
-    { id: 3, label: '3нед.', value: 3 },
-    { id: 4, label: '4нед.', value: 4 },
-]
-const handleSubmit = () => {}
-const Home = ({ user }) => {
-    const [activeDay, setActiveDay] = useState(1)
-    const [activeWeek, setActiveWeek] = useState(1)
-    const [numberPair, setNumberPair] = useState(1)
-    const [pairTypes, setPairTypes] = useState([])
-    const [pair, setPair] = useState(null)
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const res = await Api.getPairTypes()
-                if (res.status === 200) setPairTypes(res.data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        getData()
-    }, [])
-
-    const handleChange = (event) => {
-        setActiveDay(event.target.value)
+const Home = () => {
+    var settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
     }
-
     return (
-        <div className="page shedule">
-            <div className="shedule__sitebar">
-                <nav className="shedule__nav">
-                    {tabs.map((tab) => (
-                        <button
-                            key={tab.id}
-                            onClick={() => setActiveWeek(tab.value)}
-                            className={`shedule__nav-btn ${
-                                tab.value === activeWeek && 'active'
-                            }`}
-                        >
-                            {tab.label}
-                        </button>
-                    ))}
-                </nav>
-                <Select
-                    className="shedule__select shedule__select-nav"
-                    value={activeWeek}
-                    onChange={(e) => setActiveWeek(e.target.value)}
-                >
-                    {tabs.map((tab) => (
-                        <MenuItem key={tab.id} value={tab.id}>
-                            {tab.label}
-                        </MenuItem>
-                    ))}
-                </Select>
-
-                <Select
-                    className="shedule__select shedule__select-dayes"
-                    value={activeDay}
-                    label="Age"
-                    onChange={handleChange}
-                >
-                    {dayes.map((day) => (
-                        <MenuItem
-                            className="shedule__select-item"
-                            key={day.id}
-                            value={day.id}
-                        >
-                            {day.label}
-                        </MenuItem>
-                    ))}
-                </Select>
-                <div className="shedule__dayes">
-                    <ul className="shedule__dayes-list">
-                        {dayes.map((day) => (
-                            <NavLink key={day.id} to="/">
-                                <li
-                                    onClick={() => setActiveDay(day.value)}
-                                    className={`shedule__dayes-item ${
-                                        day.value === activeDay && 'active'
-                                    }`}
-                                >
-                                    {day.label}
-                                </li>
-                            </NavLink>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-            <main className="shedule__content">
-                <SheduleItem
-                    pair={pair}
-                    numberPair={numberPair}
-                    activeWeek={activeWeek}
-                    pairTypes={pairTypes}
-                    activeDay={activeDay}
-                    setNumberPair={setNumberPair}
-                    handleSubmit={handleSubmit}
-                />
-            </main>
+        <div className="page home">
+            <Slider {...settings} className="slider">
+                {data.map((item) => (
+                    <SliderContent {...item} key={item.id} />
+                ))}
+            </Slider>
         </div>
     )
 }
-Home.propTypes = {
-    user: PropTypes.object,
+
+const SliderContent = ({ id, title, features, desc }) => {
+    return (
+        <div className="slider__content">
+            <h2 className="slider__title">{title}</h2>
+            <p className="slider__text">{desc}</p>
+            <div className="slider__features">
+                {features &&
+                    features.map((item) => (
+                        <div key={item.id} className="slider__item">
+                            <strong className="slider__item-number">
+                                {item.id}
+                            </strong>
+                            <p className="slider__item-text">{item.title}</p>
+                            {item.image && (
+                                <div className="slider__item-preview">
+                                    <img
+                                        src={item.image}
+                                        alt="slider__item-image"
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    ))}
+            </div>
+        </div>
+    )
+}
+SliderContent.propTypes = {
+    id: PropTypes.number,
+    title: PropTypes.object,
+    features: PropTypes.array,
+    desc: PropTypes.string,
 }
 export default Home

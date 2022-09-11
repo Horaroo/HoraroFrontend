@@ -38,7 +38,7 @@ const Login = () => {
                             username: data.username,
                             group: data.group,
                         })
-                        navigate('/')
+                        navigate(-1)
                     }
                     setLoading(false)
                 } catch (error) {

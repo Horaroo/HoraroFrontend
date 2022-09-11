@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import UserIcon from 'assets/images/user.png'
 // Team image
 import RostomAva from 'assets/images/team/Rostom.png'
+import ArsenAva from 'assets/images/team/Arsen.png'
 
 const team = [
     {
@@ -20,7 +21,7 @@ const team = [
     },
     {
         id: 3,
-        img: UserIcon,
+        img: ArsenAva,
         name: 'Эсендеров Арсен',
         prof: 'Frontend Developer',
         username: 'arsen_esk',
@@ -28,7 +29,7 @@ const team = [
     {
         id: 4,
         img: UserIcon,
-        name: 'Умаев Ахмат',
+        name: 'Умаев Ахматхан',
         prof: 'Python Backend Developer',
         username: 'ahmadum01',
     },
@@ -57,8 +58,7 @@ const About = () => {
                 пользователей в телеграмм боте. Также вам предоставляется
                 возможность создавать и заполнять собственное расписание так,
                 как это удобно именно вам и делиться своим расписанием с другими
-                пользователями
-                {process.env.REACT_APP_NAME}.
+                пользователями {process.env.REACT_APP_NAME}.
             </p>
             <div className="about__team">
                 <h3 className="about__team-title">Наша команда</h3>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Typography, Avatar } from '@material-ui/core'
+import { Typography, Avatar, Button } from '@material-ui/core'
 import logoIcon from 'assets/images/logo.png'
 import { NavLink, useNavigate } from 'react-router-dom'
 import useAuth from 'hooks/useAuth'
@@ -7,8 +7,9 @@ import Modal from './Modal/Modal'
 import { Api } from 'api/Api'
 
 const pages = [
-    { id: 1, name: 'Расписания', url: '/' },
-    { id: 2, name: 'О нас', url: '/about' },
+    { id: 1, name: 'Главная', url: '/' },
+    { id: 2, name: 'Расписания', url: '/shedule' },
+    { id: 3, name: 'О нас', url: '/about' },
 ]
 
 const Header = () => {
@@ -17,7 +18,7 @@ const Header = () => {
     const [openDropdown, setOpenDropdown] = useState(false)
     const [openModal, setOpenModal] = useState(false)
     const [activeType, setActiveType] = useState(null)
-    const types = ['change', 'delete']
+    const [activeMenu, setActiveMenu] = useState(false)
     const onLogoutUser = async () => {
         try {
             navigate('/login')
@@ -55,45 +56,105 @@ const Header = () => {
                     </ul>
                 </nav>
 
-                <div className="header__profile">
-                    <Typography
-                        className="header__profile-name"
-                        style={{ color: 'white', marginRight: 7 }}
-                    >
-                        {user?.username}
-                    </Typography>
-                    <Avatar
-                        onClick={handleOpenUserMenu}
-                        className="header__avatar"
-                        alt={user?.username.toUpperCase()}
-                        src="/static/images/avatar/2.jpg"
-                    />
+                {!user ? (
+                    <div className="header__btns">
+                        <NavLink
+                            className="header__btn"
+                            to="/login"
+                            activeclassname="active"
+                        >
+                            Войти
+                        </NavLink>
+                        <NavLink
+                            className="header__btn"
+                            to="/signup"
+                            activeclassname="active"
+                        >
+                            Регистрация
+                        </NavLink>
+                    </div>
+                ) : (
+                    <>
+                        <div className="header__profile">
+                            <Typography
+                                className="header__profile-name"
+                                style={{ color: 'white', marginRight: 7 }}
+                            >
+                                {user?.username}
+                            </Typography>
+                            <Avatar
+                                onClick={handleOpenUserMenu}
+                                className="header__avatar"
+                                alt={user?.username.toUpperCase()}
+                                src="/static/images/avatar/2.jpg"
+                            />
+                        </div>
+                        <div className={`dropdown ${!openDropdown && 'none'} `}>
+                            <ul className="dropdown__list">
+                                <li
+                                    onClick={onLogoutUser}
+                                    className="dropdown__item"
+                                >
+                                    Выйти
+                                </li>
+                                <li
+                                    onClick={() => {
+                                        setOpenModal(true)
+                                        setActiveType('change')
+                                    }}
+                                    className="dropdown__item"
+                                >
+                                    Сменить пароль
+                                </li>
+                                <li
+                                    onClick={() => {
+                                        setOpenModal(true)
+                                        setActiveType('delete')
+                                    }}
+                                    className="dropdown__item"
+                                    style={{ color: 'red' }}
+                                >
+                                    Удалить аккаунт
+                                </li>
+                            </ul>
+                        </div>
+                    </>
+                )}
+                <div
+                    className="header__burger"
+                    onClick={() => setActiveMenu(!activeMenu)}
+                >
+                    <span
+                        className={`header__burger-line line1 ${
+                            activeMenu ? 'active' : ''
+                        }`}
+                    ></span>
+                    <span
+                        className={`header__burger-line line2 ${
+                            activeMenu ? 'active' : ''
+                        }`}
+                    ></span>
+                    <span
+                        className={`header__burger-line line3 ${
+                            activeMenu ? 'active' : ''
+                        }`}
+                    ></span>
                 </div>
-                <div className={`dropdown ${!openDropdown && 'none'} `}>
-                    <ul className="dropdown__list">
-                        <li onClick={onLogoutUser} className="dropdown__item">
-                            Выйти
-                        </li>
-                        <li
-                            onClick={() => {
-                                setOpenModal(true)
-                                setActiveType('change')
-                            }}
-                            className="dropdown__item"
-                        >
-                            Сменить пароль
-                        </li>
-                        <li
-                            onClick={() => {
-                                setOpenModal(true)
-                                setActiveType('delete')
-                            }}
-                            className="dropdown__item"
-                            style={{ color: 'red' }}
-                        >
-                            Удалить аккаунт
-                        </li>
-                    </ul>
+                <div
+                    className={`header__menu--mobile ${activeMenu && 'active'}`}
+                >
+                    {pages?.map((item) => {
+                        return (
+                            <NavLink
+                                className="header__nav-link"
+                                key={item.id}
+                                to={item.url}
+                                onClick={() => setActiveMenu(false)}
+                            >
+                                {item.name}
+                            </NavLink>
+                        )
+                    })}
                 </div>
             </div>
             <Modal

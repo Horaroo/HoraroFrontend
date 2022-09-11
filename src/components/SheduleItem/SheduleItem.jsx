@@ -39,7 +39,7 @@ const SheduleItem = ({
                             type: type_pair,
                         })
                     } else {
-                        resetData()
+                        resetForm()
                     }
                     setLoading(false)
                 }
@@ -50,21 +50,14 @@ const SheduleItem = ({
         getData()
     }, [numberPair, activeDay, activeWeek, user])
 
-    const resetData = () => {
-        setValues(initialValues)
-        setTouched({ title: false, type: false, teacher: false, audit: false })
-    }
-
     const {
         handleSubmit,
         values,
         touched,
         errors,
         handleChange,
-        setErrors,
         setValues,
-        setTouched,
-        initialValues,
+        resetForm,
     } = useFormik({
         initialValues: {
             title: '',

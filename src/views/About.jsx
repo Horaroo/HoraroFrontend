@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import UserIcon from 'assets/images/user.png'
-import TelegramIcon from 'assets/images/telegram.svg'
 // Team image
 import RostomAva from 'assets/images/team/Rostom.png'
 
@@ -9,28 +8,28 @@ const team = [
         id: 1,
         img: UserIcon,
         name: 'Абулайсов Ахмед',
-        prof: 'Backend',
+        prof: 'Python Backend Developer',
         username: 'abulaysov',
     },
     {
         id: 2,
         img: RostomAva,
         name: 'Вардидзе Ростом',
-        prof: 'DevOps',
+        prof: 'Филантроп миллионер и просто хороший человек',
         username: 'TotSamyi888',
     },
     {
         id: 3,
         img: UserIcon,
         name: 'Эсендеров Арсен',
-        prof: 'Frontend',
+        prof: 'Frontend Developer',
         username: 'arsen_esk',
     },
     {
         id: 4,
         img: UserIcon,
         name: 'Умаев Ахмат',
-        prof: 'Backend',
+        prof: 'Python Backend Developer',
         username: 'ahmadum01',
     },
     {
@@ -42,18 +41,24 @@ const team = [
     },
 ]
 const About = () => {
+    useEffect(() => {
+        const footer = document.querySelector('.footer')
+        footer.style.position = 'relative'
+        return () => (footer.style.position = 'fixed')
+    }, [])
     return (
         <div className="page about">
             <h2 className="about__title">О проекте</h2>
             <p className="about__text">
-                Представляем вашему вниманию проект [название проекта],
-                предназначенный упростить поиск расписания занятий. [название
-                проекта] позволяет пользователям в пару кликов получить
-                актуальное расписание занятий от доверенных пользователей в
-                телеграмм боте. Также вам предоставляется возможность создавать
-                и заполнять собственное расписание так, как это удобно именно
-                вам и делиться своим расписанием с другими пользователями
-                [название проекта].
+                Представляем вашему вниманию проект {process.env.REACT_APP_NAME}
+                , предназначенный упростить поиск расписания занятий.{' '}
+                {process.env.REACT_APP_NAME} позволяет пользователям в пару
+                кликов получить актуальное расписание занятий от доверенных
+                пользователей в телеграмм боте. Также вам предоставляется
+                возможность создавать и заполнять собственное расписание так,
+                как это удобно именно вам и делиться своим расписанием с другими
+                пользователями
+                {process.env.REACT_APP_NAME}.
             </p>
             <div className="about__team">
                 <h3 className="about__team-title">Наша команда</h3>

@@ -36,6 +36,9 @@
             font-weight: 500;
             margin: 0;
             margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 4px solid $accent;
+            border-radius: 12px;
         }
     }
     &__list {

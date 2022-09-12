@@ -3,6 +3,8 @@ import UserIcon from 'assets/images/user.png'
 // Team image
 import RostomAva from 'assets/images/team/Rostom.png'
 import ArsenAva from 'assets/images/team/Arsen.png'
+import JabrailAva from 'assets/images/team/Jabrail.png'
+import AxmathanAva from 'assets/images/team/Axmathan.png'
 
 const team = [
     {
@@ -16,26 +18,26 @@ const team = [
         id: 2,
         img: RostomAva,
         name: 'Вардидзе Ростом',
-        prof: 'Филантроп миллионер и просто хороший человек',
+        prof: 'Linux System Administrator',
         username: 'TotSamyi888',
     },
     {
         id: 3,
         img: ArsenAva,
-        name: 'Эсендеров Арсен',
+        name: 'Эскендеров Арсен',
         prof: 'Frontend Developer',
         username: 'arsen_esk',
     },
     {
         id: 4,
-        img: UserIcon,
+        img: AxmathanAva,
         name: 'Умаев Ахматхан',
         prof: 'Python Backend Developer',
         username: 'ahmadum01',
     },
     {
         id: 5,
-        img: UserIcon,
+        img: JabrailAva,
         name: 'Насрутдинов Джабраил',
         prof: 'Designer',
         username: 'jabraildesign',

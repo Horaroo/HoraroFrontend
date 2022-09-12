@@ -88,16 +88,15 @@ const Home = ({ user }) => {
                 <div className="shedule__dayes">
                     <ul className="shedule__dayes-list">
                         {dayes.map((day) => (
-                            <NavLink key={day.id} to="/">
-                                <li
-                                    onClick={() => setActiveDay(day.value)}
-                                    className={`shedule__dayes-item ${
-                                        day.value === activeDay && 'active'
-                                    }`}
-                                >
-                                    {day.label}
-                                </li>
-                            </NavLink>
+                            <li
+                                key={day.id}
+                                onClick={() => setActiveDay(day.value)}
+                                className={`shedule__dayes-item ${
+                                    day.value === activeDay && 'active'
+                                }`}
+                            >
+                                {day.label}
+                            </li>
                         ))}
                     </ul>
                 </div>

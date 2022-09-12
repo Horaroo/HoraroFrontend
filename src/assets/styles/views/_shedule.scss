@@ -81,6 +81,7 @@
             width: 100%;
         }
         &-item {
+            cursor: pointer;
             color: $black-secondary;
             padding: 15px $gap;
             font-size: $size-middle;

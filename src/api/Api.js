@@ -91,6 +91,9 @@ export const Api = {
             token,
         })
     },
+    getNews() {
+        return instance.get(`/events/`)
+    },
 }
 
 // Api.postShedule.propTypes = {

@@ -5,12 +5,12 @@
     &__content {
     }
     &__title {
-        font-size: $size-big;
+        font-size: $size-big + 10px;
         color: $accent;
         margin: 15px 0px 35px;
     }
     &__text {
-        font-size: $size-base;
+        font-size: 25px;
         max-width: 70%;
         margin-bottom: 50px;
     }
@@ -31,14 +31,18 @@
         flex-direction: column;
         align-items: center;
 
+        &-top {
+            display: flex;
+        }
         &-number {
-            font-size: $double-gap;
+            font-size: $double-gap + 2px;
             color: $accent;
             margin-right: 7px;
         }
         &-text {
-            font-size: 14px;
+            font-size: 19px;
             white-space: pre-line;
+            font-weight: 600;
         }
         &-preview {
             width: 100%;
@@ -46,6 +50,27 @@
             max-height: max-content;
             position: relative;
             cursor: pointer;
+
+            & .cover {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                span {
+                    position: absolute;
+                    top: 50px;
+                    font-size: 30px;
+                    font-weight: 700;
+                    color: $accent;
+                    z-index: 20;
+                }
+            }
+
+            &:hover {
+                .cover {
+                    opacity: 1;
+                }
+            }
             img {
                 position: relative;
                 width: 100%;

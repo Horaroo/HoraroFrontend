@@ -1,49 +1,43 @@
 import React from 'react'
 import Slider from 'react-slick'
 import PropTypes from 'prop-types'
-import ImageAbout from 'assets/images/home/1.png'
+import horaroImage from 'assets/images/horaro-image.png'
+
 const data = [
     {
         id: 1,
-        title: 'Фронтенд',
-        desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sit, reprehenderit, facilis laborum amet quod libero et cupiditate ut corrupti ab vitae repellat quas quis quaerat voluptatem ex nostrum porro`,
+        title: 'Приветствуем!',
+        description: `Используя наше приложение, вы можете заполнять раcписание своей группы, а также отслеживать расписание других групп.`,
         features: [
             {
                 id: 1,
-                title: 'Добавили возможность подтверждение почты',
-                image: null,
+                title: 'Команда разработчиков приложения.',
+                image: horaroImage,
             },
             {
                 id: 2,
-                title: 'Добавлена страница  <О нас>',
-                image: ImageAbout,
+                title: 'Наш теллеграм канал.',
+                image: horaroImage,
             },
             {
                 id: 3,
-                title: 'Добавлена страница <Главная>',
-                image: null,
-            },
-        ],
-    },
-    {
-        id: 2,
-        title: 'Бэкенд',
-        desc: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sit, reprehenderit, facilis laborum amet quod libero et cupiditate ut corrupti ab vitae repellat quas quis quaerat voluptatem ex nostrum porro`,
-        features: [
-            {
-                id: 1,
-                title: 'Добавили возможность подтверждение почты',
-                image: null,
+                title: 'Команда /help',
+                image: horaroImage,
             },
             {
-                id: 2,
-                title: 'Добавлена страница <О нас>',
-                image: null,
+                id: 4,
+                title: 'Команда /add',
+                image: horaroImage,
             },
             {
-                id: 3,
-                title: 'Добавлена страница <Главная>',
-                image: null,
+                id: 5,
+                title: 'Команда /del',
+                image: horaroImage,
+            },
+            {
+                id: 6,
+                title: 'Команда /token',
+                image: horaroImage,
             },
         ],
     },
@@ -56,6 +50,19 @@ const Home = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
     }
+    // const [data, setData] = useState([])
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         try {
+    //             const { data } = await Api.getNews()
+    //             setData(data)
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }
+    //     getData()
+    // }, [setData])
+
     return (
         <div className="page home">
             <Slider {...settings} className="slider">
@@ -67,21 +74,29 @@ const Home = () => {
     )
 }
 
-const SliderContent = ({ id, title, features, desc }) => {
+const SliderContent = ({ id, title, features, description }) => {
     return (
         <div className="slider__content">
             <h2 className="slider__title">{title}</h2>
-            <p className="slider__text">{desc}</p>
+            <p className="slider__text">{description}</p>
             <div className="slider__features">
                 {features &&
                     features.map((item) => (
                         <div key={item.id} className="slider__item">
-                            <strong className="slider__item-number">
-                                {item.id}
-                            </strong>
-                            <p className="slider__item-text">{item.title}</p>
+                            <div className="slider__item-top">
+                                <strong className="slider__item-number">
+                                    {item.id}
+                                </strong>
+                                <p className="slider__item-text">
+                                    {item.title}
+                                </p>
+                            </div>
+
                             {item.image && (
                                 <div className="slider__item-preview">
+                                    <div className="cover">
+                                        <span>Скоро</span>
+                                    </div>
                                     <img
                                         src={item.image}
                                         alt="slider__item-image"
@@ -98,6 +113,6 @@ SliderContent.propTypes = {
     id: PropTypes.number,
     title: PropTypes.object,
     features: PropTypes.array,
-    desc: PropTypes.string,
+    description: PropTypes.string,
 }
 export default Home

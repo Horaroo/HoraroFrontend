@@ -9,6 +9,7 @@ const Pair = ({
     touched,
     pairTypes,
     loading,
+    handleClearPair,
 }) => {
     return (
         <div className="pair">
@@ -90,20 +91,32 @@ const Pair = ({
                 </div>
             </div>
 
-            <Button
-                disabled={loading}
-                color="primary"
-                type="submit"
-                variant="contained"
-            >
-                Сохранить
-            </Button>
+            <div className="pair__btns">
+                <Button
+                    disabled={loading}
+                    color="secondary"
+                    onClick={handleClearPair}
+                    variant="contained"
+                    style={{ marginRight: '17px' }}
+                >
+                    Очистить
+                </Button>
+                <Button
+                    disabled={loading}
+                    color="primary"
+                    type="submit"
+                    variant="contained"
+                >
+                    Сохранить
+                </Button>
+            </div>
         </div>
     )
 }
 Pair.propTypes = {
     values: PropTypes.object.isRequired,
     handleChange: PropTypes.func,
+    handleClearPair: PropTypes.func,
     loading: PropTypes.bool,
     errors: PropTypes.object.isRequired,
     touched: PropTypes.object.isRequired,

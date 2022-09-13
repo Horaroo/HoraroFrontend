@@ -94,6 +94,17 @@ const SheduleItem = ({
     const decrement = () => {
         numberPair !== 1 && setNumberPair(numberPair - 1)
     }
+    const handleClearPair = async () => {
+        try {
+            setLoading(true)
+            Api.clearPair(activeWeek, activeDay, numberPair, user?.username)
+            resetForm()
+            setLoading(false)
+        } catch (error) {
+            console.log(error)
+            setLoading(false)
+        }
+    }
     return (
         <div className="shedule-item">
             <div className="shedule-item__top">
@@ -114,6 +125,7 @@ const SheduleItem = ({
                     handleChange={handleChange}
                     errors={errors}
                     touched={touched}
+                    handleClearPair={handleClearPair}
                 />
             </form>
         </div>

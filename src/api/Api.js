@@ -1,10 +1,9 @@
 import axios from 'axios'
-import Cookies from 'js-cookie'
-import PropTypes from 'prop-types'
+import localStorageService from 'services/localStorageService'
 const defaultOptions = {
     baseURL: process.env.REACT_APP_API_URL,
 }
-const token = Cookies.get('auth-token')
+const token = localStorageService.getItem('auth-token')
 let instance = axios.create(defaultOptions)
 instance.defaults.headers.common['Authorization'] = token
     ? `Token ${token}`
@@ -93,6 +92,11 @@ export const Api = {
     },
     getNews() {
         return instance.get(`/events/`)
+    },
+    clearPair(week, day, number, userName) {
+        return instance.delete(
+            `/get-pair/${week}/${day}/${number}/?token=${userName}`
+        )
     },
 }
 

@@ -1,18 +1,20 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import Cookies from 'js-cookie'
 import { AuthContext } from 'contexts/AuthContext'
 import PropTypes from 'prop-types'
+import localStorageService from 'services/localStorageService'
 function AuthProvider(props) {
     const [user, setUserData] = useState(null)
-    const [token, setTokenData] = useState(Cookies.get('auth-token') || null)
+    const [token, setTokenData] = useState(
+        localStorageService.getItem('auth-token') || null
+    )
 
     const setToken = useCallback(
         (tokenData) => {
             setTokenData(tokenData)
             if (tokenData) {
-                Cookies.set('auth-token', tokenData)
+                localStorageService.setItem('auth-token', tokenData)
             } else {
-                Cookies.remove('auth-token')
+                localStorage.removeItem('auth-token')
             }
         },
         [setTokenData]
@@ -21,9 +23,9 @@ function AuthProvider(props) {
         (userData) => {
             setUserData(userData)
             if (userData) {
-                Cookies.set('auth-user', JSON.stringify(userData))
+                localStorageService.setItem('auth-user', userData)
             } else {
-                Cookies.remove('auth-user')
+                localStorage.removeItem('auth-user')
             }
         },
         [setUserData]
@@ -35,8 +37,8 @@ function AuthProvider(props) {
     }, [setToken, setUser])
 
     useEffect(() => {
-        const user = Cookies.get('auth-user')
-        if (user) setUserData(JSON.parse(user))
+        const user = localStorageService.getItem('auth-user')
+        if (user) setUserData(user)
     }, [setUserData])
     const contextValue = useMemo(
         () => ({

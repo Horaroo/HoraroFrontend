@@ -8,11 +8,19 @@
         font-size: $size-big + 10px;
         color: $accent;
         margin: 15px 0px 35px;
+
+        @include _850 {
+            font-size: $size-big - 10px;
+        }
     }
     &__text {
         font-size: 25px;
         max-width: 70%;
         margin-bottom: 50px;
+        @include _850 {
+            font-size: $size-middle;
+            max-width: 100%;
+        }
     }
     &__features {
         display: grid;
@@ -33,11 +41,16 @@
 
         &-top {
             display: flex;
+            align-items: center;
+            height: 70px;
         }
         &-number {
             font-size: $double-gap + 2px;
             color: $accent;
             margin-right: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         &-text {
             font-size: 19px;

@@ -34,6 +34,14 @@ const Header = () => {
     const handleClose = () => {
         setOpenModal(false)
     }
+    const toggleActiveMenu = (bool) => {
+        setActiveMenu(bool)
+
+        const layout = document.querySelector('.layout')
+        bool
+            ? (layout.style.overflow = 'hidden')
+            : (layout.style.overflow = 'scroll')
+    }
     return (
         <header className="header">
             <div className="container header__container">
@@ -122,7 +130,7 @@ const Header = () => {
                 )}
                 <div
                     className="header__burger"
-                    onClick={() => setActiveMenu(!activeMenu)}
+                    onClick={() => toggleActiveMenu(!activeMenu)}
                 >
                     <span
                         className={`header__burger-line line1 ${
@@ -149,7 +157,9 @@ const Header = () => {
                                 className="header__nav-link"
                                 key={item.id}
                                 to={item.url}
-                                onClick={() => setActiveMenu(false)}
+                                onClick={() =>
+                                    setActiveMenu(() => toggleActiveMenu(false))
+                                }
                             >
                                 {item.name}
                             </NavLink>

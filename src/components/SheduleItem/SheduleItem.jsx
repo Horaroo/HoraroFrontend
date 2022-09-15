@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useFormik } from 'formik'
 import { validationSchema } from './validateShema'
-import { IconButton } from '@material-ui/core'
+import { Button, Dialog, IconButton } from '@material-ui/core'
 import Pair from 'components/Pair/Pair'
 import ArrowForward from '@material-ui/icons/ArrowForward'
 import ArrowBack from '@material-ui/icons/ArrowBack'
@@ -10,6 +10,7 @@ import { Api } from 'api/Api'
 import useAuth from 'hooks/useAuth'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
+import Modal from 'components/Modal/Modal'
 const SheduleItem = ({
     numberPair,
     activeWeek,
@@ -19,6 +20,7 @@ const SheduleItem = ({
 }) => {
     const { user } = useAuth()
     const [loading, setLoading] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
     useEffect(() => {
         const getData = async () => {
             try {
@@ -94,12 +96,16 @@ const SheduleItem = ({
     const decrement = () => {
         numberPair !== 1 && setNumberPair(numberPair - 1)
     }
+    // const handleToggleModal = () => {
+
+    // }
     const handleClearPair = async () => {
         try {
             setLoading(true)
             Api.clearPair(activeWeek, activeDay, numberPair, user?.username)
             resetForm()
             setLoading(false)
+            setOpenModal(false)
         } catch (error) {
             console.log(error)
             setLoading(false)
@@ -116,7 +122,33 @@ const SheduleItem = ({
                     <ArrowForward />
                 </IconButton>
             </div>
-
+            <Dialog
+                maxWidth="lg"
+                onClose={() => setOpenModal(false)}
+                open={openModal}
+            >
+                <div className="shedule-item__modal">
+                    <p className="shedule-item__modal-text">
+                        Вы действительно хотите удалить пару?
+                    </p>
+                    <div className="shedule-item__modal-btns">
+                        <Button
+                            className="shedule-item__modal-btn"
+                            color="primary"
+                            onClick={handleClearPair}
+                        >
+                            Подтвердить
+                        </Button>
+                        <Button
+                            className="shedule-item__modal-btn"
+                            color="secondary"
+                            onClick={() => setOpenModal(false)}
+                        >
+                            Отмена
+                        </Button>
+                    </div>
+                </div>
+            </Dialog>
             <form onSubmit={handleSubmit} className="shedule-item__form">
                 <Pair
                     loading={loading}
@@ -125,7 +157,7 @@ const SheduleItem = ({
                     handleChange={handleChange}
                     errors={errors}
                     touched={touched}
-                    handleClearPair={handleClearPair}
+                    setOpenModal={setOpenModal}
                 />
             </form>
         </div>

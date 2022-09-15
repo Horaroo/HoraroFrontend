@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Slider from 'react-slick'
 import PropTypes from 'prop-types'
 import horaroImage from 'assets/images/horaro-image.png'
@@ -62,7 +62,11 @@ const Home = () => {
     //     }
     //     getData()
     // }, [setData])
-
+    useEffect(() => {
+        const footer = document.querySelector('.footer')
+        footer.style.position = 'relative'
+        return () => (footer.style.position = 'fixed')
+    }, [])
     return (
         <div className="page home">
             <Slider {...settings} className="slider">

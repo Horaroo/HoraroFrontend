@@ -135,6 +135,18 @@
                 padding: $gap;
             }
         }
+        &__modal {
+            padding: $gap;
+            &-text {
+                font-size: $size-middle;
+                margin-bottom: $gap;
+            }
+            &-btns {
+            }
+            &-btn:first-child {
+                margin-right: 17px;
+            }
+        }
     }
 
     &__nav,

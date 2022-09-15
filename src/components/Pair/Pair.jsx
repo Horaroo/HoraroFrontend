@@ -9,7 +9,7 @@ const Pair = ({
     touched,
     pairTypes,
     loading,
-    handleClearPair,
+    setOpenModal,
 }) => {
     return (
         <div className="pair">
@@ -95,7 +95,7 @@ const Pair = ({
                 <Button
                     disabled={loading}
                     color="secondary"
-                    onClick={handleClearPair}
+                    onClick={() => setOpenModal(true)}
                     variant="contained"
                     style={{ marginRight: '17px' }}
                 >
@@ -116,7 +116,7 @@ const Pair = ({
 Pair.propTypes = {
     values: PropTypes.object.isRequired,
     handleChange: PropTypes.func,
-    handleClearPair: PropTypes.func,
+    setOpenModal: PropTypes.func,
     loading: PropTypes.bool,
     errors: PropTypes.object.isRequired,
     touched: PropTypes.object.isRequired,

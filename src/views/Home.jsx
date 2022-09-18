@@ -11,32 +11,17 @@ const data = [
         features: [
             {
                 id: 1,
-                title: 'Команда разработчиков приложения.',
+                title: 'Как пользоваться.',
                 image: horaroImage,
             },
             {
                 id: 2,
-                title: 'Наш теллеграм канал.',
+                title: 'Контакты.',
                 image: horaroImage,
             },
             {
                 id: 3,
-                title: 'Команда /help',
-                image: horaroImage,
-            },
-            {
-                id: 4,
-                title: 'Команда /add',
-                image: horaroImage,
-            },
-            {
-                id: 5,
-                title: 'Команда /del',
-                image: horaroImage,
-            },
-            {
-                id: 6,
-                title: 'Команда /token',
+                title: 'Команда разработчиков приложения',
                 image: horaroImage,
             },
         ],
@@ -62,11 +47,6 @@ const Home = () => {
     //     }
     //     getData()
     // }, [setData])
-    useEffect(() => {
-        const footer = document.querySelector('.footer')
-        footer.style.position = 'relative'
-        return () => (footer.style.position = 'fixed')
-    }, [])
     return (
         <div className="page home">
             <Slider {...settings} className="slider">

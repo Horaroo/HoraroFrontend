@@ -104,12 +104,7 @@
         align-items: center;
         position: relative;
         @include _600 {
-            display: none;
-        }
-        &-name {
-            @include _480 {
-                display: none;
-            }
+            padding-right: 50px;
         }
     }
     &__avatar {
@@ -119,7 +114,7 @@
         display: flex;
         align-items: center;
         @include _600 {
-            display: none;
+            margin-right: 50px;
         }
         span {
             font-size: $size-middle;

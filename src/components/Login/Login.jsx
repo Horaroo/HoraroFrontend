@@ -38,7 +38,7 @@ const Login = () => {
                             username: data.username,
                             group: data.group,
                         })
-                        navigate(-1)
+                        navigate('/shedule')
                     }
                     setLoading(false)
                 } catch (error) {

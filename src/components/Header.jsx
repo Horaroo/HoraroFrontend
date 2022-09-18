@@ -30,13 +30,16 @@ const Header = () => {
     }
     const handleOpenUserMenu = () => {
         setOpenDropdown(!openDropdown)
+        if (!openDropdown) {
+            setActiveMenu(false)
+        }
     }
     const handleClose = () => {
         setOpenModal(false)
     }
     const toggleActiveMenu = (bool) => {
         setActiveMenu(bool)
-
+        setOpenDropdown(false)
         const layout = document.querySelector('.layout')
         bool
             ? (layout.style.overflow = 'hidden')

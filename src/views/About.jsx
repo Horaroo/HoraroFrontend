@@ -5,6 +5,7 @@ import RostomAva from 'assets/images/team/Rostom.png'
 import ArsenAva from 'assets/images/team/Arsen.png'
 import JabrailAva from 'assets/images/team/Jabrail.png'
 import AxmathanAva from 'assets/images/team/Axmathan.png'
+import useTheme from 'hooks/useTheme'
 
 const team = [
     {
@@ -44,11 +45,16 @@ const team = [
     },
 ]
 const About = () => {
+    const { setScrollFixed } = useTheme()
     useEffect(() => {
+        setScrollFixed(false)
         const footer = document.querySelector('.footer')
         footer.style.position = 'relative'
-        return () => (footer.style.position = 'fixed')
-    }, [])
+        return () => {
+            footer.style.position = 'fixed'
+            setScrollFixed(true)
+        }
+    }, [setScrollFixed])
     return (
         <div className="page about">
             <h2 className="about__title">О проекте</h2>

@@ -3,7 +3,6 @@ import { Api } from 'api/Api'
 import SheduleItem from 'components/SheduleItem/SheduleItem'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
 const dayes = [
     { id: 1, label: 'Понедельник', value: 1 },
     { id: 2, label: 'Вторник', value: 2 },
@@ -19,12 +18,13 @@ const tabs = [
     { id: 4, label: '4нед.', value: 4 },
 ]
 const handleSubmit = () => {}
-const Home = ({ user }) => {
+const Shedule = ({ user }) => {
     const [activeDay, setActiveDay] = useState(1)
     const [activeWeek, setActiveWeek] = useState(1)
     const [numberPair, setNumberPair] = useState(1)
     const [pairTypes, setPairTypes] = useState([])
     const [pair, setPair] = useState(null)
+
     useEffect(() => {
         const getData = async () => {
             try {
@@ -115,7 +115,7 @@ const Home = ({ user }) => {
         </div>
     )
 }
-Home.propTypes = {
+Shedule.propTypes = {
     user: PropTypes.object,
 }
-export default Home
+export default Shedule

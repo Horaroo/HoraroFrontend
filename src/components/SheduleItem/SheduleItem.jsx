@@ -21,36 +21,6 @@ const SheduleItem = ({
     const { user } = useAuth()
     const [loading, setLoading] = useState(false)
     const [openModal, setOpenModal] = useState(false)
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                setLoading(true)
-                const res = await Api.getPair(
-                    activeWeek,
-                    activeDay,
-                    numberPair,
-                    user?.username
-                )
-                if (res.status === 200) {
-                    const { audience, subject, teacher, type_pair } = res.data
-                    if (JSON.stringify(res.data) !== '{}') {
-                        setValues({
-                            title: subject,
-                            audit: audience,
-                            teacher,
-                            type: type_pair,
-                        })
-                    } else {
-                        resetForm()
-                    }
-                    setLoading(false)
-                }
-            } catch (error) {
-                setLoading(false)
-            }
-        }
-        getData()
-    }, [numberPair, activeDay, activeWeek, user])
 
     const {
         handleSubmit,
@@ -60,9 +30,10 @@ const SheduleItem = ({
         handleChange,
         setValues,
         resetForm,
+        setFieldValue,
     } = useFormik({
         initialValues: {
-            title: '',
+            subject: '',
             type: '',
             teacher: '',
             audit: '',
@@ -71,7 +42,7 @@ const SheduleItem = ({
             try {
                 setLoading(true)
                 const res = await Api.postShedule({
-                    subject: values.title,
+                    subject: values.subject,
                     teacher: values.teacher,
                     type_pair: values.type,
                     audience: values.audit,
@@ -89,6 +60,39 @@ const SheduleItem = ({
         },
         validationSchema: validationSchema,
     })
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                setLoading(true)
+                const res = await Api.getPair(
+                    activeWeek,
+                    activeDay,
+                    numberPair,
+                    user?.username
+                )
+                if (res.status === 200) {
+                    const { audience, subject, teacher, type_pair } = res.data
+                    if (JSON.stringify(res.data) !== '{}') {
+                        setValues({
+                            subject: subject,
+                            audit: audience,
+                            teacher,
+                            type: type_pair,
+                        })
+                    } else {
+                        resetForm()
+                    }
+                    setLoading(false)
+                }
+            } catch (error) {
+                setLoading(false)
+            }
+        }
+        if (user) {
+            getData()
+        }
+    }, [numberPair, activeDay, activeWeek, user, resetForm, setValues])
 
     const increment = () => {
         numberPair !== 6 && setNumberPair(numberPair + 1)
@@ -111,6 +115,8 @@ const SheduleItem = ({
             setLoading(false)
         }
     }
+
+    console.log(values)
     return (
         <div className="shedule-item">
             <div className="shedule-item__top">
@@ -158,6 +164,8 @@ const SheduleItem = ({
                     errors={errors}
                     touched={touched}
                     setOpenModal={setOpenModal}
+                    setFieldValue={setFieldValue}
+                    username={user ? user.username : ''}
                 />
             </form>
         </div>

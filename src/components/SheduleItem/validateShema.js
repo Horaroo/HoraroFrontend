@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 export const validationSchema = yup.object({
-    title: yup.string('Введите названия предмета').required('Обязательно'),
+    subject: yup.string('Введите названия предмета').required('Обязательно'),
     audit: yup.string('Введите аудиторию').required('Обязательно'),
     type: yup.string('Введите тип предмета').required('Обязательно'),
     teacher: yup

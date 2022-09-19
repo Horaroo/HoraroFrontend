@@ -98,6 +98,13 @@ export const Api = {
             `/get-pair/${week}/${day}/${number}/?token=${userName}`
         )
     },
+    getSheduleDetail({ username, value, type }) {
+        // type = subject || teacher || audience
+
+        return instance.get(
+            `schedule/detail/${username}/?q=${value}&${type}=true`
+        )
+    },
 }
 
 // Api.postShedule.propTypes = {

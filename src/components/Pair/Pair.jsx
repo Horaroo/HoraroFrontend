@@ -1,6 +1,7 @@
 import { Button, MenuItem, Select, TextField } from '@material-ui/core'
 import React from 'react'
 import PropTypes from 'prop-types'
+import Autocomplete from 'components/Autocomplete/Autocomplete'
 
 const Pair = ({
     values,
@@ -10,39 +11,37 @@ const Pair = ({
     pairTypes,
     loading,
     setOpenModal,
+    setFieldValue,
+    username,
 }) => {
     return (
         <div className="pair">
             <div className="pair__field">
                 <div className="pair__field-label">Название предмета</div>
-                <TextField
-                    variant="outlined"
-                    id="title"
-                    name="title"
+                <Autocomplete
+                    name="subject"
                     type="text"
-                    className="auth__form-input"
-                    value={values.title}
-                    onChange={handleChange}
-                    error={touched.title && Boolean(errors.title)}
-                    helperText={touched.title && errors.title}
-                    size="small"
-                    placeholder={loading ? 'Загрузка...' : ''}
+                    value={values.subject}
+                    loading={loading}
+                    error={errors.subject}
+                    touch={touched.subject}
+                    handleChange={handleChange}
+                    setFieldValue={setFieldValue}
+                    username={username}
                 />
             </div>
             <div className="pair__field">
                 <div className="pair__field-label">Преподаватель</div>
-                <TextField
-                    variant="outlined"
-                    id="teacher"
+                <Autocomplete
                     name="teacher"
                     type="text"
-                    className="auth__form-input"
                     value={values.teacher}
-                    onChange={handleChange}
-                    error={touched.teacher && Boolean(errors.teacher)}
-                    helperText={touched.teacher && errors.teacher}
-                    size="small"
-                    placeholder={loading ? 'Загрузка...' : ''}
+                    loading={loading}
+                    error={errors.teacher}
+                    touch={touched.teacher}
+                    handleChange={handleChange}
+                    setFieldValue={setFieldValue}
+                    username={username}
                 />
             </div>
             <div className="flex">
@@ -75,18 +74,16 @@ const Pair = ({
 
                 <div className="pair__field">
                     <div className="pair__field-label">Аудитория</div>
-                    <TextField
-                        variant="outlined"
-                        id="audit"
+                    <Autocomplete
                         name="audit"
                         type="text"
-                        className="auth__form-input"
                         value={values.audit}
-                        onChange={handleChange}
-                        error={touched.audit && Boolean(errors.audit)}
-                        helperText={touched.audit && errors.audit}
-                        size="small"
-                        placeholder={loading ? 'Загрузка...' : ''}
+                        loading={loading}
+                        error={errors.audit}
+                        touch={touched.audit}
+                        handleChange={handleChange}
+                        setFieldValue={setFieldValue}
+                        username={username}
                     />
                 </div>
             </div>
@@ -117,9 +114,11 @@ Pair.propTypes = {
     values: PropTypes.object.isRequired,
     handleChange: PropTypes.func,
     setOpenModal: PropTypes.func,
+    setFieldValue: PropTypes.func,
     loading: PropTypes.bool,
     errors: PropTypes.object.isRequired,
     touched: PropTypes.object.isRequired,
     pairTypes: PropTypes.array.isRequired,
+    username: PropTypes.string,
 }
 export default Pair

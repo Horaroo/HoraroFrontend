@@ -1,22 +1,10 @@
 import { MenuItem, Select } from '@material-ui/core'
 import { Api } from 'api/Api'
 import SheduleItem from 'components/SheduleItem/SheduleItem'
+import { dayes, week } from 'mocks/sheduleOptions'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
-const dayes = [
-    { id: 1, label: 'Понедельник', value: 1 },
-    { id: 2, label: 'Вторник', value: 2 },
-    { id: 3, label: 'Среда', value: 3 },
-    { id: 4, label: 'Четверг', value: 4 },
-    { id: 5, label: 'Пятница', value: 5 },
-    { id: 6, label: 'Суббота', value: 6 },
-]
-const tabs = [
-    { id: 1, label: '1нед.', value: 1 },
-    { id: 2, label: '2нед.', value: 2 },
-    { id: 3, label: '3нед.', value: 3 },
-    { id: 4, label: '4нед.', value: 4 },
-]
+
 const handleSubmit = () => {}
 const Shedule = ({ user }) => {
     const [activeDay, setActiveDay] = useState(1)
@@ -45,7 +33,7 @@ const Shedule = ({ user }) => {
         <div className="page shedule">
             <div className="shedule__sitebar">
                 <nav className="shedule__nav">
-                    {tabs.map((tab) => (
+                    {week.map((tab) => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveWeek(tab.value)}
@@ -62,7 +50,7 @@ const Shedule = ({ user }) => {
                     value={activeWeek}
                     onChange={(e) => setActiveWeek(e.target.value)}
                 >
-                    {tabs.map((tab) => (
+                    {week.map((tab) => (
                         <MenuItem key={tab.id} value={tab.id}>
                             {tab.label}
                         </MenuItem>

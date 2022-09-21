@@ -2,6 +2,7 @@ import { Button, MenuItem, Select, TextField } from '@material-ui/core'
 import React from 'react'
 import PropTypes from 'prop-types'
 import Autocomplete from 'components/Autocomplete/Autocomplete'
+import CopyModal from 'components/CopyModal/CopyModal'
 
 const Pair = ({
     values,
@@ -10,9 +11,14 @@ const Pair = ({
     touched,
     pairTypes,
     loading,
-    setOpenModal,
     setFieldValue,
     username,
+    openCopyModal,
+    closeClearModal,
+    closeCopyModal,
+    setOpenClearModal,
+    setOpenCopyModal,
+    activeWeek,
 }) => {
     return (
         <div className="pair">
@@ -92,7 +98,7 @@ const Pair = ({
                 <Button
                     disabled={loading}
                     color="secondary"
-                    onClick={() => setOpenModal(true)}
+                    onClick={() => setOpenClearModal(true)}
                     variant="contained"
                     style={{ marginRight: '17px' }}
                 >
@@ -103,9 +109,24 @@ const Pair = ({
                     color="primary"
                     type="submit"
                     variant="contained"
+                    style={{ marginRight: '17px', background: '#00a152' }}
                 >
                     Сохранить
                 </Button>
+                <Button
+                    onClick={() => setOpenCopyModal(true)}
+                    disabled={loading}
+                    color="primary"
+                    variant="contained"
+                >
+                    Скопировать
+                </Button>
+                <CopyModal
+                    open={openCopyModal}
+                    handleClose={closeCopyModal}
+                    activeWeek={activeWeek}
+                    username={username}
+                />
             </div>
         </div>
     )
@@ -113,12 +134,17 @@ const Pair = ({
 Pair.propTypes = {
     values: PropTypes.object.isRequired,
     handleChange: PropTypes.func,
-    setOpenModal: PropTypes.func,
     setFieldValue: PropTypes.func,
     loading: PropTypes.bool,
     errors: PropTypes.object.isRequired,
     touched: PropTypes.object.isRequired,
     pairTypes: PropTypes.array.isRequired,
     username: PropTypes.string,
+    openCopyModal: PropTypes.bool,
+    closeClearModal: PropTypes.func,
+    closeCopyModal: PropTypes.func,
+    setOpenClearModal: PropTypes.func,
+    setOpenCopyModal: PropTypes.func,
+    activeWeek: PropTypes.number.isRequired,
 }
 export default Pair

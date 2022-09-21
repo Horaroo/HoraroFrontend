@@ -20,7 +20,8 @@ const SheduleItem = ({
 }) => {
     const { user } = useAuth()
     const [loading, setLoading] = useState(false)
-    const [openModal, setOpenModal] = useState(false)
+    const [openClearModal, setOpenClearModal] = useState(false)
+    const [openCopyModal, setOpenCopyModal] = useState(false)
 
     const {
         handleSubmit,
@@ -109,7 +110,7 @@ const SheduleItem = ({
             Api.clearPair(activeWeek, activeDay, numberPair, user?.username)
             resetForm()
             setLoading(false)
-            setOpenModal(false)
+            setOpenClearModal(false)
         } catch (error) {
             console.log(error)
             setLoading(false)
@@ -130,8 +131,8 @@ const SheduleItem = ({
             </div>
             <Dialog
                 maxWidth="lg"
-                onClose={() => setOpenModal(false)}
-                open={openModal}
+                onClose={() => setOpenClearModal(false)}
+                open={openClearModal}
             >
                 <div className="shedule-item__modal">
                     <p className="shedule-item__modal-text">
@@ -148,7 +149,7 @@ const SheduleItem = ({
                         <Button
                             className="shedule-item__modal-btn"
                             color="secondary"
-                            onClick={() => setOpenModal(false)}
+                            onClick={() => setOpenClearModal(false)}
                         >
                             Отмена
                         </Button>
@@ -163,9 +164,14 @@ const SheduleItem = ({
                     handleChange={handleChange}
                     errors={errors}
                     touched={touched}
-                    setOpenModal={setOpenModal}
                     setFieldValue={setFieldValue}
                     username={user ? user.username : ''}
+                    openCopyModal={openCopyModal}
+                    closeClearModal={() => setOpenClearModal(false)}
+                    closeCopyModal={() => setOpenCopyModal(false)}
+                    setOpenClearModal={setOpenClearModal}
+                    setOpenCopyModal={setOpenCopyModal}
+                    activeWeek={activeWeek}
                 />
             </form>
         </div>

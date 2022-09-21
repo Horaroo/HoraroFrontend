@@ -8,3 +8,55 @@
         border-radius: 15px;
     }
 }
+
+.modal-copy {
+    &__nav {
+        width: 100%;
+        display: flex;
+        padding: 8px;
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+    }
+    &__item {
+        margin-right: 17px;
+        border: 1px solid #fff;
+        cursor: pointer;
+
+        padding: 7px 10px;
+        border-radius: 12px;
+        font-weight: 500;
+        &.active {
+            color: $accent-light;
+        }
+        &.disabled {
+            color: $border-color;
+        }
+    }
+    &__form {
+        display: flex;
+        width: 320px;
+        height: 240px;
+        flex-direction: column;
+        align-items: center;
+        padding: $gap;
+        overflow: hidden;
+    }
+    &__btns {
+        margin-top: auto;
+        display: flex;
+    }
+    &__btn {
+        display: inline;
+        margin-right: 17px !important;
+        &:last-child {
+            margin-right: 0px !important;
+        }
+    }
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        font-size: $size-middle;
+    }
+}

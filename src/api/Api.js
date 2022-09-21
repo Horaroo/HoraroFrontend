@@ -105,6 +105,13 @@ export const Api = {
             `schedule/detail/${username}/?q=${value}&${type}=true`
         )
     },
+    copyShedule(username, from_week, to_week) {
+        return instance.post(`schedule/copy-week/`, {
+            username,
+            from_week,
+            to_week,
+        })
+    },
 }
 
 // Api.postShedule.propTypes = {

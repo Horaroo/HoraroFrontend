@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
-import UserIcon from 'assets/images/user.png'
 // Team image
 import RostomAva from 'assets/images/team/Rostom.png'
 import ArsenAva from 'assets/images/team/Arsen.png'
 import JabrailAva from 'assets/images/team/Jabrail.png'
 import AxmathanAva from 'assets/images/team/Axmathan.png'
+import AxmedAva from 'assets/images/team/Axmed.png'
 import useTheme from 'hooks/useTheme'
 
 const team = [
     {
         id: 1,
-        img: UserIcon,
+        img: AxmedAva,
         name: 'Абулайсов Ахмед',
         prof: 'Python Backend Developer',
         username: 'abulaysov',
@@ -60,11 +60,15 @@ const About = () => {
             <h2 className="about__title">О проекте</h2>
             <p className="about__text">
                 Представляем вашему вниманию проект {process.env.REACT_APP_NAME}{' '}
-                ({process.env.REACT_APP_NAME} - Расписание в переводе с языка
-                Эсперанто. Эспера́нто (эспер. Esperanto) — наиболее
-                распространённый плановый язык, созданный варшавским лингвистом
-                и окулистом Лазарем (Людвиком) Марковичем Заменгофом в 1887
-                году.) предназначенный упростить поиск расписания занятий.{' '}
+                ({process.env.REACT_APP_NAME} - «Расписание» в переводе с языка{' '}
+                <a
+                    rel="noreferrer"
+                    target="_blank"
+                    href="https://ru.wikipedia.org/wiki/%D0%AD%D1%81%D0%BF%D0%B5%D1%80%D0%B0%D0%BD%D1%82%D0%BE"
+                >
+                    Эсперанто
+                </a>
+                ) предназначенный упростить поиск расписания занятий.{' '}
                 {process.env.REACT_APP_NAME} позволяет пользователям в пару
                 кликов получить актуальное расписание занятий от доверенных
                 пользователей в телеграм боте. Также вам предоставляется

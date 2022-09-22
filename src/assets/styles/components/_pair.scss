@@ -15,6 +15,16 @@
         }
     }
     &__btns {
+        display: flex;
+        gap: $gap;
         margin-top: $gap;
+        @include _480 {
+            margin-top: 0px;
+            font-size: 12px;
+            gap: $small-gap;
+        }
+    }
+    &__btn {
+        font-size: inherit !important;
     }
 }

@@ -117,7 +117,6 @@ const SheduleItem = ({
         }
     }
 
-    console.log(values)
     return (
         <div className="shedule-item">
             <div className="shedule-item__top">

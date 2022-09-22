@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import Slider from 'react-slick'
 import PropTypes from 'prop-types'
 import horaroImage from 'assets/images/horaro-image.png'
+import useTheme from 'hooks/useTheme'
+import { width } from 'global'
 
 const data = [
     {
@@ -28,6 +30,7 @@ const data = [
     },
 ]
 const Home = () => {
+    const { setScrollFixed } = useTheme()
     var settings = {
         dots: true,
         infinite: true,
@@ -47,6 +50,19 @@ const Home = () => {
     //     }
     //     getData()
     // }, [setData])
+
+    useEffect(() => {
+        if (width < 768) {
+            setScrollFixed(false)
+            const footer = document.querySelector('.footer')
+            footer.style.position = 'relative'
+            return () => {
+                footer.style.position = 'fixed'
+                setScrollFixed(true)
+            }
+        }
+    }, [setScrollFixed])
+
     return (
         <div className="page home">
             <Slider {...settings} className="slider">
@@ -95,7 +111,7 @@ const SliderContent = ({ id, title, features, description }) => {
 }
 SliderContent.propTypes = {
     id: PropTypes.number,
-    title: PropTypes.object,
+    title: PropTypes.string,
     features: PropTypes.array,
     description: PropTypes.string,
 }

@@ -96,24 +96,26 @@ const Pair = ({
 
             <div className="pair__btns">
                 <Button
+                    className="pair__btn"
                     disabled={loading}
                     color="secondary"
                     onClick={() => setOpenClearModal(true)}
                     variant="contained"
-                    style={{ marginRight: '17px' }}
                 >
                     Очистить
                 </Button>
                 <Button
+                    className="pair__btn"
                     disabled={loading}
                     color="primary"
                     type="submit"
                     variant="contained"
-                    style={{ marginRight: '17px', background: '#00a152' }}
+                    style={{ background: '#00a152' }}
                 >
                     Сохранить
                 </Button>
                 <Button
+                    className="pair__btn"
                     onClick={() => setOpenCopyModal(true)}
                     disabled={loading}
                     color="primary"

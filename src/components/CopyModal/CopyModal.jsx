@@ -18,9 +18,9 @@ const CopyModal = ({ username, open, handleClose, activeWeek }) => {
         activeWeek > 3 ? activeWeek - 1 : activeWeek + 1
     )
     const options = [
-        { id: 1, type: 'pair', label: 'Пара' },
-        { id: 2, type: 'dayes', label: 'День' },
-        { id: 3, type: 'week', label: 'Неделя' },
+        { id: 1, type: 'pair', label: 'Пара', copyText: 'эту пару' },
+        { id: 2, type: 'dayes', label: 'День', copyText: 'эту день' },
+        { id: 3, type: 'week', label: 'Неделя', copyText: 'эту неделю' },
     ]
     const handleCopyShedule = async () => {
         try {
@@ -69,7 +69,9 @@ const CopyModal = ({ username, open, handleClose, activeWeek }) => {
                     ))}
                 </nav>
                 <div className="modal-copy__content">
-                    <p className="modal-copy__text">Скопировать на:</p>
+                    <p className="modal-copy__text">
+                        Скопировать {options[selectWeek].copyText} на:
+                    </p>
                     <Select
                         value={selectWeek}
                         onChange={(e) => setSelectWeek(e.target.value)}

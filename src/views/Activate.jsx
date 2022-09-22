@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DoneIcon from 'assets/images/done.png'
 import WarningIcon from 'assets/images/warning.png'
-import { CircularProgress, Typography } from '@material-ui/core'
+import { CircularProgress, Typography } from '@mui/material'
 import PropTypes from 'prop-types'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Api } from 'api/Api'

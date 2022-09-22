@@ -1,14 +1,13 @@
-import { TextField, Button, InputAdornment } from '@material-ui/core'
-import LockIcon from '@material-ui/icons/Lock'
-import PersonIcon from '@material-ui/icons/Person'
-import EmailIcon from '@material-ui/icons/Email'
+import { TextField, Button, InputAdornment, Tooltip } from '@mui/material'
+import LockIcon from '@mui/icons-material/Lock'
+import PersonIcon from '@mui/icons-material/Person'
+import EmailIcon from '@mui/icons-material/Email'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import useAuth from 'hooks/useAuth'
 import { Api } from 'api/Api'
 import { useFormik } from 'formik'
 import { validationSchema } from './validateShema'
-import Tooltip from '@material-ui/core/Tooltip'
 import { toast } from 'react-toastify'
 const SignUp = () => {
     const [loading, setLoading] = useState(false)

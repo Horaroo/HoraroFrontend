@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Typography, Avatar, Button } from '@material-ui/core'
+import { Typography, Avatar, Button } from '@mui/material'
 import logoIcon from 'assets/images/logo.png'
 import { NavLink, useNavigate } from 'react-router-dom'
 import useAuth from 'hooks/useAuth'

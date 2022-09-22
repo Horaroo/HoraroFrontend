@@ -1,4 +1,4 @@
-import { Button, MenuItem, Select, TextField } from '@material-ui/core'
+import { Button, MenuItem, Select, TextField } from '@mui/material'
 import React from 'react'
 import PropTypes from 'prop-types'
 import Autocomplete from 'components/Autocomplete/Autocomplete'
@@ -60,6 +60,7 @@ const Pair = ({
                         onChange={handleChange}
                         value={values.type}
                         error={touched.type && Boolean(errors.type)}
+                        size="small"
                     >
                         {pairTypes.map((item) => (
                             <MenuItem key={item.id} value={item.id}>
@@ -98,7 +99,7 @@ const Pair = ({
                 <Button
                     className="pair__btn"
                     disabled={loading}
-                    color="secondary"
+                    color="error"
                     onClick={() => setOpenClearModal(true)}
                     variant="contained"
                 >
@@ -107,10 +108,9 @@ const Pair = ({
                 <Button
                     className="pair__btn"
                     disabled={loading}
-                    color="primary"
+                    color="success"
                     type="submit"
                     variant="contained"
-                    style={{ background: '#00a152' }}
                 >
                     Сохранить
                 </Button>

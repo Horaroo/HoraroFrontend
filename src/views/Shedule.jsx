@@ -1,4 +1,4 @@
-import { MenuItem, Select } from '@material-ui/core'
+import { MenuItem, Select } from '@mui/material'
 import { Api } from 'api/Api'
 import SheduleItem from 'components/SheduleItem/SheduleItem'
 import { dayes, week } from 'mocks/sheduleOptions'
@@ -49,6 +49,7 @@ const Shedule = ({ user }) => {
                     className="shedule__select shedule__select-nav"
                     value={activeWeek}
                     onChange={(e) => setActiveWeek(e.target.value)}
+                    size="small"
                 >
                     {week.map((tab) => (
                         <MenuItem key={tab.id} value={tab.id}>
@@ -60,8 +61,8 @@ const Shedule = ({ user }) => {
                 <Select
                     className="shedule__select shedule__select-dayes"
                     value={activeDay}
-                    label="Age"
                     onChange={handleChange}
+                    size="small"
                 >
                     {dayes.map((day) => (
                         <MenuItem

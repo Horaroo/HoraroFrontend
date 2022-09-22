@@ -1,14 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import {
-    Dialog,
-    Button,
-    TextField,
-    Typography,
-    Select,
-    MenuItem,
-} from '@material-ui/core'
-import { dayes, week } from 'mocks/sheduleOptions'
-import Tooltip from '@material-ui/core/Tooltip'
+import React, { useState } from 'react'
+import { Dialog, Button, Tooltip, Select, MenuItem } from '@mui/material'
+import { week } from 'mocks/sheduleOptions'
 import PropTypes from 'prop-types'
 import { Api } from 'api/Api'
 import { toast } from 'react-toastify'
@@ -76,6 +68,7 @@ const CopyModal = ({ username, open, handleClose, activeWeek }) => {
                         value={selectWeek}
                         onChange={(e) => setSelectWeek(e.target.value)}
                         style={{ fontWeight: '500' }}
+                        size="small"
                     >
                         {week.map((value, index) => (
                             <MenuItem

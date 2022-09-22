@@ -1,4 +1,4 @@
-import { Dialog, Button, TextField, Typography } from '@material-ui/core'
+import { Dialog, Button, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Api, clearToken } from 'api/Api'
@@ -10,9 +10,7 @@ const Modal = ({ open, handleClose, isChangePass }) => {
     const { logOut } = useAuth()
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
-    useEffect(() => {
-        setValues({ password: '' })
-    }, [isChangePass])
+
     const title = isChangePass ? 'Смена пароля' : 'Удаление аккаунта'
     const {
         handleSubmit,
@@ -60,6 +58,10 @@ const Modal = ({ open, handleClose, isChangePass }) => {
             }
         },
     })
+
+    useEffect(() => {
+        setValues({ password: '' })
+    }, [isChangePass, setValues])
     return (
         <Dialog
             maxWidth="lg"

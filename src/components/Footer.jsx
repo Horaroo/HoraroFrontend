@@ -1,4 +1,4 @@
-import { Box, IconButton, Typography } from '@material-ui/core'
+import { Box, IconButton, Typography } from '@mui/material'
 import logoIcon from 'assets/images/logo.png'
 const Footer = () => {
     return (

@@ -3,9 +3,9 @@ import {
     Button,
     InputAdornment,
     Typography,
-} from '@material-ui/core'
-import LockIcon from '@material-ui/icons/Lock'
-import PersonIcon from '@material-ui/icons/Person'
+} from '@mui/material'
+import LockIcon from '@mui/icons-material/Lock'
+import PersonIcon from '@mui/icons-material/Person'
 import { Api } from 'api/Api'
 import useAuth from 'hooks/useAuth'
 import { useState } from 'react'

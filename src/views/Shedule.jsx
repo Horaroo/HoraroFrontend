@@ -12,7 +12,6 @@ const Shedule = ({ user }) => {
     const [numberPair, setNumberPair] = useState(1)
     const [pairTypes, setPairTypes] = useState([])
     const [pair, setPair] = useState(null)
-
     useEffect(() => {
         const getData = async () => {
             try {
@@ -26,6 +25,7 @@ const Shedule = ({ user }) => {
     }, [])
 
     const handleChange = (event) => {
+        setNumberPair(1)
         setActiveDay(event.target.value)
     }
 
@@ -79,7 +79,10 @@ const Shedule = ({ user }) => {
                         {dayes.map((day) => (
                             <li
                                 key={day.id}
-                                onClick={() => setActiveDay(day.value)}
+                                onClick={() => {
+                                    setNumberPair(1)
+                                    setActiveDay(day.value)
+                                }}
                                 className={`shedule__dayes-item ${
                                     day.value === activeDay && 'active'
                                 }`}

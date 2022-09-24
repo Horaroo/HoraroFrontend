@@ -4,7 +4,7 @@ import { week } from 'mocks/sheduleOptions'
 import PropTypes from 'prop-types'
 import { Api } from 'api/Api'
 import { toast } from 'react-toastify'
-const CopyModal = ({ username, open, handleClose, activeWeek }) => {
+const CopyModal = ({ username, open = false, handleClose, activeWeek }) => {
     const [activeType, setActiveType] = useState(3)
     const [selectWeek, setSelectWeek] = useState(
         activeWeek > 3 ? activeWeek - 1 : activeWeek + 1
@@ -49,11 +49,7 @@ const CopyModal = ({ username, open, handleClose, activeWeek }) => {
                             {item.id === activeType ? (
                                 <span>{item.label}</span>
                             ) : (
-                                <Tooltip
-                                    interactive
-                                    title="Cкоро"
-                                    placement="bottom"
-                                >
+                                <Tooltip title="Cкоро" placement="bottom">
                                     <span>{item.label}</span>
                                 </Tooltip>
                             )}
@@ -62,7 +58,11 @@ const CopyModal = ({ username, open, handleClose, activeWeek }) => {
                 </nav>
                 <div className="modal-copy__content">
                     <p className="modal-copy__text">
-                        Скопировать {options[selectWeek].copyText} на:
+                        Скопировать{' '}
+                        {options[activeType - 1]
+                            ? options[activeType - 1]?.copyText
+                            : ''}{' '}
+                        на:
                     </p>
                     <Select
                         value={selectWeek}

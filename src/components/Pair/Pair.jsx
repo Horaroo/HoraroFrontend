@@ -14,7 +14,6 @@ const Pair = ({
     setFieldValue,
     username,
     openCopyModal,
-    closeClearModal,
     closeCopyModal,
     setOpenClearModal,
     setOpenCopyModal,

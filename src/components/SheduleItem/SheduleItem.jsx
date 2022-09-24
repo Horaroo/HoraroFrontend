@@ -10,7 +10,6 @@ import { Api } from 'api/Api'
 import useAuth from 'hooks/useAuth'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
-import Modal from 'components/Modal/Modal'
 const SheduleItem = ({
     numberPair,
     activeWeek,
@@ -22,7 +21,6 @@ const SheduleItem = ({
     const [loading, setLoading] = useState(false)
     const [openClearModal, setOpenClearModal] = useState(false)
     const [openCopyModal, setOpenCopyModal] = useState(false)
-
     const {
         handleSubmit,
         values,
@@ -101,9 +99,7 @@ const SheduleItem = ({
     const decrement = () => {
         numberPair !== 1 && setNumberPair(numberPair - 1)
     }
-    // const handleToggleModal = () => {
 
-    // }
     const handleClearPair = async () => {
         try {
             setLoading(true)

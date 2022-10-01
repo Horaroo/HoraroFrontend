@@ -24,7 +24,6 @@ const Activate = () => {
                         navigate('/login')
                     }, 3000)
                 }
-                console.log(res)
             } catch (error) {
                 setLoading(false)
                 setSuccess(false)

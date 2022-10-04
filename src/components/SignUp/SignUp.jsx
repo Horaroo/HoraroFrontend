@@ -38,11 +38,6 @@ const SignUp = () => {
                     values.group,
                     values.email
                 )
-                setUser({
-                    id: data.id,
-                    username: data.username,
-                    group: data.group,
-                })
                 toast.success(
                     `На почту ${values.email} отправлено письмо для активации аккаунта.`
                 )

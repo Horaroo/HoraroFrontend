@@ -23,3 +23,4 @@ RUN adduser --disabled-password --no-create-home john-doe
 CMD [ "npm", "start" ]
 
 USER john-doe
+

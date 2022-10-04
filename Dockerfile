@@ -5,16 +5,21 @@ WORKDIR /app
 COPY package.json .
 
 COPY package-lock.json .
- 
-RUN npm install && \
-	echo 'root:wa%Dj&@!#' | chpasswd && \
-    	adduser --disabled-password --no-create-home john-doe && \
-	chown john-doe:john-doe /app/node_modules/
- 
-COPY . .
- 
-EXPOSE 3000
 
-USER john-doe 
+RUN npm install
+
+COPY . .
+
+EXPOSE 3001
+
+RUN find . -type f -exec chmod 644 {} \;
+
+RUN find . -type d -exec chmod 755 {} \;
+
+RUN chmod 777 -R node_modules
+
+RUN adduser --disabled-password --no-create-home john-doe
 
 CMD [ "npm", "start" ]
+
+USER john-doe

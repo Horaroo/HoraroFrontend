@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Dialog, Button, Tooltip, Select, MenuItem } from '@mui/material'
-import { week } from 'mocks/sheduleOptions'
+import { week } from 'shared/mocks/sheduleOptions'
 import PropTypes from 'prop-types'
-import { Api } from 'api/Api'
+import { Api } from 'shared/api/Api'
 import { toast } from 'react-toastify'
 const CopyModal = ({ username, open = false, handleClose, activeWeek }) => {
     const [activeType, setActiveType] = useState(3)

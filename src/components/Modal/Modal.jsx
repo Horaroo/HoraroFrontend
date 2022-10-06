@@ -1,11 +1,11 @@
 import { Dialog, Button, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Api, clearToken } from 'api/Api'
+import { Api, clearToken } from 'shared/api/Api'
 import { useFormik } from 'formik'
 import { changePasswordShema, deleteAccount } from './validateShema'
 import { useNavigate } from 'react-router-dom'
-import useAuth from 'hooks/useAuth'
+import useAuth from 'shared/hooks/useAuth'
 const Modal = ({ open, handleClose, isChangePass }) => {
     const { logOut } = useAuth()
     const [loading, setLoading] = useState(false)

@@ -7,9 +7,11 @@ const NotFound = () => {
         body.style.background = '#ffff'
     }, [])
     return (
-        <div className="page notfound">
-            <div className="notfound__content">
-                <img src={NotFoundImage} alt="notfound-image" />
+        <div className="layout__container">
+            <div className="page notfound">
+                <div className="notfound__content">
+                    <img src={NotFoundImage} alt="notfound-image" />
+                </div>
             </div>
         </div>
     )

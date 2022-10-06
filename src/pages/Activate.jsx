@@ -4,7 +4,7 @@ import WarningIcon from 'assets/images/warning.png'
 import { CircularProgress, Typography } from '@mui/material'
 import PropTypes from 'prop-types'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Api } from 'api/Api'
+import { Api } from 'shared/api/Api'
 const Activate = () => {
     const { token, uid } = useParams()
     const navigate = useNavigate()
@@ -38,19 +38,21 @@ const Activate = () => {
     }, [token, uid, navigate])
     const ActivateContent = ({ icon, Component, text, isIcon }) => {
         return (
-            <div className="activate__content">
-                <div className="activate__content-preview">
-                    {isIcon ? (
-                        <img
-                            className="activate__content-img"
-                            src={icon}
-                            alt="activate-icon"
-                        />
-                    ) : (
-                        <Component />
-                    )}
+            <div className="layout__container">
+                <div className="activate__content">
+                    <div className="activate__content-preview">
+                        {isIcon ? (
+                            <img
+                                className="activate__content-img"
+                                src={icon}
+                                alt="activate-icon"
+                            />
+                        ) : (
+                            <Component />
+                        )}
+                    </div>
+                    <p className="activate__content-text">{text}</p>
                 </div>
-                <p className="activate__content-text">{text}</p>
             </div>
         )
     }

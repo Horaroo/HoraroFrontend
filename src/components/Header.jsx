@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { Typography, Avatar, Button } from '@mui/material'
 import logoIcon from 'assets/images/logo.png'
 import { NavLink, useNavigate } from 'react-router-dom'
-import useAuth from 'hooks/useAuth'
+import useAuth from 'shared/hooks/useAuth'
 import Modal from './Modal/Modal'
-import { Api } from 'api/Api'
+import { Api } from 'shared/api/Api'
 
 const pages = [
     { id: 1, name: 'Главная', url: '/' },
@@ -48,24 +48,26 @@ const Header = () => {
     return (
         <header className="header">
             <div className="container header__container">
-                <div className="header__logo">
-                    <img className="logo" src={logoIcon} alt="logo" />
+                <div className="header__left">
+                    <div className="header__logo">
+                        <img className="logo" src={logoIcon} alt="logo" />
+                    </div>
+                    <nav className="header__menu">
+                        <ul className="header__menu-list">
+                            {pages?.map((item) => {
+                                return (
+                                    <NavLink
+                                        className="header__nav-link"
+                                        key={item.id}
+                                        to={item.url}
+                                    >
+                                        {item.name}
+                                    </NavLink>
+                                )
+                            })}
+                        </ul>
+                    </nav>
                 </div>
-                <nav className="header__menu">
-                    <ul className="header__menu-list">
-                        {pages?.map((item) => {
-                            return (
-                                <NavLink
-                                    className="header__nav-link"
-                                    key={item.id}
-                                    to={item.url}
-                                >
-                                    {item.name}
-                                </NavLink>
-                            )
-                        })}
-                    </ul>
-                </nav>
 
                 {!user ? (
                     <div className="header__btns">

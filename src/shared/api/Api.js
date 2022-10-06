@@ -1,5 +1,5 @@
 import axios from 'axios'
-import localStorageService from 'services/localStorageService'
+import localStorageService from 'shared/services/localStorageService'
 const defaultOptions = {
     baseURL: process.env.REACT_APP_API_URL,
 }

@@ -3,15 +3,16 @@ import PropTypes from 'prop-types'
 import { ThemeContext } from 'contexts/ThemeContext'
 function ThemeProvider(props) {
     const [scrollFixed, setScrollFixed] = useState(true)
-    // const handleScrollFixed = (bool) => {
-    //     setScrollFixed(bool)
-    // }
+    const [hasContainer, setHasContainer] = useState(true)
+
     const contextValue = useMemo(
         () => ({
             scrollFixed,
+            hasContainer,
+            setHasContainer,
             setScrollFixed,
         }),
-        [scrollFixed]
+        [scrollFixed, hasContainer]
     )
 
     return (

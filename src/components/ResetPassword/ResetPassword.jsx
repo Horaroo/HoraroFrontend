@@ -1,7 +1,7 @@
 import { TextField, Button, InputAdornment, Grid } from '@mui/material'
 import LockIcon from '@mui/icons-material/Lock'
 import EmailIcon from '@mui/icons-material/Email'
-import { Api } from 'api/Api'
+import { Api } from 'shared/api/Api'
 import { useState } from 'react'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'

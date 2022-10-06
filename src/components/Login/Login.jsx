@@ -1,13 +1,8 @@
-import {
-    TextField,
-    Button,
-    InputAdornment,
-    Typography,
-} from '@mui/material'
+import { TextField, Button, InputAdornment, Typography } from '@mui/material'
 import LockIcon from '@mui/icons-material/Lock'
 import PersonIcon from '@mui/icons-material/Person'
-import { Api } from 'api/Api'
-import useAuth from 'hooks/useAuth'
+import { Api } from 'shared/api/Api'
+import useAuth from 'shared/hooks/useAuth'
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'

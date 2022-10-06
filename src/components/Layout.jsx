@@ -1,6 +1,6 @@
-import useAuth from 'hooks/useAuth'
-import useTheme from 'hooks/useTheme'
-import React, { useState } from 'react'
+import useAuth from 'shared/hooks/useAuth'
+import useTheme from 'shared/hooks/useTheme'
+import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Footer from './Footer'
 import Header from './Header'
@@ -11,9 +11,7 @@ const Layout = () => {
     return (
         <div className={`layout ${scrollFixed ? 'fixed' : ''}`}>
             <Header />
-            <div className="layout__container">
-                <Outlet user={user} />
-            </div>
+            <Outlet user={user} />
             <Footer />
         </div>
     )

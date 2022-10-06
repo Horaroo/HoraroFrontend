@@ -1,16 +1,17 @@
-import Shedule from 'views/Shedule'
+import Shedule from 'pages/Shedule'
 import Login from 'components/Login/Login'
 import SignUp from 'components/SignUp/SignUp'
-import NotFound from 'views/NotFound'
+import NotFound from 'pages/NotFound'
 import { Route, Routes } from 'react-router-dom'
 import Layout from 'components/Layout'
 import PrivateRoute from 'routes/PrivateRoute'
 import ResetPassword from 'components/ResetPassword/ResetPassword'
 import 'react-toastify/dist/ReactToastify.css'
-import About from 'views/About'
-import Activate from 'views/Activate'
+import About from 'pages/About'
+import Activate from 'pages/Activate'
 import { ToastContainer } from 'react-toastify'
-import Home from 'views/Home'
+import { Home } from 'pages/Home'
+
 function App() {
     return (
         <>

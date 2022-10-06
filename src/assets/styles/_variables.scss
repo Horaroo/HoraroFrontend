@@ -1,5 +1,4 @@
 // Colors
-$black: rgba(0, 0, 0, 0.87);
 $muted: rgba(0, 0, 0, 0.54);
 $grey: #dcdcde;
 $primary: var(--primary);
@@ -57,6 +56,15 @@ $color-text: #646777;
 $color-hover: #fafbfe;
 
 $white: #ffffff;
+$black: rgba(0, 0, 0, 0.87);
+$background: #273953;
+$accent-light: #2896b9;
+$secondary: #a6a6a6;
+$green: #21bd43;
+$green-light: #82eac5;
+$warn: #bd2121;
+$warn-light: #f89da8;
+
 $accent: #3f51b5;
 $black-secondary: #232329;
 $accent-light: #6183c4;
@@ -75,3 +83,4 @@ $size-big: 56px;
 
 // border
 $border-base: 6px;
+$border-btn: 12px;

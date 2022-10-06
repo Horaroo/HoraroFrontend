@@ -3,7 +3,7 @@ import { TextField } from '@mui/material'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { Api } from 'api/Api'
+import { Api } from 'shared/api/Api'
 
 const AutocompletCustom = ({
     name,

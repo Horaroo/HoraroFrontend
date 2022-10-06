@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { AuthContext } from 'contexts/AuthContext'
 import PropTypes from 'prop-types'
-import localStorageService from 'services/localStorageService'
+import localStorageService from 'shared/services/localStorageService'
 function AuthProvider(props) {
     const [user, setUserData] = useState(null)
     const [token, setTokenData] = useState(

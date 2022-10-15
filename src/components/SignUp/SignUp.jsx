@@ -2,6 +2,7 @@ import { TextField, Button, InputAdornment, Tooltip } from '@mui/material'
 import LockIcon from '@mui/icons-material/Lock'
 import PersonIcon from '@mui/icons-material/Person'
 import EmailIcon from '@mui/icons-material/Email'
+import SchoolIcon from '@mui/icons-material/School'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import useAuth from 'shared/hooks/useAuth'
@@ -73,10 +74,8 @@ const SignUp = () => {
                     placement="bottom"
                 >
                     <TextField
-                        variant="outlined"
                         id="username"
                         name="username"
-                        type="text"
                         label="Логин"
                         className="auth__form-input"
                         value={values.username}
@@ -84,6 +83,7 @@ const SignUp = () => {
                         error={touched.username && Boolean(errors.username)}
                         helperText={touched.username && errors.username}
                         size="small"
+                        sx={{ color: 'red' }}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment
@@ -98,7 +98,6 @@ const SignUp = () => {
                 </Tooltip>
 
                 <TextField
-                    variant="outlined"
                     type="email"
                     name="email"
                     id="email"
@@ -122,7 +121,6 @@ const SignUp = () => {
                 />
 
                 <TextField
-                    variant="outlined"
                     type="password"
                     name="password"
                     id="password"
@@ -146,7 +144,6 @@ const SignUp = () => {
                 />
 
                 <TextField
-                    variant="outlined"
                     id="group"
                     name="group"
                     type="text"
@@ -157,14 +154,24 @@ const SignUp = () => {
                     error={touched.group && Boolean(errors.group)}
                     helperText={touched.group && errors.group}
                     size="small"
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment
+                                position="start"
+                                className="input-icon"
+                            >
+                                <SchoolIcon />
+                            </InputAdornment>
+                        ),
+                    }}
                 />
 
                 <Button
                     type="submit"
                     variant="contained"
                     size="large"
-                    color="primary"
                     style={{ marginBottom: 40 }}
+                    className="btn"
                     disabled={loading}
                 >
                     Зарегистрироваться

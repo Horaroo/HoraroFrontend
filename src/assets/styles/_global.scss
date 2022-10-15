@@ -21,6 +21,15 @@ ul {
 a {
     text-decoration: none;
 }
+
+input:-webkit-autofill {
+    border: none;
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px atachment inset;
+    color: white;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 #root {
     height: 100% !important;
 }
@@ -38,9 +47,9 @@ a {
         }
     }
     &--light {
-        color: $color-blue;
+        color: $white;
         &:hover {
-            color: $color-text;
+            opacity: 0.8;
         }
     }
 }
@@ -80,7 +89,7 @@ a {
 }
 
 .input-icon {
-    color: $grey-text;
+    color: $white !important;
 }
 .mb-20 {
     margin-bottom: 20px;
@@ -103,10 +112,14 @@ a {
 .btn {
     width: max-content;
     border: 0;
-    background: $white !important;
+    background-color: $white !important;
     border-radius: $border-btn !important;
     color: $black-secondary !important;
     text-transform: capitalize !important;
+
+    &:hover {
+        background-color: darken($white, 15%) !important;
+    }
 }
 .btn--small {
     padding: 12px 30px;

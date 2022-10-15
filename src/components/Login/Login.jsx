@@ -51,7 +51,11 @@ const Login = () => {
 
     return (
         <div className="auth__form-layout">
-            <form onSubmit={handleSubmit} className="auth__form">
+            <form
+                autoComplete="false"
+                onSubmit={handleSubmit}
+                className="auth__form"
+            >
                 <h2 className="auth__form-title">Вход</h2>
                 <TextField
                     fullWidth
@@ -105,18 +109,15 @@ const Login = () => {
                 )}
                 <Button
                     type="submit"
-                    color="primary"
                     variant="contained"
                     size="large"
                     style={{ marginBottom: 40 }}
                     disabled={loading}
+                    className="btn"
                 >
                     Войти
                 </Button>
-                <NavLink
-                    className="link link--light mb-10"
-                    to="/reset_password"
-                >
+                <NavLink className=" link--light mb-10" to="/reset_password">
                     Забыли пароль?
                 </NavLink>
                 <NavLink className="link link--not-hover" to="/signup">

@@ -1,13 +1,24 @@
-import { Box, IconButton, Typography } from '@mui/material'
-import logoIcon from 'assets/images/logo.png'
+import { Link } from 'react-router-dom'
+
 const Footer = () => {
     return (
-        <Box sx={{ height: { md: 60, sm: 55, sx: 50 } }} className="footer">
-            <img src={logoIcon} alt="logo" className="footer-logo" />
-            <Typography className="footer__text" variant="body1">
-                ©️ {process.env.REACT_APP_NAME} 2022
-            </Typography>
-        </Box>
+        <footer className="footer">
+            <div className="container footer__container">
+                <nav className="footer__nav">
+                    <Link to="/about" className="footer__link">
+                        О нас
+                    </Link>
+                    <a
+                        rel="noreferrer"
+                        target="_blank"
+                        href="https://t.me/horaroBot"
+                        className="footer__link"
+                    >
+                        Телеграм бот
+                    </a>
+                </nav>
+            </div>
+        </footer>
     )
 }
 

@@ -9,7 +9,6 @@ import { Api } from 'shared/api/Api'
 const pages = [
     { id: 1, name: 'Главная', url: '/' },
     { id: 2, name: 'Расписания', url: '/shedule' },
-    { id: 3, name: 'О нас', url: '/about' },
 ]
 
 const Header = () => {

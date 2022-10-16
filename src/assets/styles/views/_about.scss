@@ -1,5 +1,6 @@
 .about {
     text-align: center;
+    color: $white;
     .layout {
         overflow: auto;
     }
@@ -28,6 +29,9 @@
         @include _768 {
             font-size: $size-base;
         }
+        a {
+            color: white;
+        }
     }
     &__team {
         margin-bottom: $double-gap;
@@ -37,8 +41,7 @@
             margin: 0;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 4px solid $accent;
-            border-radius: 12px;
+            border-bottom: 1px solid $grey;
         }
     }
     &__list {
@@ -50,7 +53,7 @@
     &__card {
         padding: 30px;
         border-radius: 12px;
-        border: 1px solid $border-color;
+        border: 1px solid $color-text;
         min-height: 350px;
         margin: 20px;
         &-preview {
@@ -78,7 +81,7 @@
         }
         &-prof {
             font-size: 18px;
-            color: $border-color;
+            color: $color-text;
             margin-bottom: 30px;
             font-weight: 500;
         }
@@ -87,7 +90,7 @@
                 margin: 8px;
 
                 svg {
-                    fill: $border-color;
+                    fill: $color-text;
                     transition: all 0.2s ease-in-out;
                     &:hover {
                         fill: $accent;

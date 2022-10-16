@@ -7,6 +7,10 @@ import AxmathanAva from 'assets/images/team/Axmathan.png'
 import AxmedAva from 'assets/images/team/Axmed.png'
 import useTheme from 'shared/hooks/useTheme'
 
+/*
+TODO: 
+- сделать цвет текста белым
+*/
 const team = [
     {
         id: 1,

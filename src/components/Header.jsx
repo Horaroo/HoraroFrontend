@@ -45,7 +45,7 @@ const Header = () => {
             : (layout.style.overflow = 'scroll')
     }
     return (
-        <header className="header">
+        <header className={`header ${activeMenu ? 'active' : ''}`}>
             <div className="container header__container">
                 <div className="header__left">
                     <div className="header__logo">
@@ -88,18 +88,18 @@ const Header = () => {
                 ) : (
                     <>
                         <div className="header__profile">
-                            <Typography
-                                className="header__profile-name"
-                                style={{ color: 'white', marginRight: 7 }}
-                            >
-                                {user?.username}
-                            </Typography>
                             <Avatar
                                 onClick={handleOpenUserMenu}
                                 className="header__avatar"
                                 alt={user?.username.toUpperCase()}
                                 src="/static/images/avatar/2.jpg"
                             />
+                            <Typography
+                                className="header__profile-name"
+                                style={{ color: 'white', marginRight: 7 }}
+                            >
+                                {user?.username}
+                            </Typography>
                         </div>
                         <div className={`dropdown ${!openDropdown && 'none'} `}>
                             <ul className="dropdown__list">

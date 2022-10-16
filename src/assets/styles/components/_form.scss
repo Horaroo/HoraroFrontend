@@ -1,0 +1,47 @@
+.form {
+    &__title {
+        margin-bottom: $gap;
+        font-size: 32px;
+        line-height: 1.4;
+        font-weight: 600;
+        font-family: 'Lato', sans-serif;
+        color: $white;
+    }
+    &__textfield {
+        &.MuiTextField-root {
+            margin-bottom: 20px;
+        }
+
+        // label
+        & .MuiInputLabel-root {
+            color: $white;
+            &.Mui-focused {
+                color: $white;
+            }
+        }
+        // input
+        & .MuiOutlinedInput-root {
+            color: $white;
+            & > fieldset {
+                border-color: $white !important;
+            }
+        }
+
+        // for primary
+        &.primary {
+            & .MuiInputLabel-root {
+                color: $accent;
+                &.Mui-focused {
+                    color: $accent;
+                }
+            }
+
+            & .MuiOutlinedInput-root {
+                color: $accent;
+                & > fieldset {
+                    border-color: $accent !important;
+                }
+            }
+        }
+    }
+}

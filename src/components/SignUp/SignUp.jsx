@@ -66,8 +66,8 @@ const SignUp = () => {
     })
     return (
         <div className="auth__form-layout">
-            <form onSubmit={handleSubmit} className="auth__form">
-                <h2 className="auth__form-title">Регистрация</h2>
+            <form onSubmit={handleSubmit} className="form auth__form">
+                <h2 className="form__title">Регистрация</h2>
                 <Tooltip
                     interactive
                     title="Логин используется в качестве токена"
@@ -77,7 +77,7 @@ const SignUp = () => {
                         id="username"
                         name="username"
                         label="Логин"
-                        className="auth__form-input"
+                        className="form__textfield"
                         value={values.username}
                         onChange={handleChange}
                         error={touched.username && Boolean(errors.username)}
@@ -102,7 +102,7 @@ const SignUp = () => {
                     name="email"
                     id="email"
                     label="Почта"
-                    className="auth__form-input"
+                    className="form__textfield"
                     value={values.email}
                     onChange={handleChange}
                     error={touched.email && Boolean(errors.email)}
@@ -125,7 +125,7 @@ const SignUp = () => {
                     name="password"
                     id="password"
                     label="Пароль"
-                    className="auth__form-input"
+                    className="form__textfield"
                     value={values.password}
                     onChange={handleChange}
                     error={touched.password && Boolean(errors.password)}
@@ -148,7 +148,7 @@ const SignUp = () => {
                     name="group"
                     type="text"
                     label="Группа"
-                    className="auth__form-input"
+                    className="form__textfield"
                     value={values.group}
                     onChange={handleChange}
                     error={touched.group && Boolean(errors.group)}

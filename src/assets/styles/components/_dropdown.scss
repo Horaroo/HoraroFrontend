@@ -6,6 +6,9 @@
     transition: all ease-in-out 0.2s;
     opacity: 1;
 
+    @include _600 {
+        right: 100px;
+    }
     &__list {
         padding: 8px 5px;
         margin: 0;

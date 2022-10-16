@@ -54,18 +54,17 @@ const Login = () => {
             <form
                 autoComplete="false"
                 onSubmit={handleSubmit}
-                className="auth__form"
+                className="form auth__form"
             >
-                <h2 className="auth__form-title">Вход</h2>
+                <h2 className="form__title">Вход</h2>
                 <TextField
                     fullWidth
                     id="username"
                     name="username"
                     label="Логин"
-                    variant="outlined"
                     value={values.username}
                     onChange={handleChange}
-                    className="auth__form-input"
+                    className="form__textfield"
                     error={touched.username && Boolean(errors.username)}
                     helperText={touched.username && errors.username}
                     InputProps={{
@@ -88,7 +87,7 @@ const Login = () => {
                     variant="outlined"
                     value={values.password}
                     onChange={handleChange}
-                    className="auth__form-input"
+                    className="form__textfield"
                     error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
                     InputProps={{

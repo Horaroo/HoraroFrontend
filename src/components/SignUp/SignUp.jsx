@@ -68,41 +68,13 @@ const SignUp = () => {
         <div className="auth__form-layout">
             <form onSubmit={handleSubmit} className="form auth__form">
                 <h2 className="form__title">Регистрация</h2>
-                <Tooltip
-                    interactive
-                    title="Логин используется в качестве токена"
-                    placement="bottom"
-                >
-                    <TextField
-                        id="username"
-                        name="username"
-                        label="Логин"
-                        className="form__textfield"
-                        value={values.username}
-                        onChange={handleChange}
-                        error={touched.username && Boolean(errors.username)}
-                        helperText={touched.username && errors.username}
-                        size="small"
-                        sx={{ color: 'red' }}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment
-                                    position="start"
-                                    className="input-icon"
-                                >
-                                    <PersonIcon />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </Tooltip>
 
                 <TextField
                     type="email"
                     name="email"
                     id="email"
                     label="Почта"
-                    className="form__textfield"
+                    className="form__field"
                     value={values.email}
                     onChange={handleChange}
                     error={touched.email && Boolean(errors.email)}
@@ -121,11 +93,34 @@ const SignUp = () => {
                 />
 
                 <TextField
+                    id="username"
+                    name="username"
+                    label="Токен"
+                    className="form__field"
+                    value={values.username}
+                    onChange={handleChange}
+                    error={touched.username && Boolean(errors.username)}
+                    helperText={touched.username && errors.username}
+                    size="small"
+                    sx={{ color: 'red' }}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment
+                                position="start"
+                                className="input-icon"
+                            >
+                                <PersonIcon />
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+
+                <TextField
                     type="password"
                     name="password"
                     id="password"
                     label="Пароль"
-                    className="form__textfield"
+                    className="form__field"
                     value={values.password}
                     onChange={handleChange}
                     error={touched.password && Boolean(errors.password)}
@@ -148,7 +143,7 @@ const SignUp = () => {
                     name="group"
                     type="text"
                     label="Группа"
-                    className="form__textfield"
+                    className="form__field"
                     value={values.group}
                     onChange={handleChange}
                     error={touched.group && Boolean(errors.group)}

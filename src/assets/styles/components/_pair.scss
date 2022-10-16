@@ -1,4 +1,11 @@
 .pair {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    row-gap: $gap;
+    column-gap: $double-gap;
+    @include _850 {
+        grid-template-columns: repeat(1, 1fr);
+    }
     &__field {
         display: flex;
         flex-direction: column;
@@ -7,6 +14,7 @@
         &-label {
             font-size: $size-middle;
             padding-bottom: $small-gap;
+            color: $white;
         }
 
         &-select {
@@ -15,9 +23,11 @@
         }
     }
     &__btns {
+        width: max-content;
+        margin: 0 auto;
         display: flex;
         gap: $gap;
-        margin-top: $gap;
+        margin-top: $double-gap;
         @include _480 {
             margin-top: 0px;
             font-size: 12px;

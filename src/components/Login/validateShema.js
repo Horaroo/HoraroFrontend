@@ -1,9 +1,9 @@
 import * as yup from 'yup'
 const usernameRegExp = /^[A-z]{1}[A-z\d]+$/
 export const validationSchema = yup.object({
-    username: yup
-        .string('Введите ваш Логин')
-        .matches(usernameRegExp, 'Введен не корректный Логин')
+    email: yup
+        .string()
+        .email('Введен не корректный адрес электроной почты')
         .required('Обязательно'),
     password: yup
         .string('Введите ваш пароль')

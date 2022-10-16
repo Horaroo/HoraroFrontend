@@ -121,7 +121,7 @@ const SheduleItem = ({
                 </IconButton>
                 <h2 className="shedule-item__title">Предмет-{numberPair}</h2>
                 <IconButton onClick={increment}>
-                    <ArrowForward />
+                    <ArrowForward color="white" />
                 </IconButton>
             </div>
             <Dialog

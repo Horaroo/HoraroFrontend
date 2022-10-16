@@ -20,80 +20,114 @@ const Pair = ({
     activeWeek,
 }) => {
     return (
-        <div className="pair">
-            <div className="pair__field">
-                <div className="pair__field-label">Название предмета</div>
-                <Autocomplete
-                    name="subject"
-                    type="text"
-                    value={values.subject}
-                    loading={loading}
-                    error={errors.subject}
-                    touch={touched.subject}
-                    handleChange={handleChange}
-                    setFieldValue={setFieldValue}
-                    username={username}
-                />
-            </div>
-            <div className="pair__field">
-                <div className="pair__field-label">Преподаватель</div>
-                <Autocomplete
-                    name="teacher"
-                    type="text"
-                    value={values.teacher}
-                    loading={loading}
-                    error={errors.teacher}
-                    touch={touched.teacher}
-                    handleChange={handleChange}
-                    setFieldValue={setFieldValue}
-                    username={username}
-                />
-            </div>
-            <div className="flex">
+        <div className="pair__container">
+            <div className="pair">
                 <div className="pair__field">
-                    <div className="pair__field-label">Тип</div>
-                    <Select
-                        style={{ marginRight: 'auto' }}
-                        name="type"
-                        className="pair__field-select auth__form-input"
-                        onChange={handleChange}
-                        value={values.type}
-                        error={touched.type && Boolean(errors.type)}
-                        size="small"
-                    >
-                        {pairTypes.map((item) => (
-                            <MenuItem key={item.id} value={item.id}>
-                                {item.name}
-                            </MenuItem>
-                        ))}
-                    </Select>
-
-                    {touched.type && Boolean(errors.type) && (
-                        <div
-                            className="text--error "
-                            style={{ position: 'relative', top: '-30px' }}
-                        >
-                            Обязательно
-                        </div>
-                    )}
-                </div>
-
-                <div className="pair__field">
-                    <div className="pair__field-label">Аудитория</div>
+                    <div className="pair__field-label">Название предмета</div>
                     <Autocomplete
-                        name="audit"
+                        name="subject"
                         type="text"
-                        value={values.audit}
+                        value={values.subject}
                         loading={loading}
-                        error={errors.audit}
-                        touch={touched.audit}
+                        error={errors.subject}
+                        touch={touched.subject}
                         handleChange={handleChange}
                         setFieldValue={setFieldValue}
                         username={username}
                     />
                 </div>
-            </div>
 
+                <div className="pair__field">
+                    <div className="pair__field-label">Преподаватель</div>
+                    <Autocomplete
+                        name="teacher"
+                        type="text"
+                        value={values.teacher}
+                        className="form__field"
+                        loading={loading}
+                        error={errors.teacher}
+                        touch={touched.teacher}
+                        handleChange={handleChange}
+                        setFieldValue={setFieldValue}
+                        username={username}
+                    />
+                </div>
+
+                <div className="flex">
+                    <div
+                        className="pair__field mr-10"
+                        style={{ width: '200px' }}
+                    >
+                        <div className="pair__field-label">Аудитория</div>
+                        <Autocomplete
+                            name="audit"
+                            type="text"
+                            value={values.audit}
+                            loading={loading}
+                            error={errors.audit}
+                            touch={touched.audit}
+                            handleChange={handleChange}
+                            setFieldValue={setFieldValue}
+                            username={username}
+                        />
+                    </div>
+                    <div className="pair__field">
+                        <div className="pair__field-label">Тип</div>
+                        <Select
+                            name="type"
+                            className="form__select "
+                            onChange={handleChange}
+                            value={values.type}
+                            error={touched.type && Boolean(errors.type)}
+                            size="small"
+                        >
+                            {pairTypes.map((item) => (
+                                <MenuItem key={item.id} value={item.id}>
+                                    {item.name}
+                                </MenuItem>
+                            ))}
+                        </Select>
+
+                        {touched.type && Boolean(errors.type) && (
+                            <div
+                                className="text--error "
+                                style={{ position: 'relative', top: '-30px' }}
+                            >
+                                Обязательно
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                <div className="flex">
+                    <div className="pair__field " style={{ width: '200px' }}>
+                        <div className="pair__field-label">Начало пары</div>
+                        <TextField
+                            name="start_date"
+                            className="form__field mr-10"
+                            value={values.start_date}
+                            onChange={handleChange}
+                            error={
+                                touched.start_date && Boolean(errors.start_date)
+                            }
+                            helperText={touched.start_date && errors.start_date}
+                            size="small"
+                        />
+                    </div>
+                    <div className="pair__field" style={{ width: '200px' }}>
+                        <div className="pair__field-label">Завершение пары</div>
+                        <TextField
+                            name="end_date"
+                            className="form__field"
+                            value={values.end_date}
+                            onChange={handleChange}
+                            error={touched.end_date && Boolean(errors.end_date)}
+                            helperText={touched.end_date && errors.end_date}
+                            size="small"
+                        />
+                    </div>
+                </div>
+            </div>
             <div className="pair__btns">
                 <Button
                     className="pair__btn"

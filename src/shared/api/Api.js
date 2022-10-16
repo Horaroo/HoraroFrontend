@@ -19,10 +19,10 @@ export const Api = {
             email,
         })
     },
-    login(username, password) {
+    login(email, password) {
         return instance
             .post(`auth/token/login/`, {
-                username,
+                email,
                 password,
             })
             .then((res) => {
@@ -117,4 +117,3 @@ export const Api = {
         return instance.get(`/events`)
     },
 }
-

@@ -57,7 +57,7 @@ const ResetPassword = ({ isSetNewPass }) => {
                                 name="email"
                                 value={values.email}
                                 onChange={handleChange}
-                                className="form__textfield"
+                                className="form__field"
                                 error={touched.email && Boolean(errors.email)}
                                 helperText={touched.email && errors.email}
                                 type="email"
@@ -88,7 +88,7 @@ const ResetPassword = ({ isSetNewPass }) => {
                             name="password"
                             onChange={handleChange}
                             placeholder="Новый пароль"
-                            className="form__textfield"
+                            className="form__field"
                             size="small"
                             InputProps={{
                                 endAdornment: (
@@ -117,7 +117,7 @@ const ResetPassword = ({ isSetNewPass }) => {
                             }
                             type="text"
                             placeholder="Подтвердите новый пароль"
-                            className="form__textfield"
+                            className="form__field"
                             size="small"
                             InputProps={{
                                 endAdornment: (

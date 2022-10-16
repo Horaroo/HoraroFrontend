@@ -16,14 +16,14 @@ const Login = () => {
     const { handleSubmit, values, touched, errors, handleChange, setErrors } =
         useFormik({
             initialValues: {
-                username: '',
+                email: '',
                 password: '',
             },
             onSubmit: async (values) => {
                 try {
                     setLoading(true)
                     const { data, status } = await Api.login(
-                        values.username,
+                        values.email,
                         values.password
                     )
                     if (status === 200) {
@@ -59,14 +59,15 @@ const Login = () => {
                 <h2 className="form__title">Вход</h2>
                 <TextField
                     fullWidth
-                    id="username"
-                    name="username"
-                    label="Логин"
-                    value={values.username}
+                    id="email"
+                    type="email"
+                    name="email"
+                    label="Email"
+                    value={values.email}
                     onChange={handleChange}
-                    className="form__textfield"
-                    error={touched.username && Boolean(errors.username)}
-                    helperText={touched.username && errors.username}
+                    className="form__field"
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment
@@ -87,7 +88,7 @@ const Login = () => {
                     variant="outlined"
                     value={values.password}
                     onChange={handleChange}
-                    className="form__textfield"
+                    className="form__field"
                     error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
                     InputProps={{

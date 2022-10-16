@@ -7,7 +7,7 @@
         font-family: 'Lato', sans-serif;
         color: $white;
     }
-    &__textfield {
+    &__field {
         &.MuiTextField-root {
             margin-bottom: 20px;
         }
@@ -19,8 +19,10 @@
                 color: $white;
             }
         }
+
         // input
         & .MuiOutlinedInput-root {
+            width: 100%;
             color: $white;
             & > fieldset {
                 border-color: $white !important;
@@ -41,6 +43,19 @@
                 & > fieldset {
                     border-color: $accent !important;
                 }
+            }
+        }
+    }
+
+    &__select {
+        &.MuiOutlinedInput-root {
+            color: $white;
+            & > fieldset {
+                border-color: $white !important;
+                color: $white;
+            }
+            & .MuiSelect-icon {
+                color: $white !important;
             }
         }
     }

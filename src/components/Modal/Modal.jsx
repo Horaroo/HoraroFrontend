@@ -81,7 +81,7 @@ const Modal = ({ open, handleClose, isChangePass }) => {
                     name="password"
                     onChange={handleChange}
                     placeholder="Текущий пароль"
-                    className="form__textfield"
+                    className="form__field"
                     size="small"
                 />
                 {isChangePass && (
@@ -97,7 +97,7 @@ const Modal = ({ open, handleClose, isChangePass }) => {
                         name="newPassword"
                         onChange={handleChange}
                         placeholder="Новый пароль"
-                        className="form__textfield"
+                        className="form__field"
                         size="small"
                     />
                 )}

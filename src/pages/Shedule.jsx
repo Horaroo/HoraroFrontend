@@ -4,6 +4,7 @@ import SheduleItem from 'components/SheduleItem/SheduleItem'
 import { dayes, week } from 'shared/mocks/sheduleOptions'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
+import useTheme from 'shared/hooks/useTheme'
 
 const handleSubmit = () => {}
 const Shedule = ({ user }) => {
@@ -12,6 +13,7 @@ const Shedule = ({ user }) => {
     const [numberPair, setNumberPair] = useState(1)
     const [pairTypes, setPairTypes] = useState([])
     const [pair, setPair] = useState(null)
+    const { setScrollFixed } = useTheme()
     useEffect(() => {
         const getData = async () => {
             try {
@@ -24,6 +26,16 @@ const Shedule = ({ user }) => {
         getData()
     }, [])
 
+    // useEffect(() => {
+    //     setScrollFixed(false)
+    //     const footer = document.querySelector('.footer')
+    //     footer.style.position = 'relative'
+    //     return () => {
+    //         footer.style.position = 'fixed'
+    //         setScrollFixed(true)
+    //     }
+    // }, [setScrollFixed])
+
     const handleChange = (event) => {
         setNumberPair(1)
         setActiveDay(event.target.value)
@@ -32,22 +44,22 @@ const Shedule = ({ user }) => {
     return (
         <div className="layout__container">
             <div className="page shedule">
-                <div className="shedule__sitebar">
-                    <nav className="shedule__nav">
+                <div className="shedule__top">
+                    <ul className="shedule__list">
                         {week.map((tab) => (
-                            <button
+                            <li
                                 key={tab.id}
                                 onClick={() => setActiveWeek(tab.value)}
-                                className={`shedule__nav-btn ${
+                                className={`shedule__item ${
                                     tab.value === activeWeek && 'active'
                                 }`}
                             >
                                 {tab.label}
-                            </button>
+                            </li>
                         ))}
-                    </nav>
+                    </ul>
                     <Select
-                        className="shedule__select shedule__select-nav"
+                        className="form__select shedule__select shedule__select-nav"
                         value={activeWeek}
                         onChange={(e) => setActiveWeek(e.target.value)}
                         size="small"
@@ -60,7 +72,7 @@ const Shedule = ({ user }) => {
                     </Select>
 
                     <Select
-                        className="shedule__select shedule__select-dayes"
+                        className="form__select  shedule__select shedule__select-dayes"
                         value={activeDay}
                         onChange={handleChange}
                         size="small"
@@ -76,7 +88,7 @@ const Shedule = ({ user }) => {
                         ))}
                     </Select>
                     <div className="shedule__dayes">
-                        <ul className="shedule__dayes-list">
+                        <ul className="shedule__list">
                             {dayes.map((day) => (
                                 <li
                                     key={day.id}
@@ -84,7 +96,7 @@ const Shedule = ({ user }) => {
                                         setNumberPair(1)
                                         setActiveDay(day.value)
                                     }}
-                                    className={`shedule__dayes-item ${
+                                    className={`shedule__item ${
                                         day.value === activeDay && 'active'
                                     }`}
                                 >

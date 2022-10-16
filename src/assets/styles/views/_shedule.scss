@@ -1,30 +1,50 @@
 .shedule {
     position: relative;
     width: 100%;
-    display: flex;
-    align-items: flex-start;
     font-weight: 500;
     line-height: 1.4;
     color: $accent;
-    padding-top: 70px;
 
     @include _768 {
-        padding-top: 90px;
+        padding-top: 20px;
     }
-    &__sitebar {
+
+    &__list {
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        width: max-content;
+        @include _768 {
+            display: none;
+        }
     }
+
+    &__item {
+        cursor: pointer;
+        color: $color-text;
+        font-size: $size-middle;
+        transition: all 0.3s ease-in-out;
+        &:not(:first-child) {
+            margin-left: $gap;
+            @include _850 {
+                margin-left: 10px;
+            }
+        }
+        &.active {
+            color: $white;
+            border-bottom: 1px solid $white;
+        }
+    }
+
+    &__top {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: $gap;
+    }
+
     &__nav {
-        position: absolute;
-        top: 0;
-        left: 0;
         padding: 0 5px;
         display: inline-flex;
-        margin-bottom: $gap;
-        padding-bottom: $small-gap;
-        border-bottom: 1px solid $accent;
 
         &-btn {
             color: inherit;
@@ -71,30 +91,15 @@
     }
 
     &__dayes {
+        width: max-content;
         margin-right: $gap;
-        border: 2px solid $accent-light;
-        border-radius: $border-base;
         overflow: hidden;
 
-        &-list {
-            border-radius: $border-base;
-            width: 100%;
-        }
         &-item {
-            cursor: pointer;
-            color: $black-secondary;
-            padding: 15px $gap;
-            font-size: $size-middle;
-            transition: all 0.3s ease-in-out;
-            &.active {
-                background-color: $accent-light;
-                color: $white;
-            }
         }
     }
     &__content {
         position: relative;
-        max-width: 750px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -105,35 +110,26 @@
     &-item {
         width: 100%;
         &__top {
-            position: absolute;
-            top: -85px;
-            left: 50%;
-            transform: translateX(-50%);
             width: max-content;
             display: inline-flex;
             align-items: center;
             margin: 0 auto;
             font-size: $size-big;
             @include _768 {
-                font-size: 28px;
-                top: -46px;
+                font-size: 35px;
             }
             svg {
-                fill: $accent;
+                fill: $white;
             }
         }
         &__title {
+            color: $white;
             font-size: inherit;
-            margin: 0 10px 10px;
+            margin-bottom: 15px;
         }
         &__form {
             position: relative;
-            padding: $gap 30px;
-            border: 2px solid $accent-light;
             border-radius: $border-base;
-            @include _768 {
-                padding: $gap;
-            }
         }
         &__modal {
             padding: $gap;

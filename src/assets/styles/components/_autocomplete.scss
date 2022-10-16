@@ -2,9 +2,8 @@
     width: 100%;
     position: relative;
     height: max-content;
-    margin-bottom: 30px;
-    &__input {
-        margin: 0 !important;
+    &__field {
+        width: 100%;
     }
     &__dropdown {
         position: absolute;

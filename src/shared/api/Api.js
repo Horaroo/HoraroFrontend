@@ -112,14 +112,9 @@ export const Api = {
             to_week,
         })
     },
+
+    getEvents() {
+        return instance.get(`/events`)
+    },
 }
 
-// Api.postShedule.propTypes = {
-//     number_pair: PropTypes.number.isRequired,
-//     subject: PropTypes.string.isRequired,
-//     teacher: PropTypes.string.isRequired, audience: PropTypes.string.isRequired,
-//     week: PropTypes.number.isRequired,
-//     group: PropTypes.number.isRequired,
-//     type_pair: PropTypes.number.isRequired,
-//     day: PropTypes.number.isRequired
-// }

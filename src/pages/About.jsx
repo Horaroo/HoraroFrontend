@@ -62,26 +62,6 @@ const About = () => {
     return (
         <div className="layout__container">
             <div className="page about">
-                <h2 className="about__title">О проекте</h2>
-                <p className="about__text">
-                    Представляем вашему вниманию проект{' '}
-                    {process.env.REACT_APP_NAME} ({process.env.REACT_APP_NAME} -
-                    «Расписание» в переводе с языка{' '}
-                    <a
-                        rel="noreferrer"
-                        target="_blank"
-                        href="https://ru.wikipedia.org/wiki/%D0%AD%D1%81%D0%BF%D0%B5%D1%80%D0%B0%D0%BD%D1%82%D0%BE"
-                    >
-                        Эсперанто
-                    </a>
-                    ) предназначенный упростить поиск расписания занятий.{' '}
-                    {process.env.REACT_APP_NAME} позволяет пользователям в пару
-                    кликов получить актуальное расписание занятий от доверенных
-                    пользователей в телеграм боте. Также вам предоставляется
-                    возможность создавать и заполнять собственное расписание
-                    так, как это удобно именно вам и делиться своим расписанием
-                    с другими пользователями {process.env.REACT_APP_NAME}.
-                </p>
                 <div className="about__team">
                     <h3 className="about__team-title">Наша команда</h3>
                     <div className="about__list">

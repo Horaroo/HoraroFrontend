@@ -36,7 +36,12 @@
         }
     }
     &__desc {
+        text-align: justify;
         margin-bottom: $gap;
+
+        a {
+            color: $accent;
+        }
     }
     &__preview {
         max-width: 460px;

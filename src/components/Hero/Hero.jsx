@@ -9,11 +9,25 @@ const Hero = ({ handleScrollDown }) => {
                         Horaro - <br /> Телеграм бот <br /> С расписанием
                     </h1>
                     <p className="hero__desc">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Consectetur molestias eligendi iusto minus
-                        repellendus praesentium iure enim mollitia delectus
-                        deleniti in, ut perferendis maiores fugiat. Amet
-                        blanditiis quibusdam alias ducimus?
+                        Представляем вашему вниманию проект{' '}
+                        {process.env.REACT_APP_NAME} (
+                        {process.env.REACT_APP_NAME} - «Расписание» в переводе с
+                        языка{' '}
+                        <a
+                            rel="noreferrer"
+                            target="_blank"
+                            href="https://ru.wikipedia.org/wiki/%D0%AD%D1%81%D0%BF%D0%B5%D1%80%D0%B0%D0%BD%D1%82%D0%BE"
+                        >
+                            Эсперанто
+                        </a>
+                        ) предназначенный упростить поиск расписания занятий.{' '}
+                        {process.env.REACT_APP_NAME} позволяет пользователям в
+                        пару кликов получить актуальное расписание занятий от
+                        доверенных пользователей в телеграм боте. Также вам
+                        предоставляется возможность создавать и заполнять
+                        собственное расписание так, как это удобно именно вам и
+                        делиться своим расписанием с другими пользователями{' '}
+                        {process.env.REACT_APP_NAME}.
                     </p>
                     <div className="hero__nav">
                         <span>Листай вниз</span>

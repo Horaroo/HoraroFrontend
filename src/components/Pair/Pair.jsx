@@ -1,12 +1,15 @@
 import { Button, MenuItem, Select, TextField } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Autocomplete from 'components/Autocomplete/Autocomplete'
 import CopyModal from 'components/CopyModal/CopyModal'
-
+import { TimePicker } from '@mui/x-date-pickers/TimePicker'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 const Pair = ({
     values,
     handleChange,
+    setValues,
     errors,
     touched,
     pairTypes,
@@ -19,6 +22,8 @@ const Pair = ({
     setOpenCopyModal,
     activeWeek,
 }) => {
+    const locale = 'ru'
+
     return (
         <div className="pair__container">
             <div className="pair">
@@ -99,34 +104,88 @@ const Pair = ({
                     </div>
                 </div>
 
-                <div className="flex">
-                    <div className="pair__field " style={{ width: '200px' }}>
-                        <div className="pair__field-label">Начало пары</div>
-                        <TextField
-                            name="start_date"
-                            className="form__field mr-10"
-                            value={values.start_date}
-                            onChange={handleChange}
-                            error={
-                                touched.start_date && Boolean(errors.start_date)
-                            }
-                            helperText={touched.start_date && errors.start_date}
-                            size="small"
-                        />
+                <LocalizationProvider
+                    dateAdapter={AdapterDayjs}
+                    adapterLocale={locale}
+                >
+                    <div className="flex">
+                        <div
+                            className="pair__field "
+                            style={{ width: '200px', marginRight: 17 }}
+                        >
+                            <div className="pair__field-label">Начало</div>
+                            <TimePicker
+                                value={values.startDate}
+                                onChange={(value) =>
+                                    setValues((prevState) => ({
+                                        ...prevState,
+                                        startDate: value,
+                                    }))
+                                }
+                                className="datetimepicker"
+                                renderInput={(params) => (
+                                    <TextField {...params} />
+                                )}
+                            />
+                        </div>
+                        <div
+                            className="pair__field "
+                            style={{ width: '200px' }}
+                        >
+                            <div className="pair__field-label">Окончание</div>
+                            <TimePicker
+                                value={values.endDate}
+                                onChange={(value) =>
+                                    setValues((prevState) => ({
+                                        ...prevState,
+                                        endDate: value,
+                                    }))
+                                }
+                                className="datetimepicker"
+                                renderInput={(params) => (
+                                    <TextField {...params} />
+                                )}
+                            />
+                        </div>
+
+                        {/* <div
+                            className="pair__field "
+                            style={{ width: '200px' }}
+                        >
+                            <div className="pair__field-label">Начало пары</div>
+                            <TextField
+                                name="start_date"
+                                className="form__field mr-10"
+                                value={values.start_date}
+                                onChange={handleChange}
+                                error={
+                                    touched.start_date &&
+                                    Boolean(errors.start_date)
+                                }
+                                helperText={
+                                    touched.start_date && errors.start_date
+                                }
+                                size="small"
+                            />
+                        </div>
+                        <div className="pair__field" style={{ width: '200px' }}>
+                            <div className="pair__field-label">
+                                Завершение пары
+                            </div>
+                            <TextField
+                                name="end_date"
+                                className="form__field"
+                                value={values.end_date}
+                                onChange={handleChange}
+                                error={
+                                    touched.end_date && Boolean(errors.end_date)
+                                }
+                                helperText={touched.end_date && errors.end_date}
+                                size="small"
+                            />
+                        </div> */}
                     </div>
-                    <div className="pair__field" style={{ width: '200px' }}>
-                        <div className="pair__field-label">Завершение пары</div>
-                        <TextField
-                            name="end_date"
-                            className="form__field"
-                            value={values.end_date}
-                            onChange={handleChange}
-                            error={touched.end_date && Boolean(errors.end_date)}
-                            helperText={touched.end_date && errors.end_date}
-                            size="small"
-                        />
-                    </div>
-                </div>
+                </LocalizationProvider>
             </div>
             <div className="pair__btns">
                 <Button
@@ -169,6 +228,7 @@ const Pair = ({
 Pair.propTypes = {
     values: PropTypes.object.isRequired,
     handleChange: PropTypes.func,
+    setValues: PropTypes.func,
     setFieldValue: PropTypes.func,
     loading: PropTypes.bool,
     errors: PropTypes.object.isRequired,

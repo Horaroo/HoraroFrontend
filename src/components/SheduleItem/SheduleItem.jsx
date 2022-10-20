@@ -10,6 +10,9 @@ import { Api } from 'shared/api/Api'
 import useAuth from 'shared/hooks/useAuth'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
+import dayjs from 'dayjs'
+import 'dayjs/locale/ru'
+
 const SheduleItem = ({
     numberPair,
     activeWeek,
@@ -36,6 +39,8 @@ const SheduleItem = ({
             type: '',
             teacher: '',
             audit: '',
+            startDate: '',
+            endDate: '',
         },
         onSubmit: async (values) => {
             try {
@@ -49,6 +54,8 @@ const SheduleItem = ({
                     week: activeWeek,
                     number_pair: numberPair,
                     group: user.id,
+                    start_time: values.startDate,
+                    end_time: values.endDate,
                 })
                 toast.success('Данные сохранены!')
                 setLoading(false)
@@ -71,13 +78,22 @@ const SheduleItem = ({
                     user?.username
                 )
                 if (res.status === 200) {
-                    const { audience, subject, teacher, type_pair } = res.data
+                    const {
+                        audience,
+                        subject,
+                        teacher,
+                        type_pair,
+                        start_time,
+                        end_time,
+                    } = res.data
                     if (JSON.stringify(res.data) !== '{}') {
                         setValues({
                             subject: subject,
                             audit: audience,
                             teacher,
                             type: type_pair,
+                            startDate: start_time || dayjs('2022-10-20'),
+                            endDate: end_time || dayjs('2022-10-20'),
                         })
                     } else {
                         resetForm()
@@ -167,6 +183,7 @@ const SheduleItem = ({
                     setOpenClearModal={setOpenClearModal}
                     setOpenCopyModal={setOpenCopyModal}
                     activeWeek={activeWeek}
+                    setValues={setValues}
                 />
             </form>
         </div>

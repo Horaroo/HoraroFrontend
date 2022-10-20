@@ -29,7 +29,6 @@
         gap: $gap;
         margin-top: $double-gap;
         @include _480 {
-            margin-top: 0px;
             font-size: 12px;
             gap: $small-gap;
         }

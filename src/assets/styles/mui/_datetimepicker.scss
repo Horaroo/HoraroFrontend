@@ -1,4 +1,5 @@
 .datetimepicker {
-    & .MuiInputBase-root {
+    & .MuiButtonBase-root {
+        color: $white !important;
     }
 }

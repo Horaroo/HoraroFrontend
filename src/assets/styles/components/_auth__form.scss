@@ -9,11 +9,7 @@
     align-items: center;
     z-index: 10;
     color: aliceblue !important;
-    @include _480 {
-        position: fixed;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+
     &-layout {
         position: relative;
         width: 100%;
@@ -32,5 +28,12 @@
     &-text {
         text-align: center;
         margin-bottom: 20px;
+    }
+    &-title {
+        color: $black;
+        margin-bottom: 10px;
+    }
+    input {
+        margin-bottom: 15px !important;
     }
 }

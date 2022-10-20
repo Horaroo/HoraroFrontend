@@ -79,9 +79,9 @@ const Modal = ({ open, handleClose, isChangePass }) => {
                     helperText={touched.password && errors.password}
                     type="text"
                     name="password"
+                    className="auth__form-input"
                     onChange={handleChange}
                     placeholder="Текущий пароль"
-                    className="form__field"
                     size="small"
                 />
                 {isChangePass && (
@@ -96,8 +96,8 @@ const Modal = ({ open, handleClose, isChangePass }) => {
                         type="text"
                         name="newPassword"
                         onChange={handleChange}
+                        className="auth__form-input"
                         placeholder="Новый пароль"
-                        className="form__field"
                         size="small"
                     />
                 )}
@@ -124,7 +124,15 @@ const Modal = ({ open, handleClose, isChangePass }) => {
                     >
                         {isChangePass ? 'Сменить' : 'Удалить'}
                     </Button>
-                    <Button onClick={handleClose}>Закрыть</Button>
+                    <Button
+                        style={{
+                            backgroundColor: 'rgb(211 47 47)',
+                            color: 'white',
+                        }}
+                        onClick={handleClose}
+                    >
+                        Закрыть
+                    </Button>
                 </div>
             </form>
         </Dialog>

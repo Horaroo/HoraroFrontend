@@ -146,13 +146,17 @@ const SheduleItem = ({
                 open={openClearModal}
             >
                 <div className="shedule-item__modal">
-                    <p className="shedule-item__modal-text">
+                    <p
+                        className="shedule-item__modal-text"
+                        style={{ textAlign: 'center' }}
+                    >
                         Вы действительно хотите удалить пару?
                     </p>
                     <div className="shedule-item__modal-btns">
                         <Button
                             className="shedule-item__modal-btn"
                             color="primary"
+                            variant="contained"
                             onClick={handleClearPair}
                         >
                             Подтвердить
@@ -161,6 +165,10 @@ const SheduleItem = ({
                             className="shedule-item__modal-btn"
                             color="secondary"
                             onClick={() => setOpenClearModal(false)}
+                            style={{
+                                backgroundColor: 'rgb(211 47 47)',
+                                color: 'white',
+                            }}
                         >
                             Отмена
                         </Button>

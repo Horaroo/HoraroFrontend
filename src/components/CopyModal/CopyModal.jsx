@@ -57,7 +57,7 @@ const CopyModal = ({ username, open = false, handleClose, activeWeek }) => {
                     ))}
                 </nav>
                 <div className="modal-copy__content">
-                    <p className="modal-copy__text">
+                    <p className="modal-copy__text mb-10">
                         Скопировать{' '}
                         {options[activeType - 1]
                             ? options[activeType - 1]?.copyText
@@ -99,7 +99,10 @@ const CopyModal = ({ username, open = false, handleClose, activeWeek }) => {
                         className="modal-copy__btn"
                         size="small"
                         variant="contained"
-                        color="secondary"
+                        style={{
+                            backgroundColor: 'rgb(211 47 47)',
+                            color: 'white',
+                        }}
                         onClick={handleClose}
                     >
                         Отмена

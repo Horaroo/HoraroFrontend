@@ -45,7 +45,7 @@ const ResetPassword = ({ isSetNewPass }) => {
     return (
         <div className="auth__form-layout">
             <form onSubmit={handleSubmit} className="auth__form">
-                <h2 className="auth__form-title">Cброс пароля</h2>
+                <h2 className="form__title">Cброс пароля</h2>
                 {!isSetNewPass ? (
                     <div className="auth__form-text w-100">
                         {isSend ? (
@@ -137,6 +137,7 @@ const ResetPassword = ({ isSetNewPass }) => {
                     type="submit"
                     color="primary"
                     variant="contained"
+                    className="btn"
                     size="large"
                     style={{ marginBottom: 20 }}
                     disabled={isSend || loading}

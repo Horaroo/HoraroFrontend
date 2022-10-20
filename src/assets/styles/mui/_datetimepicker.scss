@@ -2,4 +2,15 @@
     & .MuiButtonBase-root {
         color: $white !important;
     }
+
+    & .MuiInputBase-root {
+        color: white !important;
+
+        & fieldset {
+            border-color: $white !important;
+        }
+    }
+    & .MuiInputLabel-root {
+        color: white !important;
+    }
 }

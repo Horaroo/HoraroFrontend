@@ -8,6 +8,10 @@ import useTheme from 'shared/hooks/useTheme'
 
 const handleSubmit = () => {}
 const Shedule = ({ user }) => {
+    const [windowDimenion, detectHW] = useState({
+        winWidth: window.innerWidth,
+        winHeight: window.innerHeight,
+    })
     const [activeDay, setActiveDay] = useState(1)
     const [activeWeek, setActiveWeek] = useState(1)
     const [numberPair, setNumberPair] = useState(1)
@@ -26,15 +30,18 @@ const Shedule = ({ user }) => {
         getData()
     }, [])
 
-    // useEffect(() => {
-    //     setScrollFixed(false)
-    //     const footer = document.querySelector('.footer')
-    //     footer.style.position = 'relative'
-    //     return () => {
-    //         footer.style.position = 'fixed'
-    //         setScrollFixed(true)
-    //     }
-    // }, [setScrollFixed])
+    useEffect(() => {
+        const footer = document.querySelector('.footer')
+        if (windowDimenion?.winWidth < 850) {
+            setScrollFixed(false)
+            footer.style.position = 'relative'
+        }
+
+        return () => {
+            footer.style.position = 'fixed'
+            setScrollFixed(true)
+        }
+    }, [setScrollFixed, windowDimenion])
 
     const handleChange = (event) => {
         setNumberPair(1)

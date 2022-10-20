@@ -12,7 +12,7 @@ export const clearToken = async () =>
     (instance.defaults.headers.common['Authorization'] = null)
 export const Api = {
     register(username, password, group, email) {
-        return instance.post(`/auth/detail/users/`, {
+        return instance.post(`/auth/detail/`, {
             username,
             password,
             group,
@@ -43,12 +43,12 @@ export const Api = {
         })
     },
     resetPassword(email) {
-        return instance.post(`/auth/detail/users/reset_password/`, {
+        return instance.post(`/auth/detail/reset_password/`, {
             email,
         })
     },
     setNewPassword(uid, token, newPassword) {
-        return instance.post(`/auth/detail/users/reset_password_confirm/`, {
+        return instance.post(`/auth/detail/reset_password_confirm/`, {
             uid,
             token,
             new_password: newPassword,
@@ -60,13 +60,13 @@ export const Api = {
         })
     },
     changePassword(current_password, new_password) {
-        return instance.post(`/auth/detail/users/set_password/`, {
+        return instance.post(`/auth/detail/set_password/`, {
             current_password,
             new_password,
         })
     },
     deleteAccount(password) {
-        return instance.delete(`/auth/detail/users/me/`, {
+        return instance.delete(`/auth/detail/me/`, {
             data: {
                 current_password: password,
             },
@@ -85,7 +85,7 @@ export const Api = {
         )
     },
     activation(uid, token) {
-        return instance.post(`auth/detail/users/activation/`, {
+        return instance.post(`auth/detail/activation/`, {
             uid,
             token,
         })

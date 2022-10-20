@@ -49,7 +49,10 @@ const Shedule = ({ user }) => {
                         {week.map((tab) => (
                             <li
                                 key={tab.id}
-                                onClick={() => setActiveWeek(tab.value)}
+                                onClick={() => {
+                                    setNumberPair(1)
+                                    setActiveWeek(tab.value)
+                                }}
                                 className={`shedule__item ${
                                     tab.value === activeWeek && 'active'
                                 }`}

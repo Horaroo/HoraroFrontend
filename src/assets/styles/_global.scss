@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Jeko-Light', sans-serif;
 }
 
 html,
@@ -12,6 +13,14 @@ body {
     background-color: $background;
     overflow: hidden;
 }
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Jeko-Variable', sans-serif;
+}
+
 li,
 ul {
     list-style: none;

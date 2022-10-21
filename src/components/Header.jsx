@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Typography, Avatar, Button } from '@mui/material'
 import logoIcon from 'assets/images/logo.png'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import useAuth from 'shared/hooks/useAuth'
 import Modal from './Modal/Modal'
 import { Api } from 'shared/api/Api'
@@ -48,9 +48,12 @@ const Header = () => {
         <header className={`header ${activeMenu ? 'active' : ''}`}>
             <div className="container header__container">
                 <div className="header__left">
-                    <div className="header__logo">
-                        <img className="logo" src={logoIcon} alt="logo" />
-                    </div>
+                    <Link to="/">
+                        <div className="header__logo">
+                            <img className="logo" src={logoIcon} alt="logo" />
+                        </div>
+                    </Link>
+                    
                     <nav className="header__menu">
                         <ul className="header__menu-list">
                             {pages?.map((item) => {

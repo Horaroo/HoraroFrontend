@@ -93,7 +93,7 @@
             }
 
             &:hover {
-                color: lighten($color-text, 15%);
+                color: lighten($background, 30%);
             }
         }
     }

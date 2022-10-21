@@ -23,5 +23,8 @@
         &:not(:last-child) {
             margin-right: 30px;
         }
+        &:hover {
+            color: lighten($background, 30%)
+        }
     }
 }

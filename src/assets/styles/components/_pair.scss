@@ -21,6 +21,12 @@
             width: max-content;
             margin-right: auto;
         }
+        &--datetime {
+            width: 200px;
+            @include _480 {
+                width: 150px;
+            }
+        }
     }
     &__btns {
         width: max-content;
@@ -29,8 +35,9 @@
         gap: $gap;
         margin-top: $double-gap;
         @include _480 {
-            font-size: 12px;
-            gap: $small-gap;
+            flex-direction: column;
+            font-size: 14px;
+            gap: 15px;
         }
     }
     &__btn {

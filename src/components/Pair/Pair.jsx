@@ -110,8 +110,8 @@ const Pair = ({
                 >
                     <div className="flex">
                         <div
-                            className="pair__field "
-                            style={{ width: '200px', marginRight: 17 }}
+                            className="pair__field pair__field--datetime"
+                            style={{ marginRight: 17 }}
                         >
                             <div className="pair__field-label">Начало</div>
                             <TimePicker
@@ -128,10 +128,7 @@ const Pair = ({
                                 )}
                             />
                         </div>
-                        <div
-                            className="pair__field "
-                            style={{ width: '200px' }}
-                        >
+                        <div className="pair__field pair__field--datetime">
                             <div className="pair__field-label">Окончание</div>
                             <TimePicker
                                 value={values.endDate}
@@ -147,7 +144,6 @@ const Pair = ({
                                 )}
                             />
                         </div>
-
                     </div>
                 </LocalizationProvider>
             </div>
@@ -158,6 +154,7 @@ const Pair = ({
                     color="error"
                     onClick={() => setOpenClearModal(true)}
                     variant="contained"
+                    size="large"
                 >
                     Очистить
                 </Button>
@@ -167,6 +164,7 @@ const Pair = ({
                     color="success"
                     type="submit"
                     variant="contained"
+                    size="large"
                 >
                     Сохранить
                 </Button>
@@ -176,6 +174,7 @@ const Pair = ({
                     disabled={loading}
                     color="primary"
                     variant="contained"
+                    size="large"
                 >
                     Скопировать
                 </Button>

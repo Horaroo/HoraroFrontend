@@ -148,42 +148,6 @@ const Pair = ({
                             />
                         </div>
 
-                        {/* <div
-                            className="pair__field "
-                            style={{ width: '200px' }}
-                        >
-                            <div className="pair__field-label">Начало пары</div>
-                            <TextField
-                                name="start_date"
-                                className="form__field mr-10"
-                                value={values.start_date}
-                                onChange={handleChange}
-                                error={
-                                    touched.start_date &&
-                                    Boolean(errors.start_date)
-                                }
-                                helperText={
-                                    touched.start_date && errors.start_date
-                                }
-                                size="small"
-                            />
-                        </div>
-                        <div className="pair__field" style={{ width: '200px' }}>
-                            <div className="pair__field-label">
-                                Завершение пары
-                            </div>
-                            <TextField
-                                name="end_date"
-                                className="form__field"
-                                value={values.end_date}
-                                onChange={handleChange}
-                                error={
-                                    touched.end_date && Boolean(errors.end_date)
-                                }
-                                helperText={touched.end_date && errors.end_date}
-                                size="small"
-                            />
-                        </div> */}
                     </div>
                 </LocalizationProvider>
             </div>

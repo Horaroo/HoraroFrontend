@@ -39,8 +39,8 @@ const SheduleItem = ({
             type: '',
             teacher: '',
             audit: '',
-            startDate: '',
-            endDate: '',
+            startDate: null,
+            endDate: null,
         },
         onSubmit: async (values) => {
             try {
@@ -92,11 +92,16 @@ const SheduleItem = ({
                             audit: audience,
                             teacher,
                             type: type_pair,
-                            startDate: start_time || dayjs('2022-10-20'),
-                            endDate: end_time || dayjs('2022-10-20'),
+                            startDate: start_time ,
+                            endDate: end_time ,
                         })
                     } else {
                         resetForm()
+                        setValues((prevState) => ({
+                            ...prevState,
+                            startDate: null,
+                            endDate: null,
+                        }))
                     }
                     setLoading(false)
                 }

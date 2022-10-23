@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 import RostomAva from 'assets/images/team/Rostom.png'
 import ArsenAva from 'assets/images/team/Arsen.png'
 import JabrailAva from 'assets/images/team/Jabrail.png'
-import AxmathanAva from 'assets/images/team/Axmathan.png'
 import AxmedAva from 'assets/images/team/Axmed.png'
 import useTheme from 'shared/hooks/useTheme'
 
@@ -35,13 +34,6 @@ const team = [
     },
     {
         id: 4,
-        img: AxmathanAva,
-        name: 'Умаев Ахматхан',
-        prof: 'Python Backend Developer',
-        username: 'ahmadum01',
-    },
-    {
-        id: 5,
         img: JabrailAva,
         name: 'Насрутдинов Джабраил',
         prof: 'Designer',

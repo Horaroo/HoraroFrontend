@@ -6,7 +6,9 @@ const Hero = ({ handleScrollDown }) => {
             <div className="hero__container">
                 <div className="hero__content">
                     <h1 className="hero__title">
-                        Horaro - <br /> Телеграм бот <br /> С расписанием
+                        <div>Horaro -</div>
+                        <div>Телеграм бот</div>
+                        <div>С расписанием</div>
                     </h1>
                     <p className="hero__desc">
                         Представляем вашему вниманию проект{' '}

@@ -22,6 +22,7 @@
         color: $color-text;
         font-size: $size-middle;
         transition: all 0.3s ease-in-out;
+        border-bottom: 1px solid transparent;
         &:not(:first-child) {
             margin-left: $gap;
             @include _850 {

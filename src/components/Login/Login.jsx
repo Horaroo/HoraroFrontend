@@ -1,6 +1,6 @@
 import { TextField, Button, InputAdornment, Typography } from '@mui/material'
 import LockIcon from '@mui/icons-material/Lock'
-import PersonIcon from '@mui/icons-material/Person'
+import EmailIcon from '@mui/icons-material/Email'
 import { Api } from 'shared/api/Api'
 import useAuth from 'shared/hooks/useAuth'
 import { useState } from 'react'
@@ -74,7 +74,7 @@ const Login = () => {
                                 position="start"
                                 className="input-icon"
                             >
-                                <PersonIcon />
+                                <EmailIcon />
                             </InputAdornment>
                         ),
                     }}

@@ -116,4 +116,8 @@ export const Api = {
     getEvents() {
         return instance.get(`/events`)
     },
+
+    getShedule(username, week) {
+        return instance.get(`schedule/?token=${username}&week=${week}`)
+    },
 }

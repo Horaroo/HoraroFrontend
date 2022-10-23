@@ -1,6 +1,6 @@
 import { MenuItem, Select } from '@mui/material'
 import { Api } from 'shared/api/Api'
-import SheduleItem from 'components/SheduleItem/SheduleItem'
+import SheduleContent from 'components/Shedule/SheduleContent/SheduleContent'
 import { dayes, week } from 'shared/mocks/sheduleOptions'
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
@@ -117,7 +117,7 @@ const Shedule = ({ user }) => {
                     </div>
                 </div>
                 <main className="shedule__content">
-                    <SheduleItem
+                    <SheduleContent
                         pair={pair}
                         numberPair={numberPair}
                         activeWeek={activeWeek}

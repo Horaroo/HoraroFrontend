@@ -12,8 +12,9 @@ import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import dayjs from 'dayjs'
 import 'dayjs/locale/ru'
+import { SheduleModal } from '../SheduleModal'
 
-const SheduleItem = ({
+const SheduleContent = ({
     numberPair,
     activeWeek,
     setNumberPair,
@@ -92,8 +93,8 @@ const SheduleItem = ({
                             audit: audience,
                             teacher,
                             type: type_pair,
-                            startDate: start_time ,
-                            endDate: end_time ,
+                            startDate: start_time,
+                            endDate: end_time,
                         })
                     } else {
                         resetForm()
@@ -113,6 +114,18 @@ const SheduleItem = ({
             getData()
         }
     }, [numberPair, activeDay, activeWeek, user, resetForm, setValues])
+
+    // useEffect(() => {
+    //     const getShedule = async () => {
+    //         try {
+    //             const res = await Api.getShedule(user.username, activeWeek)
+    //             console.log(res)
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }
+    //     getShedule()
+    // }, [])
 
     const increment = () => {
         numberPair !== 6 && setNumberPair(numberPair + 1)
@@ -180,6 +193,7 @@ const SheduleItem = ({
                     </div>
                 </div>
             </Dialog>
+            <SheduleModal open={false} />
             <form onSubmit={handleSubmit} className="shedule-item__form">
                 <Pair
                     loading={loading}
@@ -202,7 +216,7 @@ const SheduleItem = ({
         </div>
     )
 }
-SheduleItem.propTypes = {
+SheduleContent.propTypes = {
     pair: PropTypes.object,
     pairTypes: PropTypes.array,
     numberPair: PropTypes.number.isRequired,
@@ -211,4 +225,4 @@ SheduleItem.propTypes = {
     handleSubmit: PropTypes.func,
     setNumberPair: PropTypes.func,
 }
-export default SheduleItem
+export default SheduleContent

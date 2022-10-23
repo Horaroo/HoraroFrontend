@@ -97,12 +97,12 @@ const SheduleContent = ({
                             endDate: end_time,
                         })
                     } else {
-                        resetForm()
                         setValues((prevState) => ({
                             ...prevState,
                             startDate: null,
                             endDate: null,
                         }))
+                        resetForm()
                     }
                     setLoading(false)
                 }

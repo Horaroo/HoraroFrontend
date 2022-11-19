@@ -1,7 +1,6 @@
 Dockerfile
-.dockerignore
-.git
-.gitignore
+.docker*
+.git*
 Makefile
 README.md
 

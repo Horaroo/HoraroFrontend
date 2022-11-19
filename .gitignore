@@ -22,6 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 docker-compose.yaml
-.env
+.env*
 .git
-.github

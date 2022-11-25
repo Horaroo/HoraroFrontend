@@ -15,14 +15,14 @@ const team = [
         id: 1,
         img: AxmedAva,
         name: 'Абулайсов Ахмед',
-        prof: 'Python Backend Developer',
+        prof: 'Founder & Backend Developer',
         username: 'abulaysov',
     },
     {
         id: 2,
         img: RostomAva,
         name: 'Вардидзе Ростом',
-        prof: 'Linux System Administrator',
+        prof: 'Co-founder & DevOps',
         username: 'TotSamyi888',
     },
     {

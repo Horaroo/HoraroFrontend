@@ -12,9 +12,9 @@ jobs:
       - name: deploy
         uses: appleboy/ssh-action@master
         with:
-          host: 46.229.214.105
-          username: prod
-          key: ${{ secrets.SERVER_PRIVATE_KEY }}
+          host: staging.horaro.net
+          username: ubuntu
+          key: ${{ secrets.AWS_HORARO_PRYVATE_KEY }}
           script: | 
                   cd ~/staging_horaro/HoraroFrontend/ &&\
                   git pull && cd .. &&\ 

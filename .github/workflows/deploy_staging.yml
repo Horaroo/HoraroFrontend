@@ -25,6 +25,19 @@ jobs:
           source: ".env"
           target: "~/staging_horaro/HoraroFrontend/"
 
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action
+
+      - name: Build Backend
+        id: docker_build_backend
+        uses: docker/build-push-action
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ivan556/horaro-frontend
+
       - name: deploy
         uses: appleboy/ssh-action@master
         with:

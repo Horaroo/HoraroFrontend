@@ -34,4 +34,3 @@ jobs:
                   cd ~/prod_horaro/HoraroFrontend/ &&\
                   git pull && cd .. &&\ 
                   make up_and_build_one_service service=front
-          

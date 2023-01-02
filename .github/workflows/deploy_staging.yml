@@ -45,7 +45,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.AWS_HORARO_PRYVATE_KEY }}
           script: | 
-                  cd ~/staging_horaro/HoraroFrontend/ &&\
-                  git pull && cd .. &&\ 
+                  cd ~/staging_horaro &&\
+                  docker-compose -f docker-compose.staging.yml pull &&\
                   make staging_up_and_build_one_service service=front
-

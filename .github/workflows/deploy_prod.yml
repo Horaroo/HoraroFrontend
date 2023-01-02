@@ -45,6 +45,5 @@ jobs:
           username: ubuntu
           key: ${{ secrets.AWS_HORARO_PRYVATE_KEY }}
           script: | 
-                  cd ~/prod_horaro/HoraroFrontend/ &&\
-                  git pull && cd .. &&\ 
-                  make up_and_build_one_service service=front
+                  cd ~/prod_horaro && docker-compose pull &&\
+                  make up_and_build_one_service service=font

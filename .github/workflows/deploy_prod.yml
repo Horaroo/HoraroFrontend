@@ -24,7 +24,6 @@ jobs:
           source: ".env"
           target: "~/prod_horaro/HoraroFrontend/"
 
-
       - name: deploy
         uses: appleboy/ssh-action@master
         with:

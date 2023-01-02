@@ -7,12 +7,16 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: deploy
         uses: appleboy/ssh-action@master
         with:
-          host: 46.229.214.105
-          username: prod
-          key: ${{ secrets.SERVER_PRIVATE_KEY }}
-          script: cd ~/prod_horaro/HoraroFrontend/ && git pull && cd .. && docker stop prod_horaro_front_1 && docker-compose up -d --no-deps --build front && docker image prune -f
+          host: horaro.net
+          username: ubuntu
+          key: ${{ secrets.AWS_HORARO_PRYVATE_KEY }}
+          script: | 
+                  cd ~/prod_horaro/HoraroFrontend/ &&\
+                  git pull && cd .. &&\ 
+                  make up_and_build_one_service service=front
+          

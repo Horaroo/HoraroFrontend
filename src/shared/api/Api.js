@@ -105,11 +105,21 @@ export const Api = {
             `schedule/detail/${username}/?q=${value}&${type}=true`
         )
     },
-    copyShedule(username, from_week, to_week) {
-        return instance.post(`schedule/copy-week/`, {
-            username,
-            from_week,
-            to_week,
+    postCopyShedule({
+        source_week,
+        target_week,
+        source_day,
+        target_day,
+        source_pair,
+        target_pair,
+    }) {
+        return instance.post(`schedule/copy/`, {
+            source_week,
+            target_week,
+            source_day,
+            target_day,
+            source_pair,
+            target_pair,
         })
     },
 

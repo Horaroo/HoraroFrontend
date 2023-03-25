@@ -31,7 +31,7 @@ const Login = () => {
                         setUser({
                             id: data.id,
                             username: data.username,
-                            group: data.group,
+                            group: data.username,
                         })
                         navigate('/shedule')
                     }
@@ -62,7 +62,7 @@ const Login = () => {
                     id="email"
                     type="email"
                     name="email"
-                    label="Email"
+                    label="Почта"
                     value={values.email}
                     onChange={handleChange}
                     className="form__field"

@@ -31,13 +31,13 @@
             color: $accent-light;
         }
         &.disabled {
-            color: $border-color;
+            color: grey;
         }
     }
     &__form {
         display: flex;
         width: 320px;
-        height: 240px;
+        height: 340px;
         flex-direction: column;
         align-items: center;
         padding: $gap;
@@ -60,5 +60,6 @@
         align-items: center;
         margin-top: 20px;
         font-size: $size-middle;
+        margin-bottom: 10px;
     }
 }

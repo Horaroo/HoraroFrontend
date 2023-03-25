@@ -12,12 +12,13 @@ const Shedule = ({ user }) => {
         winWidth: window.innerWidth,
         winHeight: window.innerHeight,
     })
-    const [activeDay, setActiveDay] = useState(1)
+    const [activeDay, setActiveDay] = useState('monday')
     const [activeWeek, setActiveWeek] = useState(1)
     const [numberPair, setNumberPair] = useState(1)
     const [pairTypes, setPairTypes] = useState([])
     const [pair, setPair] = useState(null)
     const { setScrollFixed } = useTheme()
+    
     useEffect(() => {
         const getData = async () => {
             try {
@@ -90,8 +91,8 @@ const Shedule = ({ user }) => {
                         {dayes.map((day) => (
                             <MenuItem
                                 className="shedule__select-item"
-                                key={day.id}
-                                value={day.id}
+                                key={day.name}
+                                value={day.name}
                             >
                                 {day.label}
                             </MenuItem>
@@ -101,13 +102,13 @@ const Shedule = ({ user }) => {
                         <ul className="shedule__list">
                             {dayes.map((day) => (
                                 <li
-                                    key={day.id}
+                                    key={day.name}
                                     onClick={() => {
                                         setNumberPair(1)
-                                        setActiveDay(day.value)
+                                        setActiveDay(day.name)
                                     }}
                                     className={`shedule__item ${
-                                        day.value === activeDay && 'active'
+                                        day.name === activeDay && 'active'
                                     }`}
                                 >
                                     {day.label}

@@ -15,16 +15,17 @@ import 'dayjs/locale/ru'
 import { SheduleModal } from '../SheduleModal'
 
 const SheduleContent = ({
-    numberPair,
-    activeWeek,
     setNumberPair,
+    activeWeek,
     activeDay,
+    numberPair,
     pairTypes,
 }) => {
     const { user } = useAuth()
     const [loading, setLoading] = useState(false)
     const [openClearModal, setOpenClearModal] = useState(false)
     const [openCopyModal, setOpenCopyModal] = useState(false)
+    const [emptyPair, setEmptyPair] = useState(true)
     const {
         handleSubmit,
         values,
@@ -96,12 +97,14 @@ const SheduleContent = ({
                             startDate: start_time,
                             endDate: end_time,
                         })
+                        setEmptyPair(false)
                     } else {
                         setValues((prevState) => ({
                             ...prevState,
                             startDate: null,
                             endDate: null,
                         }))
+                        setEmptyPair(true)
                         resetForm()
                     }
                     setLoading(false)
@@ -210,7 +213,10 @@ const SheduleContent = ({
                     setOpenClearModal={setOpenClearModal}
                     setOpenCopyModal={setOpenCopyModal}
                     activeWeek={activeWeek}
+                    activeDay={activeDay}
+                    activePair={numberPair}
                     setValues={setValues}
+                    emptyPair={emptyPair}
                 />
             </form>
         </div>
@@ -221,7 +227,7 @@ SheduleContent.propTypes = {
     pairTypes: PropTypes.array,
     numberPair: PropTypes.number.isRequired,
     activeWeek: PropTypes.number.isRequired,
-    activeDay: PropTypes.number.isRequired,
+    activeDay: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func,
     setNumberPair: PropTypes.func,
 }

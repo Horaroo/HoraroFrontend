@@ -90,7 +90,7 @@ const Pair = ({
                             size="small"
                         >
                             {pairTypes.map((item) => (
-                                <MenuItem key={item.id} value={item.id}>
+                                <MenuItem key={item.id} value={item.name}>
                                     {item.name}
                                 </MenuItem>
                             ))}

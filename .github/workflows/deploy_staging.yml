@@ -62,3 +62,8 @@ jobs:
                   cd ~/staging_horaro &&\
                   docker-compose -f docker-compose.staging.yml pull &&\
                   make staging_up_and_build_one_service service=front
+
+                  curl -XPOST \
+                  -H 'Content-Type: application/json' \
+                  -d '{ "text": "*successfull front deployed to staging*" }' \
+                  'https://telepush.dev/api/messages/${{ secrets.TELEPUSH_TOKEN }}'

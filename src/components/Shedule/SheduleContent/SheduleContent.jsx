@@ -55,7 +55,7 @@ const SheduleContent = ({
                     day: activeDay,
                     week: activeWeek,
                     number_pair: numberPair,
-                    group: user.id,
+                    group: user.username,
                     start_time: values.startDate,
                     end_time: values.endDate,
                 })

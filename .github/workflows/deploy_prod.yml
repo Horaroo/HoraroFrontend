@@ -61,3 +61,8 @@ jobs:
  
                   cd ~/prod_horaro && docker-compose pull &&\
                   make up_and_build_one_service service=front
+
+                  curl -XPOST \
+                  -H 'Content-Type: application/json' \
+                  -d '{ "text": "*successfull font deployed to prod*" }' \
+                  'https://telepush.dev/api/messages/${{ secrets.TELEPUSH_TOKEN }}'

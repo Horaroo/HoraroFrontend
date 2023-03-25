@@ -21,6 +21,9 @@ const Pair = ({
     setOpenClearModal,
     setOpenCopyModal,
     activeWeek,
+    activeDay,
+    activePair,
+    emptyPair,
 }) => {
     const locale = 'ru'
 
@@ -178,12 +181,16 @@ const Pair = ({
                 >
                     Скопировать
                 </Button>
-                <CopyModal
-                    open={openCopyModal}
-                    handleClose={closeCopyModal}
-                    activeWeek={activeWeek}
-                    username={username}
-                />
+                {openCopyModal && (
+                    <CopyModal
+                        open={openCopyModal}
+                        handleClose={closeCopyModal}
+                        activeWeek={activeWeek}
+                        activeDay={activeDay}
+                        activePair={activePair}
+                        emptyPair={emptyPair}
+                    />
+                )}
             </div>
         </div>
     )
@@ -199,10 +206,13 @@ Pair.propTypes = {
     pairTypes: PropTypes.array.isRequired,
     username: PropTypes.string,
     openCopyModal: PropTypes.bool,
+    emptyPair: PropTypes.bool,
     closeClearModal: PropTypes.func,
     closeCopyModal: PropTypes.func,
     setOpenClearModal: PropTypes.func,
     setOpenCopyModal: PropTypes.func,
     activeWeek: PropTypes.number.isRequired,
+    activeDay: PropTypes.string.isRequired,
+    activePair: PropTypes.number.isRequired,
 }
 export default Pair

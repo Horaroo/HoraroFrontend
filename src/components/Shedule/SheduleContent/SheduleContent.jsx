@@ -52,7 +52,7 @@ const SheduleContent = ({
                     teacher: values.teacher,
                     type_pair: values.type,
                     audience: values.audit,
-                    day: 1,
+                    day: activeDay,
                     week: activeWeek,
                     number_pair: numberPair,
                     group: user.id,

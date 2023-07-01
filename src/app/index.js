@@ -26,7 +26,7 @@ function App() {
                             </PrivateRoute>
                         }
                     />
-                    <Route path="/about" element={<About />} />
+                    {/* <Route path="/about" element={<About />} /> */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/reset_password" element={<ResetPassword />} />
                     <Route

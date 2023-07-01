@@ -5,7 +5,7 @@ const Footer = () => {
         <footer className="footer">
             <div className="container footer__container">
                 <nav className="footer__nav">
-                    <Link to="/about" className="footer__link">
+                    <Link disabled to="/about" className="footer__link">
                         О нас
                     </Link>
                     <a

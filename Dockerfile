@@ -1,26 +1,24 @@
-FROM node:14-alpine
+FROM node:14-alpine as builder
 
 WORKDIR /app
 
-COPY package.json .
+COPY package.json package-lock.json .
 
-COPY package-lock.json .
-
-RUN npm install
+RUN yarn install
 
 COPY . .
 
+RUN yarn build
+
+FROM alpine
+
+WORKDIR /app
+
 EXPOSE 3001
 
-RUN find . -type f -exec chmod 644 {} \;
-
-RUN find . -type d -exec chmod 755 {} \;
-
-RUN chmod 777 -R node_modules
+COPY --from=builder /usr/src/app/build .
 
 RUN adduser --disabled-password --no-create-home john-doe
-
-CMD [ "npm", "start" ]
 
 USER john-doe
 
